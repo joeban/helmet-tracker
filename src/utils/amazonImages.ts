@@ -94,9 +94,14 @@ export const MANUAL_HELMET_ASINS: Record<string, string> = {
   'SMITH SIGNAL MIPS': 'B08WBMM4MG', // SMITH Signal Cycling Helmet with MIPS Technology
   'SMITH ROUTE MIPS': 'B08WBLSHBB', // SMITH Route MIPS from search results
 
+  // Newly researched Amazon ASINs - December 2024
+  'GIRO AETHER SPHERICAL': 'B07FTSN2QP', // Giro Aether Spherical Adult Road Cycling Helmet
+  'BELL Z20 MIPS': 'B07JC3Q6PG', // BELL Z20 Aero MIPS Adult Road Bike Helmet
+  'BELL Z20 AERO MIPS': 'B07JC3Q6PG', // Same product, alternate name match
+  'POC VENTRAL AIR MIPS': 'B09Q5S7BYB', // POC Ventral Air MIPS Road Cycling Helmet
+
   // Add more verified helmets as researched
   // 'SPECIALIZED PREVAIL 3': 'B08XXXXX', // Need to research
-  // 'GIRO AETHER MIPS': 'B09XXXXX', // Need to research
 };
 
 /**
