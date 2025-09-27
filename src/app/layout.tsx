@@ -113,9 +113,8 @@ export default function RootLayout({
         />
         {/* AvantLink Affiliate Verification */}
         <script
-          async
           type="text/javascript"
-          src="http://classic.avantlink.com/affiliate_app_confirm.php?mode=js&authResponse=0b7c0a9a6210d902e8394b526c8e2c05e76e0d96"
+          src="https://classic.avantlink.com/affiliate_app_confirm.php?mode=js&authResponse=0b7c0a9a6210d902e8394b526c8e2c05e76e0d96"
         />
       </head>
       <body
