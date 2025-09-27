@@ -214,9 +214,20 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredAndSortedHelmets.map((helmet) => (
             <div key={helmet.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-              {/* Helmet Image Placeholder */}
-              <div className="h-48 bg-gray-100 flex items-center justify-center text-gray-500">
-                No Image Available
+              {/* Helmet Image */}
+              <div className="h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
+                {helmet.image_url ? (
+                  <img
+                    src={helmet.image_url}
+                    alt={`${helmet.brand} ${helmet.name}`}
+                    className="w-full h-full object-contain hover:scale-105 transition-transform duration-200"
+                  />
+                ) : (
+                  <div className="text-gray-500 text-center">
+                    <div className="text-4xl mb-2">🚴</div>
+                    <div className="text-sm">No Image Available</div>
+                  </div>
+                )}
               </div>
 
               {/* Helmet Details */}

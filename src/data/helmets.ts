@@ -199,7 +199,7 @@ export const HELMETS: Helmet[] = [
     avg_price: 82.88,
     listing_count: 4,
     available_count: 3,
-    image_url: null,
+    image_url: 'https://vault.widen.net/content/pstktwsezj/webp/giro-fixture-mips-recreational-helmet-matte-portaro-grey-hero.webp?w=1500&h=1500',
     amazon_url: 'https://www.amazon.com/Giro-Fixture-MIPS-Adult-Helmet/dp/B08FCV5M3P'
   },
 
@@ -764,7 +764,7 @@ export const HELMETS: Helmet[] = [
     avg_price: 146.25,
     listing_count: 3,
     available_count: 2,
-    image_url: null,
+    image_url: 'https://www.smithoptics.com/dw/image/v2/BDPZ_PRD/on/demandware.static/-/Sites-smith-master-catalog/default/dw578049b0/images/product-images/network-helmet/2024/network-helmet_white-MatteWhite_3Q.png?sw=700&sh=700&sm=fit',
     amazon_url: 'https://www.amazon.com/SMITH-Optics-Network-Helmet-Yellow/dp/B07ZH78XSS'
   },
   {
@@ -780,7 +780,7 @@ export const HELMETS: Helmet[] = [
     avg_price: 195.0,
     listing_count: 2,
     available_count: 2,
-    image_url: null,
+    image_url: 'https://www.smithoptics.com/dw/image/v2/BDPZ_PRD/on/demandware.static/-/Sites-smith-master-catalog/default/dw96973ac3/images/product-images/persist-helmet/2025/persist-helmet_matteLunarFogCosmos_3Q.png?sw=700&sh=700&sm=fit',
     amazon_url: 'https://www.amazon.com/Smith-Optics-Persist-Cycling-Helmet/dp/B0DWT66XQH'
   },
 
@@ -798,7 +798,7 @@ export const HELMETS: Helmet[] = [
     avg_price: 390.0,
     listing_count: 2,
     available_count: 1,
-    image_url: null,
+    image_url: 'https://vault.widen.net/content/ocjx79fd1f/webp/bell-super-air-r-spherical-mountain-bike-helmet-matte-gloss-black-right.webp?w=1500&h=1500',
     amazon_url: 'https://www.amazon.com/Bell-Super-MIPS-Adult-Helmet/dp/B07W4M5YFB'
   },
   {
