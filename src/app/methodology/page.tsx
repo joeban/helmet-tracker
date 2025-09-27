@@ -1,9 +1,9 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
+import { Metadata } from &apos;next&apos;;
+import Link from &apos;next/link&apos;;
 
 export const metadata: Metadata = {
   title: "Virginia Tech STAR Methodology - HelmetScore",
-  description: "Learn about Virginia Tech's STAR evaluation methodology for bicycle helmet safety testing, including test protocols, scoring systems, and research methodology.",
+  description: "Learn about Virginia Tech&apos;s STAR evaluation methodology for bicycle helmet safety testing, including test protocols, scoring systems, and research methodology.",
   keywords: "STAR methodology, helmet testing, Virginia Tech research, cycling safety standards, impact testing",
   openGraph: {
     title: "Virginia Tech STAR Methodology - HelmetScore",
@@ -22,7 +22,7 @@ export default function MethodologyPage() {
             ← Back to HelmetScore Database
           </Link>
           <h1 className="text-4xl font-semibold text-slate-800 mb-3">STAR Methodology</h1>
-          <p className="text-xl text-slate-600">Understanding Virginia Tech's bicycle helmet safety evaluation</p>
+          <p className="text-xl text-slate-600">Understanding Virginia Tech&apos;s bicycle helmet safety evaluation</p>
         </div>
       </header>
 
@@ -34,7 +34,7 @@ export default function MethodologyPage() {
           <section className="mb-12">
             <h2 className="text-2xl font-semibold text-slate-800 mb-4">What is STAR?</h2>
             <p className="text-lg text-slate-600 leading-relaxed mb-4">
-              STAR (Summation of Tests for the Analysis of Risk) is Virginia Tech's proprietary methodology for evaluating
+              STAR (Summation of Tests for the Analysis of Risk) is Virginia Tech&apos;s proprietary methodology for evaluating
               bicycle helmet safety. Unlike basic safety certifications that only test pass/fail criteria, STAR provides
               nuanced safety scores that allow meaningful comparisons between helmet models.
             </p>
@@ -190,7 +190,7 @@ export default function MethodologyPage() {
             <div className="bg-slate-50 p-6 rounded-lg">
               <p className="text-slate-600 leading-relaxed mb-4">
                 While STAR methodology represents the most comprehensive bicycle helmet evaluation available,
-                it's important to understand its scope and limitations:
+                it&apos;s important to understand its scope and limitations:
               </p>
               <ul className="text-slate-600 space-y-2">
                 <li>• <strong>Laboratory conditions:</strong> Testing occurs in controlled environments that may not capture all real-world variables</li>
@@ -208,7 +208,7 @@ export default function MethodologyPage() {
               <div className="bg-green-50 p-6 rounded-lg">
                 <h3 className="text-lg font-semibold text-slate-800 mb-3">HelmetScore Commitment</h3>
                 <p className="text-slate-600 text-sm">
-                  All safety scores in our database come directly from Virginia Tech's official publications.
+                  All safety scores in our database come directly from Virginia Tech&apos;s official publications.
                   We do not modify, adjust, or interpret the original research data.
                 </p>
               </div>

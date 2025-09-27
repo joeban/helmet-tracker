@@ -1,9 +1,9 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
+import { Metadata } from &apos;next&apos;;
+import Link from &apos;next/link&apos;;
 
 export const metadata: Metadata = {
   title: "About HelmetScore - The Definitive Helmet Safety Database",
-  description: "Learn about HelmetScore's mission to provide comprehensive Virginia Tech helmet safety ratings, helping cyclists make informed decisions about protective gear.",
+  description: "Learn about HelmetScore&apos;s mission to provide comprehensive Virginia Tech helmet safety ratings, helping cyclists make informed decisions about protective gear.",
   keywords: "helmet safety, Virginia Tech STAR, cycling safety research, helmet testing methodology",
   openGraph: {
     title: "About HelmetScore - Helmet Safety Database",
@@ -35,7 +35,7 @@ export default function AboutPage() {
             <h2 className="text-2xl font-semibold text-slate-800 mb-4">Our Mission</h2>
             <p className="text-lg text-slate-600 leading-relaxed mb-4">
               HelmetScore exists to make bicycle helmet safety data accessible, understandable, and actionable for every cyclist.
-              By presenting Virginia Tech's comprehensive STAR evaluation data in an intuitive format, we help riders make
+              By presenting Virginia Tech&apos;s comprehensive STAR evaluation data in an intuitive format, we help riders make
               informed decisions about the most critical piece of safety equipment they wear.
             </p>
             <p className="text-lg text-slate-600 leading-relaxed">
@@ -50,7 +50,7 @@ export default function AboutPage() {
             <div className="bg-slate-50 p-6 rounded-lg mb-6">
               <h3 className="text-lg font-semibold text-slate-800 mb-3">The Gold Standard in Helmet Testing</h3>
               <p className="text-slate-600 leading-relaxed">
-                Virginia Tech's Helmet Lab is internationally recognized as the premier independent testing facility for bicycle helmets.
+                Virginia Tech&apos;s Helmet Lab is internationally recognized as the premier independent testing facility for bicycle helmets.
                 Their STAR (Summation of Tests for the Analysis of Risk) methodology goes beyond basic safety certifications
                 to provide nuanced safety scores based on real-world accident scenarios.
               </p>
@@ -102,7 +102,7 @@ export default function AboutPage() {
               </div>
             </div>
             <p className="text-slate-600 leading-relaxed">
-              Our comprehensive database includes every bicycle helmet tested by Virginia Tech's lab, from budget-friendly
+              Our comprehensive database includes every bicycle helmet tested by Virginia Tech&apos;s lab, from budget-friendly
               options to premium models. Each entry includes the official STAR safety score, pricing information, and
               direct links to purchase from trusted retailers.
             </p>
@@ -157,7 +157,7 @@ export default function AboutPage() {
               </p>
               <p className="text-slate-600 leading-relaxed mb-4">
                 <strong>Our commitment:</strong> Affiliate partnerships never influence our safety ratings or recommendations.
-                All safety scores come directly from Virginia Tech's independent testing, and we present this data objectively
+                All safety scores come directly from Virginia Tech&apos;s independent testing, and we present this data objectively
                 regardless of commission rates or retailer relationships.
               </p>
               <p className="text-slate-600 leading-relaxed">
@@ -171,7 +171,7 @@ export default function AboutPage() {
           <section>
             <h2 className="text-2xl font-semibold text-slate-800 mb-4">Stay Connected</h2>
             <p className="text-slate-600 leading-relaxed mb-4">
-              Have questions about helmet safety or suggestions for improving HelmetScore? We'd love to hear from you.
+              Have questions about helmet safety or suggestions for improving HelmetScore? We&apos;d love to hear from you.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
