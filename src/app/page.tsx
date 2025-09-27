@@ -10,7 +10,7 @@ export default function Home() {
   const [brandFilter, setBrandFilter] = useState<BrandFilter>('');
   const [sortBy, setSortBy] = useState<SortOption>('rating');
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
-  const [priceRange, setPriceRange] = useState<{min: number; max: number}>({min: 0, max: 500});
+  const [priceRange, setPriceRange] = useState<{min: number; max: number}>({min: 0, max: 600});
 
   // Get unique brands for filter
   const uniqueBrands = useMemo(() => {
