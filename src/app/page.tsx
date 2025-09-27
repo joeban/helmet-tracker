@@ -1,16 +1,26 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { HELMETS } from '@/data/helmets';
 import { SortOption, CategoryFilter, BrandFilter } from '@/types/helmet';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('');
   const [brandFilter, setBrandFilter] = useState<BrandFilter>('');
   const [sortBy, setSortBy] = useState<SortOption>('rating');
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
   const [priceRange, setPriceRange] = useState<{min: number; max: number}>({min: 0, max: 600});
+
+  // Debounce search term for better performance
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
 
   // Get unique brands for filter
   const uniqueBrands = useMemo(() => {
@@ -20,9 +30,9 @@ export default function Home() {
 
   const filteredAndSortedHelmets = useMemo(() => {
     const filtered = HELMETS.filter(helmet => {
-      const matchesSearch = helmet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           helmet.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           helmet.category.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = helmet.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+                           helmet.brand.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+                           helmet.category.toLowerCase().includes(debouncedSearchTerm.toLowerCase());
       const matchesCategory = !categoryFilter || helmet.category === categoryFilter;
       const matchesBrand = !brandFilter || helmet.brand === brandFilter;
       const matchesAvailability = !showAvailableOnly || helmet.available_count > 0;
@@ -46,15 +56,27 @@ export default function Home() {
           return 0;
       }
     });
-  }, [searchTerm, categoryFilter, brandFilter, sortBy, showAvailableOnly, priceRange]);
+  }, [debouncedSearchTerm, categoryFilter, brandFilter, sortBy, showAvailableOnly, priceRange]);
 
-  const renderStars = (rating: number) => {
+  // Optimize rendering functions with useCallback
+  const renderStars = useCallback((rating: number) => {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-  };
+  }, []);
 
-  const formatPrice = (price: number) => {
+  const formatPrice = useCallback((price: number) => {
     return `$${price.toFixed(2)}`;
-  };
+  }, []);
+
+  // Loading state for better UX during search
+  const [isSearching, setIsSearching] = useState(false);
+
+  useEffect(() => {
+    if (searchTerm !== debouncedSearchTerm) {
+      setIsSearching(true);
+    } else {
+      setIsSearching(false);
+    }
+  }, [searchTerm, debouncedSearchTerm]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -205,8 +227,17 @@ export default function Home() {
           <div className="flex-1">
             {/* Results Header */}
             <div className="mb-6">
-              <h2 className="text-2xl font-semibold text-gray-800">
-                {filteredAndSortedHelmets.length} Helmet{filteredAndSortedHelmets.length !== 1 ? 's' : ''} Found
+              <h2 className="text-2xl font-semibold text-gray-800 flex items-center gap-3">
+                {isSearching ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                    Searching...
+                  </>
+                ) : (
+                  <>
+                    {filteredAndSortedHelmets.length} Helmet{filteredAndSortedHelmets.length !== 1 ? 's' : ''} Found
+                  </>
+                )}
               </h2>
             </div>
 
