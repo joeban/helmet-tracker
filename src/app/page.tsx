@@ -116,16 +116,16 @@ export default function Home() {
             <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium mb-4 lg:mb-6 max-w-3xl mx-auto">The only site with complete Virginia Tech safety test results for 281+ helmets.</p>
 
             {/* Safety Score Explainer */}
-            <div className="bg-gradient-to-r from-green-50 to-red-50 rounded-lg p-4 lg:p-5 mb-4 lg:mb-6 max-w-3xl mx-auto border border-green-100">
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 lg:p-5 mb-4 lg:mb-6 max-w-3xl mx-auto border border-green-100">
               <div className="mb-2 lg:mb-3">
-                <span className="text-sm lg:text-base font-semibold text-slate-700">How Safety Scores Work:</span>
+                <span className="text-sm lg:text-base font-semibold text-slate-700">Virginia Tech Safety Ratings:</span>
               </div>
               <div className="flex flex-col sm:flex-row justify-between items-center gap-2 lg:gap-4 text-xs lg:text-sm">
-                <span className="text-green-700 font-semibold">Lower Score = Better Protection</span>
-                <span className="text-red-700 font-semibold">Higher Score = More Risk</span>
+                <span className="text-green-700 font-semibold">★★★★★ or ★★★★☆ = VT Recommended</span>
+                <span className="text-yellow-600 font-semibold">★★★☆☆ or lower = Not Recommended</span>
               </div>
               <div className="mt-2 lg:mt-3 text-xs lg:text-sm text-slate-600 font-medium">
-                Example: Score 8.0 = Excellent, Score 15.0 = Good, Score 25.0 = Avoid
+                Virginia Tech recommends any helmet with 4 or 5 stars for optimal protection
               </div>
             </div>
 
@@ -133,7 +133,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row justify-center gap-3 lg:gap-4">
               <button
                 onClick={() => {
-                  setSortBy('safety');
+                  setSortBy('rating');
                   // Scroll to results section
                   const resultsSection = document.querySelector('main');
                   if (resultsSection) {
@@ -142,7 +142,7 @@ export default function Home() {
                 }}
                 className="bg-blue-600 text-white px-5 sm:px-6 lg:px-8 py-2.5 lg:py-3 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-all duration-200 font-semibold text-sm lg:text-base shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
               >
-                Browse Safest Helmets
+                Browse VT Recommended Helmets
               </button>
               <a
                 href="/methodology"
