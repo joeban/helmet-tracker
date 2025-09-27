@@ -1,5 +1,5 @@
-import { Metadata } from &apos;next&apos;;
-import Link from &apos;next/link&apos;;
+import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: "Virginia Tech STAR Methodology - HelmetScore",
