@@ -125,14 +125,21 @@ export default function Home() {
                 <span className="text-red-700 font-semibold">Higher Score = More Risk</span>
               </div>
               <div className="mt-2 lg:mt-3 text-xs lg:text-sm text-slate-600 font-medium">
-                Example: A score of 8.0 is 50% safer than 15.0
+                Example: Score 8.0 = Excellent, Score 15.0 = Good, Score 25.0 = Avoid
               </div>
             </div>
 
             {/* Quick Action Buttons */}
             <div className="flex flex-col sm:flex-row justify-center gap-3 lg:gap-4">
               <button
-                onClick={() => setSortBy('rating')}
+                onClick={() => {
+                  setSortBy('safety');
+                  // Scroll to results section
+                  const resultsSection = document.querySelector('main');
+                  if (resultsSection) {
+                    resultsSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 className="bg-blue-600 text-white px-5 sm:px-6 lg:px-8 py-2.5 lg:py-3 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-all duration-200 font-semibold text-sm lg:text-base shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
               >
                 Browse Safest Helmets
