@@ -90,6 +90,24 @@ export default function Home() {
       {/* Header */}
       <header className="bg-gradient-to-b from-slate-50 to-white border-b border-slate-200 py-16">
         <div className="max-w-6xl mx-auto px-4">
+          {/* Navigation */}
+          <nav className="flex justify-end mb-8">
+            <div className="flex gap-6">
+              <a
+                href="/about"
+                className="text-slate-600 hover:text-blue-600 font-medium transition-colors"
+              >
+                About
+              </a>
+              <a
+                href="/methodology"
+                className="text-slate-600 hover:text-blue-600 font-medium transition-colors"
+              >
+                Methodology
+              </a>
+            </div>
+          </nav>
+
           <h1 className="text-6xl font-semibold text-slate-800 mb-4 tracking-wide">
             Helmet<span className="text-blue-600 font-light">Score</span>
           </h1>
