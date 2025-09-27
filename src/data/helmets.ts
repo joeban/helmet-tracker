@@ -1262,7 +1262,7 @@ export const HELMETS: Helmet[] = [
     avg_price: 230.0,
     listing_count: 1,
     available_count: 1,
-    image_url: 'https://m.media-amazon.com/images/I/61tQjkXHnTL._AC_SL1500_.jpg',
+    image_url: null,
     amazon_url: 'https://www.amazon.com/dp/B07JC3Q6PG?tag=test-affiliate-20'
   },
   {
@@ -1886,7 +1886,7 @@ export const HELMETS: Helmet[] = [
     avg_price: 250.0,
     listing_count: 1,
     available_count: 1,
-    image_url: 'https://m.media-amazon.com/images/I/61tQjkXHnTL._AC_SL1500_.jpg',
+    image_url: null,
     amazon_url: 'https://www.amazon.com/dp/B07JC3Q6PG?tag=test-affiliate-20'
   },
   {
@@ -1998,7 +1998,7 @@ export const HELMETS: Helmet[] = [
     avg_price: 325.0,
     listing_count: 1,
     available_count: 1,
-    image_url: 'https://m.media-amazon.com/images/I/71Zm2oYN6CL._AC_SL1500_.jpg',
+    image_url: null,
     amazon_url: 'https://www.amazon.com/dp/B07FTSN2QP?tag=test-affiliate-20'
   },
   {
@@ -2414,7 +2414,7 @@ export const HELMETS: Helmet[] = [
     avg_price: 100.0,
     listing_count: 1,
     available_count: 1,
-    image_url: 'https://m.media-amazon.com/images/I/61XrLwZ5YJL._AC_SL1500_.jpg',
+    image_url: null,
     amazon_url: 'https://www.amazon.com/dp/B0CKRYSQ88?tag=test-affiliate-20'
   },
   {
@@ -3166,7 +3166,7 @@ export const HELMETS: Helmet[] = [
     avg_price: 85.0,
     listing_count: 1,
     available_count: 1,
-    image_url: 'https://m.media-amazon.com/images/I/61K8Q9z-VsL._AC_SL1500_.jpg',
+    image_url: null,
     amazon_url: 'https://www.amazon.com/dp/B08WBMM4MG?tag=test-affiliate-20'
   },
   {
