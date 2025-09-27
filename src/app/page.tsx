@@ -111,13 +111,13 @@ export default function Home() {
           <h1 className="text-6xl font-semibold text-slate-800 mb-4 tracking-wide">
             Helmet<span className="text-blue-600 font-light">Score</span>
           </h1>
-          <p className="text-2xl text-slate-700 font-semibold mb-4">🛡️ Find the Safest Bike Helmet for Your Life</p>
+          <p className="text-2xl text-slate-700 font-semibold mb-4">Find the Safest Bike Helmet for Your Life</p>
           <p className="text-lg text-slate-600 font-medium mb-6">The only site with complete Virginia Tech safety test results for 281+ helmets.</p>
 
           {/* Safety Score Explainer */}
           <div className="bg-gradient-to-r from-green-50 to-red-50 rounded-lg p-4 mb-6 max-w-2xl">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm font-semibold text-slate-700">📊 How Safety Scores Work:</span>
+              <span className="text-sm font-semibold text-slate-700">How Safety Scores Work:</span>
             </div>
             <div className="flex items-center justify-between text-sm">
               <span className="text-green-700 font-medium">Lower Score = Better Protection</span>
@@ -134,13 +134,13 @@ export default function Home() {
               onClick={() => setSortBy('rating')}
               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
             >
-              🏆 Browse Safest Helmets
+              Browse Safest Helmets
             </button>
             <a
               href="/methodology"
               className="bg-slate-200 text-slate-700 px-6 py-3 rounded-lg hover:bg-slate-300 transition-colors font-medium"
             >
-              📚 Learn About Safety Testing
+              Learn About Safety Testing
             </a>
           </div>
         </div>
