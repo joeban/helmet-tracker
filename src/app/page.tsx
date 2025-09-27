@@ -14,6 +14,7 @@ export default function Home() {
   const [priceRange, setPriceRange] = useState<{min: number; max: number}>({min: 0, max: 600});
   const [safetyScoreRange, setSafetyScoreRange] = useState<{min: number; max: number}>({min: 6.8, max: 27.0});
   const [mipsOnly, setMipsOnly] = useState(false);
+  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
   // Debounce search term for better performance
   useEffect(() => {
@@ -95,8 +96,8 @@ export default function Home() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex gap-8">
-          {/* Left Sidebar - Filters */}
-          <aside className="w-80 flex-shrink-0">
+          {/* Desktop Sidebar - Filters */}
+          <aside className="hidden lg:block w-80 flex-shrink-0">
             <div className="bg-white rounded-lg shadow-md p-6 sticky top-8 max-h-[calc(100vh-6rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
               <h3 className="text-lg font-semibold text-gray-900 mb-6">Filters</h3>
 
@@ -281,6 +282,19 @@ export default function Home() {
 
           {/* Right Content - Results */}
           <div className="flex-1">
+            {/* Mobile Filter Toggle */}
+            <div className="lg:hidden mb-4">
+              <button
+                onClick={() => setIsMobileFiltersOpen(true)}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
+                </svg>
+                Filters & Search
+              </button>
+            </div>
+
             {/* Results Header */}
             <div className="mb-6">
               <h2 className="text-2xl font-semibold text-gray-800 flex items-center gap-3">
@@ -390,6 +404,227 @@ export default function Home() {
           </div>
         </div>
       </main>
+
+      {/* Mobile Filter Drawer */}
+      {isMobileFiltersOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50"
+            onClick={() => setIsMobileFiltersOpen(false)}
+          />
+
+          {/* Drawer */}
+          <div className="fixed inset-y-0 left-0 w-80 bg-white shadow-xl transform transition-transform duration-300 ease-in-out">
+            <div className="flex flex-col h-full">
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 border-b">
+                <h3 className="text-lg font-semibold text-gray-900">Filters</h3>
+                <button
+                  onClick={() => setIsMobileFiltersOpen(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Filter Content - Scrollable */}
+              <div className="flex-1 overflow-y-auto p-6">
+                {/* Search */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Search
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Search helmets..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+
+                {/* Category Filter */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Category
+                  </label>
+                  <select
+                    value={categoryFilter}
+                    onChange={(e) => setCategoryFilter(e.target.value as CategoryFilter)}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="">All Categories</option>
+                    <option value="All Mountain">All Mountain</option>
+                    <option value="Road">Road</option>
+                    <option value="Urban">Urban</option>
+                    <option value="Full-Face">Full-Face</option>
+                    <option value="Multi-sport">Multi-sport</option>
+                  </select>
+                </div>
+
+                {/* Brand Filter */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Brand
+                  </label>
+                  <select
+                    value={brandFilter}
+                    onChange={(e) => setBrandFilter(e.target.value as BrandFilter)}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="">All Brands</option>
+                    {uniqueBrands.map((brand) => (
+                      <option key={brand} value={brand}>
+                        {brand}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Sort By */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Sort By
+                  </label>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as SortOption)}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    <option value="rating">Best Rating</option>
+                    <option value="safety">Best Safety Score</option>
+                    <option value="price">Lowest Price</option>
+                  </select>
+                </div>
+
+                {/* Price Range */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Price Range
+                  </label>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="number"
+                        placeholder="Min"
+                        value={priceRange.min}
+                        onChange={(e) => setPriceRange(prev => ({...prev, min: Number(e.target.value) || 0}))}
+                        className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                      />
+                      <span className="text-gray-500">to</span>
+                      <input
+                        type="number"
+                        placeholder="Max"
+                        value={priceRange.max}
+                        onChange={(e) => setPriceRange(prev => ({...prev, max: Number(e.target.value) || 500}))}
+                        className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                      />
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      ${priceRange.min} - ${priceRange.max}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Safety Score Range */}
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Safety Score Range (STAR)
+                  </label>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="number"
+                        placeholder="Min"
+                        value={safetyScoreRange.min}
+                        step="0.1"
+                        min="6.8"
+                        max="27.0"
+                        onChange={(e) => setSafetyScoreRange(prev => ({...prev, min: Number(e.target.value) || 6.8}))}
+                        className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                      />
+                      <span className="text-gray-500">to</span>
+                      <input
+                        type="number"
+                        placeholder="Max"
+                        value={safetyScoreRange.max}
+                        step="0.1"
+                        min="6.8"
+                        max="27.0"
+                        onChange={(e) => setSafetyScoreRange(prev => ({...prev, max: Number(e.target.value) || 27.0}))}
+                        className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                      />
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      {safetyScoreRange.min} - {safetyScoreRange.max} (lower = safer)
+                    </div>
+                  </div>
+                </div>
+
+                {/* MIPS Filter */}
+                <div className="mb-6">
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={mipsOnly}
+                      onChange={(e) => setMipsOnly(e.target.checked)}
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                    />
+                    <span className="ml-2 text-sm text-gray-700">
+                      MIPS technology only
+                    </span>
+                  </label>
+                </div>
+
+                {/* Availability Filter */}
+                <div className="mb-6">
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={showAvailableOnly}
+                      onChange={(e) => setShowAvailableOnly(e.target.checked)}
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                    />
+                    <span className="ml-2 text-sm text-gray-700">
+                      Show available only
+                    </span>
+                  </label>
+                </div>
+
+                {/* Clear Filters */}
+                <button
+                  onClick={() => {
+                    setSearchTerm('');
+                    setCategoryFilter('');
+                    setBrandFilter('');
+                    setSortBy('rating');
+                    setShowAvailableOnly(false);
+                    setPriceRange({min: 0, max: 600});
+                    setSafetyScoreRange({min: 6.8, max: 27.0});
+                    setMipsOnly(false);
+                  }}
+                  className="w-full px-4 py-2 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  Clear All Filters
+                </button>
+              </div>
+
+              {/* Footer */}
+              <div className="p-4 border-t">
+                <button
+                  onClick={() => setIsMobileFiltersOpen(false)}
+                  className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Apply Filters
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8 mt-12">
