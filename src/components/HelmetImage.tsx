@@ -67,23 +67,23 @@ export default function HelmetImage({
 
   // Professional fallback display
   return (
-    <div className="relative w-full h-full bg-white border border-gray-300 rounded-sm flex flex-col items-center justify-center p-4">
+    <div className="relative w-full h-full bg-white border border-slate-300 rounded-lg shadow-sm flex flex-col items-center justify-center p-5">
       {/* Clean geometric placeholder */}
-      <div className="w-12 h-12 border-2 border-gray-400 rounded-sm mb-4 flex items-center justify-center">
-        <div className="w-6 h-6 bg-gray-300 rounded-sm"></div>
+      <div className="w-14 h-14 border-2 border-slate-400 rounded-lg mb-4 flex items-center justify-center bg-slate-50">
+        <div className="w-7 h-7 bg-slate-300 rounded-md"></div>
       </div>
 
       {/* Brand and model info */}
       <div className="text-center">
-        <div className="text-sm font-semibold text-gray-900 mb-1 uppercase tracking-wide">{brand}</div>
-        <div className="text-xs text-gray-700 font-medium leading-tight">{name}</div>
-        <div className="text-xs text-gray-500 mt-1">{category}</div>
+        <div className="text-sm font-bold text-slate-800 mb-1 uppercase tracking-wider">{brand}</div>
+        <div className="text-xs text-slate-600 font-medium leading-tight">{name}</div>
+        <div className="text-xs text-slate-500 mt-1">{category}</div>
       </div>
 
       {/* Amazon link indicator if available */}
       {amazonUrl && (
-        <div className="absolute top-2 right-2">
-          <div className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-sm border border-gray-300 font-medium">
+        <div className="absolute top-3 right-3">
+          <div className="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded-md border border-blue-200 font-medium">
             Available
           </div>
         </div>
