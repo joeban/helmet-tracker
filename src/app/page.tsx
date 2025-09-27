@@ -112,11 +112,7 @@ export default function Home() {
             Helmet<span className="text-blue-600 font-light">Score</span>
           </h1>
           <p className="text-2xl text-slate-700 font-semibold mb-4">🛡️ Find the Safest Bike Helmet for Your Life</p>
-          <p className="text-lg text-slate-600 font-medium mb-4">The only site with complete Virginia Tech safety test results for 281+ helmets.</p>
-          <p className="text-base text-slate-600 max-w-3xl mb-6">
-            See which helmets actually protect your brain in real crashes. Virginia Tech is the world&apos;s leading
-            independent helmet testing lab - their STAR ratings could save your life.
-          </p>
+          <p className="text-lg text-slate-600 font-medium mb-6">The only site with complete Virginia Tech safety test results for 281+ helmets.</p>
 
           {/* Safety Score Explainer */}
           <div className="bg-gradient-to-r from-green-50 to-red-50 rounded-lg p-4 mb-6 max-w-2xl">
