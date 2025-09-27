@@ -111,7 +111,7 @@ export const MANUAL_HELMET_ASINS: Record<string, string> = {
   'BELL DRAFT MIPS': 'B07DLHCR2L', // Bell Draft MIPS Adult Road Bike Helmet
   'GIRO REGISTER MIPS': 'B07NQBVD6X', // Giro Register MIPS Adult Road Cycling Helmet
   'SMITH PERSIST MIPS': 'B08G8B8M2G', // Smith Persist MIPS Cycling Helmet
-  'BONTRAGER RALLY MIPS': 'B07P6RJZV5', // Bontrager Rally MIPS Cycling Helmet
+  // 'BONTRAGER RALLY MIPS': 'B07P6RJZV5', // Product no longer available on Amazon
   'SCOTT VIVO PLUS MIPS': 'B08FBQ8HX3', // Scott Vivo Plus MIPS Helmet
   'GIANT PURSUIT': 'B08BCRKMFV', // Giant Pursuit Helmet
   'LAZER BLADE PLUS MIPS': 'B085TCXJ7D', // Lazer Blade+ MIPS Road Cycling Helmet

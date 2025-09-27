@@ -399,7 +399,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: 'https://www.amazon.com/dp/B07P6RJZV5?tag=helmetscore-20'
+    amazon_url: null
   },
   {
     id: 26,
