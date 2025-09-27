@@ -399,7 +399,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: null
+    amazon_url: 'https://www.amazon.com/dp/B07P6RJZV5?tag=test-affiliate-20'
   },
   {
     id: 26,
@@ -3135,7 +3135,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: null
+    amazon_url: 'https://www.amazon.com/dp/B08FBQ8HX3?tag=test-affiliate-20'
   },
   {
     id: 197,
