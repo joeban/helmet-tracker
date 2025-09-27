@@ -1,9 +1,73 @@
 import { Helmet } from '@/types/helmet';
 
 export const HELMETS: Helmet[] = [
-  // 5-STAR HELMETS (< 10.1 STAR score)
+  // 5-STAR HELMETS (< 10.1 STAR score) - UPDATED WITH 2025 VT DATA
   {
     id: 1,
+    name: 'Deflectr RLS',
+    brand: 'Canyon',
+    category: 'All Mountain',
+    star_rating: 5,
+    safety_score: 6.82,
+    vt_test_price: 160.0,
+    min_price: 160.0,
+    max_price: 160.0,
+    avg_price: 160.0,
+    listing_count: 1,
+    available_count: 0,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 2,
+    name: 'Miden RLS',
+    brand: 'HEXR',
+    category: 'All Mountain',
+    star_rating: 5,
+    safety_score: 6.93,
+    vt_test_price: 300.0,
+    min_price: 300.0,
+    max_price: 300.0,
+    avg_price: 300.0,
+    listing_count: 1,
+    available_count: 0,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 3,
+    name: 'Cularis',
+    brand: 'POC',
+    category: 'All Mountain',
+    star_rating: 5,
+    safety_score: 7.10,
+    vt_test_price: 260.0,
+    min_price: 260.0,
+    max_price: 260.0,
+    avg_price: 260.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 4,
+    name: 'Speedframe RS',
+    brand: 'Fox',
+    category: 'All Mountain',
+    star_rating: 5,
+    safety_score: 7.23,
+    vt_test_price: 319.0,
+    min_price: 319.0,
+    max_price: 319.0,
+    avg_price: 319.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 5,
     name: 'Tactic 4',
     brand: 'Specialized',
     category: 'All Mountain',
