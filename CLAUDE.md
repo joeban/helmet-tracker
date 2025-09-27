@@ -418,3 +418,4 @@ helmet-tracker-next/
 5. **Price Drop Alerts** - Notify users when preferred helmets go on sale
 
 **Competitive Advantage:** Only helmet site with 100% accurate, complete Virginia Tech data
+- Always commit and push to github and update claude.md with our progress
