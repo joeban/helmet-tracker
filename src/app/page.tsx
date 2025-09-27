@@ -88,71 +88,73 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <header className="bg-gradient-to-b from-slate-50 to-white border-b border-slate-200 py-16">
-        <div className="max-w-6xl mx-auto px-4">
+      <header className="bg-gradient-to-b from-slate-50 to-white border-b border-slate-200 py-4 lg:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Navigation */}
-          <nav className="flex justify-end mb-8">
-            <div className="flex gap-6">
+          <nav className="flex justify-end mb-4 lg:mb-6">
+            <div className="flex gap-6 lg:gap-8">
               <a
                 href="/about"
-                className="text-slate-600 hover:text-blue-600 font-medium transition-colors"
+                className="text-slate-600 hover:text-blue-600 font-medium transition-colors text-sm lg:text-base"
               >
                 About
               </a>
               <a
                 href="/methodology"
-                className="text-slate-600 hover:text-blue-600 font-medium transition-colors"
+                className="text-slate-600 hover:text-blue-600 font-medium transition-colors text-sm lg:text-base"
               >
                 Methodology
               </a>
             </div>
           </nav>
 
-          <h1 className="text-6xl font-semibold text-slate-800 mb-4 tracking-wide">
-            Helmet<span className="text-blue-600 font-light">Score</span>
-          </h1>
-          <p className="text-2xl text-slate-700 font-semibold mb-4">Find the Safest Bike Helmet for Your Life</p>
-          <p className="text-lg text-slate-600 font-medium mb-6">The only site with complete Virginia Tech safety test results for 281+ helmets.</p>
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-slate-800 mb-2 lg:mb-4 tracking-wide leading-tight">
+              Helmet<span className="text-blue-600 font-light">Score</span>
+            </h1>
+            <p className="text-lg sm:text-xl lg:text-2xl text-slate-700 font-semibold mb-2 lg:mb-3 leading-tight">Find the Safest Bike Helmet for Your Life</p>
+            <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium mb-4 lg:mb-6 max-w-3xl mx-auto">The only site with complete Virginia Tech safety test results for 281+ helmets.</p>
 
-          {/* Safety Score Explainer */}
-          <div className="bg-gradient-to-r from-green-50 to-red-50 rounded-lg p-4 mb-6 max-w-2xl">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm font-semibold text-slate-700">How Safety Scores Work:</span>
+            {/* Safety Score Explainer */}
+            <div className="bg-gradient-to-r from-green-50 to-red-50 rounded-lg p-4 lg:p-5 mb-4 lg:mb-6 max-w-3xl mx-auto border border-green-100">
+              <div className="mb-2 lg:mb-3">
+                <span className="text-sm lg:text-base font-semibold text-slate-700">How Safety Scores Work:</span>
+              </div>
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-2 lg:gap-4 text-xs lg:text-sm">
+                <span className="text-green-700 font-semibold">Lower Score = Better Protection</span>
+                <span className="text-red-700 font-semibold">Higher Score = More Risk</span>
+              </div>
+              <div className="mt-2 lg:mt-3 text-xs lg:text-sm text-slate-600 font-medium">
+                Example: A score of 8.0 is 50% safer than 15.0
+              </div>
             </div>
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-green-700 font-medium">Lower Score = Better Protection</span>
-              <span className="text-red-700 font-medium">Higher Score = More Risk</span>
-            </div>
-            <div className="mt-2 text-xs text-slate-600">
-              Example: A score of 8.0 is 50% safer than 15.0
-            </div>
-          </div>
 
-          {/* Quick Action Buttons */}
-          <div className="flex flex-wrap gap-3">
-            <button
-              onClick={() => setSortBy('rating')}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
-            >
-              Browse Safest Helmets
-            </button>
-            <a
-              href="/methodology"
-              className="bg-slate-200 text-slate-700 px-6 py-3 rounded-lg hover:bg-slate-300 transition-colors font-medium"
-            >
-              Learn About Safety Testing
-            </a>
+            {/* Quick Action Buttons */}
+            <div className="flex flex-col sm:flex-row justify-center gap-3 lg:gap-4">
+              <button
+                onClick={() => setSortBy('rating')}
+                className="bg-blue-600 text-white px-5 sm:px-6 lg:px-8 py-2.5 lg:py-3 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-all duration-200 font-semibold text-sm lg:text-base shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              >
+                Browse Safest Helmets
+              </button>
+              <a
+                href="/methodology"
+                className="bg-slate-200 text-slate-700 px-5 sm:px-6 lg:px-8 py-2.5 lg:py-3 rounded-lg hover:bg-slate-300 active:bg-slate-400 transition-all duration-200 font-semibold text-sm lg:text-base shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+              >
+                Learn About Safety Testing
+              </a>
+            </div>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex gap-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-8">
+        <div className="flex gap-4 lg:gap-6">
           {/* Desktop Sidebar - Filters */}
-          <aside className="hidden lg:block w-80 flex-shrink-0">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-8 max-h-[calc(100vh-6rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-              <h3 className="text-lg font-semibold text-gray-900 mb-6">Filters</h3>
+          <aside className="hidden lg:block w-72 xl:w-80 flex-shrink-0">
+            <div className="bg-white rounded-xl shadow-md border border-slate-200 p-4 lg:p-6 sticky top-4 max-h-[calc(100vh-4rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+              <h3 className="text-lg lg:text-xl font-bold text-slate-800 mb-4 lg:mb-6">Filters</h3>
 
               {/* Search */}
               <div className="mb-6">
@@ -349,27 +351,29 @@ export default function Home() {
             </div>
 
             {/* Results Header */}
-            <div className="mb-6">
-              <h2 className="text-2xl font-semibold text-gray-800 flex items-center gap-3">
+            <div className="mb-4 lg:mb-6">
+              <h2 className="text-xl lg:text-2xl font-bold text-slate-800 flex items-center gap-2 lg:gap-3">
                 {isSearching ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                    Searching...
+                    <div className="w-5 h-5 lg:w-6 lg:h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                    <span className="text-lg lg:text-xl">Searching...</span>
                   </>
                 ) : (
                   <>
-                    {filteredAndSortedHelmets.length} Helmet{filteredAndSortedHelmets.length !== 1 ? 's' : ''} Found
+                    <span className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                      {filteredAndSortedHelmets.length} Helmet{filteredAndSortedHelmets.length !== 1 ? 's' : ''} Found
+                    </span>
                   </>
                 )}
               </h2>
             </div>
 
             {/* Helmet Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
           {filteredAndSortedHelmets.map((helmet) => (
-            <div key={helmet.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow touch-manipulation">
+            <div key={helmet.id} className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-200 group">
               {/* Helmet Image */}
-              <div className="h-40 sm:h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
+              <div className="h-40 lg:h-48 bg-slate-50 flex items-center justify-center overflow-hidden group-hover:bg-slate-100 transition-colors duration-200">
                 <HelmetImage
                   brand={helmet.brand}
                   name={helmet.name}
@@ -380,26 +384,26 @@ export default function Home() {
               </div>
 
               {/* Helmet Details */}
-              <div className="p-4 sm:p-6">
-                <div className="mb-3 sm:mb-4">
-                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 leading-tight">
+              <div className="p-4 lg:p-5">
+                <div className="mb-3 lg:mb-4">
+                  <h3 className="text-base lg:text-lg font-bold text-gray-900 mb-1.5 lg:mb-2 leading-tight group-hover:text-blue-800 transition-colors duration-200">
                     {helmet.brand} {helmet.name}
                   </h3>
-                  <span className="inline-block bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-xs sm:text-sm">
+                  <span className="inline-block bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 px-2.5 py-1 rounded-full text-xs font-medium">
                     {helmet.category}
                   </span>
                 </div>
 
                 {/* Star Rating */}
-                <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                  <span className="text-yellow-500 text-lg sm:text-xl tracking-wider">
+                <div className="flex items-center gap-2 mb-2.5 lg:mb-3">
+                  <span className="text-yellow-500 text-lg lg:text-xl tracking-wider">
                     {renderStars(helmet.star_rating)}
                   </span>
-                  <span className="text-gray-600 text-sm">({helmet.star_rating}/5)</span>
+                  <span className="text-gray-600 text-sm font-medium">({helmet.star_rating}/5)</span>
                 </div>
 
                 {/* Safety Score */}
-                <div className={`mb-3 sm:mb-4 p-2 sm:p-3 rounded border-l-4 ${
+                <div className={`mb-3 lg:mb-4 p-2.5 lg:p-3 rounded-lg border-l-4 shadow-sm ${
                   helmet.safety_score <= 10
                     ? 'bg-green-50 border-green-500'
                     : helmet.safety_score <= 15
@@ -411,7 +415,7 @@ export default function Home() {
                     : 'bg-red-50 border-red-500'
                 }`}>
                   <div className="flex items-center justify-between">
-                    <div className="text-xs sm:text-sm text-gray-700">
+                    <div className="text-sm lg:text-base text-gray-700 font-medium">
                       <strong>Safety Score:</strong> {helmet.safety_score}
                     </div>
                     <div className={`text-xs px-2 py-1 rounded font-medium ${
@@ -432,27 +436,27 @@ export default function Home() {
                        : 'AVOID'}
                     </div>
                   </div>
-                  <div className="text-xs text-gray-600 mt-1">Lower score = better protection</div>
+                  <div className="text-xs text-gray-600 mt-1.5 font-medium">Lower score = better protection</div>
                 </div>
 
                 {/* Pricing */}
-                <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-3 sm:p-4 rounded-lg">
-                  <div className="text-lg sm:text-xl font-bold text-green-600 mb-1">
+                <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-3 lg:p-4 rounded-lg border border-gray-200">
+                  <div className="text-lg lg:text-xl font-bold text-green-600 mb-1.5">
                     {helmet.min_price === helmet.max_price
                       ? formatPrice(helmet.min_price)
                       : `${formatPrice(helmet.min_price)} - ${formatPrice(helmet.max_price)}`
                     }
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-600 mb-1">
+                  <div className="text-xs lg:text-sm text-gray-600 mb-1">
                     VT Test Price: {formatPrice(helmet.vt_test_price)}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-700 font-medium">
+                  <div className="text-xs lg:text-sm text-gray-700 font-medium">
                     {helmet.available_count} of {helmet.listing_count} retailers have it in stock
                   </div>
                 </div>
 
                 {/* Amazon Shopping Links */}
-                <div className="mt-3 sm:mt-4 space-y-2">
+                <div className="mt-3 lg:mt-4 space-y-2">
                   {(() => {
                     const amazonInfo = getHelmetAmazonInfo(helmet.brand, helmet.name);
 
@@ -463,7 +467,7 @@ export default function Home() {
                           href={helmet.amazon_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full inline-flex items-center justify-center px-4 py-3 sm:py-2 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-medium rounded-lg transition-colors duration-200 touch-manipulation text-sm sm:text-base"
+                          className="w-full inline-flex items-center justify-center px-4 py-2.5 lg:py-3 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-semibold rounded-lg transition-all duration-200 touch-manipulation text-sm shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
                         >
                           <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M13.74 12c-.092-.071-.306-.232-.306-.232V9.53c0-.105.008-.21.025-.314h1.745c.085.104.154.22.206.348.05.128.076.267.076.416v.457c0 .085-.02.168-.058.25-.036.082-.092.154-.17.214-.077.061-.178.109-.301.145-.123.036-.267.054-.432.054h-.785c-.085 0-.07.09-.07.175v.755zM10.26 12c.085-.071.306-.232.306-.232V9.53c0-.105-.008-.21-.025-.314H8.796c-.085.104-.154.22-.206.348-.05.128-.076.267-.076.416v.457c0 .085.02.168.058.25.036.082.092.154.17.214.077.061.178.109.301.145.123.036.267.054.432.054h.785c.085 0 .07.09.07.175v.755zM22.5 6.908V17.09c0 .604-.246 1.152-.643 1.549-.397.396-.945.643-1.549.643H3.692c-.604 0-1.152-.247-1.549-.643-.396-.397-.643-.945-.643-1.549V6.908c0-.604.247-1.152.643-1.549.397-.396.945-.643 1.549-.643h16.616c.604 0 1.152.247 1.549.643.397.397.643.945.643 1.549z"/>
@@ -478,7 +482,7 @@ export default function Home() {
                           href={amazonInfo.productUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full inline-flex items-center justify-center px-4 py-3 sm:py-2 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-medium rounded-lg transition-colors duration-200 touch-manipulation text-sm sm:text-base"
+                          className="w-full inline-flex items-center justify-center px-4 py-2.5 lg:py-3 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-semibold rounded-lg transition-all duration-200 touch-manipulation text-sm shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
                         >
                           <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M13.74 12c-.092-.071-.306-.232-.306-.232V9.53c0-.105.008-.21.025-.314h1.745c.085.104.154.22.206.348.05.128.076.267.076.416v.457c0 .085-.02.168-.058.25-.036.082-.092.154-.17.214-.077.061-.178.109-.301.145-.123.036-.267.054-.432.054h-.785c-.085 0-.07.09-.07.175v.755zM10.26 12c.085-.071.306-.232.306-.232V9.53c0-.105-.008-.21-.025-.314H8.796c-.085.104-.154.22-.206.348-.05.128-.076.267-.076.416v.457c0 .085.02.168.058.25.036.082.092.154.17.214.077.061.178.109.301.145.123.036.267.054.432.054h.785c.085 0 .07.09.07.175v.755zM22.5 6.908V17.09c0 .604-.246 1.152-.643 1.549-.397.396-.945.643-1.549.643H3.692c-.604 0-1.152-.247-1.549-.643-.396-.397-.643-.945-.643-1.549V6.908c0-.604.247-1.152.643-1.549.397-.396.945-.643 1.549-.643h16.616c.604 0 1.152.247 1.549.643.397.397.643.945.643 1.549z"/>
@@ -493,7 +497,7 @@ export default function Home() {
                           href={amazonInfo.searchUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full inline-flex items-center justify-center px-4 py-3 sm:py-2 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 touch-manipulation text-sm sm:text-base"
+                          className="w-full inline-flex items-center justify-center px-4 lg:px-6 py-3 lg:py-4 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200 touch-manipulation text-sm lg:text-base shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                         >
                           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -511,9 +515,16 @@ export default function Home() {
 
             {/* No Results */}
             {filteredAndSortedHelmets.length === 0 && (
-              <div className="text-center py-12">
-                <h3 className="text-xl font-semibold text-gray-700 mb-2">No helmets found</h3>
-                <p className="text-gray-500">Try adjusting your search criteria</p>
+              <div className="text-center py-12 lg:py-16 col-span-full">
+                <div className="max-w-sm mx-auto">
+                  <div className="w-12 h-12 lg:w-16 lg:h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-6 h-6 lg:w-8 lg:h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg lg:text-xl font-bold text-gray-700 mb-2">No helmets found</h3>
+                  <p className="text-gray-500 text-sm lg:text-base">Try adjusting your search criteria or clearing filters</p>
+                </div>
               </div>
             )}
           </div>
@@ -742,20 +753,20 @@ export default function Home() {
       )}
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8 mt-12">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <p className="mb-2">
+      <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-8 lg:py-12 mt-8 lg:mt-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="mb-2 text-sm lg:text-base">
             Safety data from{' '}
             <a
               href="https://www.helmet.beam.vt.edu/bicycle-helmet-ratings.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-400 hover:underline"
+              className="text-blue-400 hover:text-blue-300 underline font-semibold transition-colors"
             >
               Virginia Tech Helmet Lab
             </a>
           </p>
-          <p>Built with ♥ for cyclist safety</p>
+          <p className="text-gray-300 text-sm lg:text-base font-medium">Built with care for cyclist safety</p>
         </div>
       </footer>
     </div>
