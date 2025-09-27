@@ -1279,7 +1279,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: null
+    amazon_url: 'https://www.amazon.com/dp/B0993F24FM?tag=test-affiliate-20'
   },
   {
     id: 81,
@@ -2239,7 +2239,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: null
+    amazon_url: 'https://www.amazon.com/dp/B017Y92QUQ?tag=test-affiliate-20'
   },
   {
     id: 141,
@@ -3263,7 +3263,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: null
+    amazon_url: 'https://www.amazon.com/dp/B07DLHCR2L?tag=test-affiliate-20'
   },
   {
     id: 205,
@@ -3439,7 +3439,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: null
+    amazon_url: 'https://www.amazon.com/dp/B07GT7F78H?tag=test-affiliate-20'
   },
   {
     id: 216,

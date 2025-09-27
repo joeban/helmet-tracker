@@ -94,11 +94,23 @@ export const MANUAL_HELMET_ASINS: Record<string, string> = {
   'SMITH SIGNAL MIPS': 'B08WBMM4MG', // SMITH Signal Cycling Helmet with MIPS Technology
   'SMITH ROUTE MIPS': 'B08WBLSHBB', // SMITH Route MIPS from search results
 
-  // Newly researched Amazon ASINs - December 2024
+  // First batch of Amazon ASINs - December 2024
   'GIRO AETHER SPHERICAL': 'B07FTSN2QP', // Giro Aether Spherical Adult Road Cycling Helmet
   'BELL Z20 MIPS': 'B07JC3Q6PG', // BELL Z20 Aero MIPS Adult Road Bike Helmet
   'BELL Z20 AERO MIPS': 'B07JC3Q6PG', // Same product, alternate name match
   'POC VENTRAL AIR MIPS': 'B09Q5S7BYB', // POC Ventral Air MIPS Road Cycling Helmet
+
+  // Comprehensive search batch - December 2024
+  'GIRO SYNTHE MIPS': 'B017Y92QUQ', // Giro Synthe MIPS Adult Road Cycling Helmet
+  'GIRO FORAY MIPS': 'B07GT7F78H', // Giro Foray MIPS Cycling Helmet
+  'MET TRENTA MIPS': 'B0993F24FM', // MET Trenta MIPS Road Cycling Helmet
+  'KASK PROTONE': 'B013EYA5OY', // KASK Protone Helmet
+
+  // Additional research batch - December 2024
+  'SPECIALIZED ALIGN II MIPS': 'B07PBQG8QP', // Specialized Align II MIPS Adult Helmet
+  'BELL DRAFT MIPS': 'B07DLHCR2L', // Bell Draft MIPS Adult Road Bike Helmet
+  'GIRO REGISTER MIPS': 'B07NQBVD6X', // Giro Register MIPS Adult Road Cycling Helmet
+  'SMITH PERSIST MIPS': 'B08G8B8M2G', // Smith Persist MIPS Cycling Helmet
 
   // Add more verified helmets as researched
   // 'SPECIALIZED PREVAIL 3': 'B08XXXXX', // Need to research
