@@ -339,7 +339,7 @@ export default function Home() {
                 {/* Safety Score */}
                 <div className="mb-4 p-2 bg-gray-50 rounded border-l-4 border-green-500">
                   <div className="text-sm text-gray-700">
-                    <strong>Safety Score:</strong> {helmet.safety_score.toFixed(1)} (lower is better)
+                    <strong>Safety Score:</strong> {helmet.safety_score} (lower is better)
                   </div>
                 </div>
 
