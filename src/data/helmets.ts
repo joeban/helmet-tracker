@@ -2241,8 +2241,7 @@ export const HELMETS: Helmet[] = [
     max_price: 105.0,
     avg_price: 97.5,
     listing_count: 3,
-    available_count: 3,
-    image_count: null
+    available_count: 3
   },
   {
     id: 145,
