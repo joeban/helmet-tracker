@@ -163,6 +163,22 @@ export const HELMETS: Helmet[] = [
   },
   {
     id: 11,
+    name: 'ALTERRA',
+    brand: 'D',
+    category: 'All Mountain',
+    star_rating: 5,
+    safety_score: 8.5,
+    vt_test_price: 395.0,
+    min_price: 395.0,
+    max_price: 395.0,
+    avg_price: 395.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 12,
     name: 'TACTIC 4',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -178,10 +194,10 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 12,
+    id: 13,
     name: 'PREVAIL 3',
     brand: 'SPECIALIZED',
-    category: 'All Mountain',
+    category: 'Road',
     star_rating: 5,
     safety_score: 8.64,
     vt_test_price: 300.0,
@@ -194,7 +210,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 13,
+    id: 14,
     name: 'PROTECTION TRAILBLAZER MIPS',
     brand: 'SWEET',
     category: 'All Mountain',
@@ -210,7 +226,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 14,
+    id: 15,
     name: 'MODE',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -226,7 +242,23 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 15,
+    id: 16,
+    name: 'RACING DROPFRAME PRO',
+    brand: 'FOX',
+    category: 'All Mountain',
+    star_rating: 5,
+    safety_score: 8.85,
+    vt_test_price: 200.0,
+    min_price: 200.0,
+    max_price: 200.0,
+    avg_price: 200.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 17,
     name: '1 AURA',
     brand: 'UNIT',
     category: 'All Mountain',
@@ -242,7 +274,23 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 16,
+    id: 18,
+    name: 'GIANT',
+    brand: 'GIANT',
+    category: 'All Mountain',
+    star_rating: 5,
+    safety_score: 9.02,
+    vt_test_price: 150.0,
+    min_price: 150.0,
+    max_price: 150.0,
+    avg_price: 150.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 19,
     name: 'RACING DROPFRAME PRO 2023',
     brand: 'FOX',
     category: 'All Mountain',
@@ -258,7 +306,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 17,
+    id: 20,
     name: 'PROTECTION BUSHWHACKER 2VI MIPS',
     brand: 'SWEET',
     category: 'All Mountain',
@@ -274,7 +322,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 18,
+    id: 21,
     name: 'PROTECTION FALCONER AERO 2VI MIPS',
     brand: 'SWEET',
     category: 'Road',
@@ -290,7 +338,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 19,
+    id: 22,
     name: 'REV COMP MIPS',
     brand: 'GIANT',
     category: 'All Mountain',
@@ -306,7 +354,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 20,
+    id: 23,
     name: 'G1 MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -322,7 +370,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 21,
+    id: 24,
     name: 'RHOAN',
     brand: 'KAV',
     category: 'All Mountain',
@@ -338,7 +386,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 22,
+    id: 25,
     name: 'RALLY MIPS',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -354,7 +402,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 23,
+    id: 26,
     name: 'RACING CROSSFRAME PRO',
     brand: 'FOX',
     category: 'All Mountain',
@@ -370,7 +418,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 24,
+    id: 27,
     name: 'VELOCIS MIPS',
     brand: 'TREK',
     category: 'All Mountain',
@@ -386,7 +434,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 25,
+    id: 28,
     name: 'ALIGN II',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -402,7 +450,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 26,
+    id: 29,
     name: 'CHAMONIX 3',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -418,7 +466,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 27,
+    id: 30,
     name: 'HUMMVEE MIPS',
     brand: 'ENDURA',
     category: 'All Mountain',
@@ -434,7 +482,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 28,
+    id: 31,
     name: 'TONIC MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -450,7 +498,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 29,
+    id: 32,
     name: 'AMBUSH 2',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -466,7 +514,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 30,
+    id: 33,
     name: 'ROGUE CORE MIPS',
     brand: 'BLUEGRASS',
     category: 'All Mountain',
@@ -482,7 +530,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 31,
+    id: 34,
     name: 'LEE DESIGNS A2 MIPS DECOY',
     brand: 'TROY',
     category: 'All Mountain',
@@ -498,7 +546,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 32,
+    id: 35,
     name: 'CENTURY MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -514,7 +562,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 33,
+    id: 36,
     name: 'DOWNTOWN MIPS',
     brand: 'MET',
     category: 'All Mountain',
@@ -530,7 +578,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 34,
+    id: 37,
     name: 'MILES MIPS',
     brand: 'MET',
     category: 'All Mountain',
@@ -546,7 +594,23 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 35,
+    id: 38,
+    name: 'ATB-2T',
+    brand: 'D',
+    category: 'All Mountain',
+    star_rating: 5,
+    safety_score: 10.03,
+    vt_test_price: 229.0,
+    min_price: 229.0,
+    max_price: 229.0,
+    avg_price: 229.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 39,
     name: 'Z1 KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -562,7 +626,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 36,
+    id: 40,
     name: 'ROOST',
     brand: 'GIANT',
     category: 'All Mountain',
@@ -578,7 +642,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 37,
+    id: 41,
     name: 'ROOST',
     brand: 'LIV',
     category: 'All Mountain',
@@ -594,7 +658,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 38,
+    id: 42,
     name: 'VANGUARD CORE',
     brand: 'BLUEGRASS',
     category: 'All Mountain',
@@ -610,7 +674,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 39,
+    id: 43,
     name: 'CENTRIC PLUS MIPS',
     brand: 'SCOTT',
     category: 'Road',
@@ -626,7 +690,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 40,
+    id: 44,
     name: 'REV PRO MIPS',
     brand: 'GIANT',
     category: 'All Mountain',
@@ -642,7 +706,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 41,
+    id: 45,
     name: 'REV PRO MIPS',
     brand: 'LIV',
     category: 'All Mountain',
@@ -658,7 +722,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 42,
+    id: 46,
     name: 'TERRAE',
     brand: 'MET',
     category: 'All Mountain',
@@ -674,7 +738,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 43,
+    id: 47,
     name: 'SPHERE MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -690,7 +754,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 44,
+    id: 48,
     name: 'REVO',
     brand: 'MET',
     category: 'All Mountain',
@@ -706,7 +770,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 45,
+    id: 49,
     name: 'CYCLONE MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -722,7 +786,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 46,
+    id: 50,
     name: 'TERRANOVA MIPS',
     brand: 'MET',
     category: 'All Mountain',
@@ -738,7 +802,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 47,
+    id: 51,
     name: 'OCTAL X SPIN',
     brand: 'POC',
     category: 'All Mountain',
@@ -754,7 +818,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 48,
+    id: 52,
     name: 'MOTRIP MIPS',
     brand: 'ABUS',
     category: 'All Mountain',
@@ -770,7 +834,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 49,
+    id: 53,
     name: 'QUANTUM WAVECEL',
     brand: 'TREK',
     category: 'All Mountain',
@@ -786,7 +850,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 50,
+    id: 54,
     name: 'MT500 MIPS',
     brand: 'ENDURA',
     category: 'All Mountain',
@@ -802,7 +866,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 51,
+    id: 55,
     name: 'ARX PLUS MIPS 2020',
     brand: 'SCOTT',
     category: 'Road',
@@ -818,7 +882,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 52,
+    id: 56,
     name: 'LEE DESIGNS FLOWLINE',
     brand: 'TROY',
     category: 'All Mountain',
@@ -834,7 +898,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 53,
+    id: 57,
     name: 'SPECTER WAVECEL',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -850,7 +914,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 54,
+    id: 58,
     name: 'HELIOS SPHERICAL',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -866,7 +930,23 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 55,
+    id: 59,
+    name: 'RACING SPEEDFRAME PRO MIPS',
+    brand: 'FOX',
+    category: 'All Mountain',
+    star_rating: 5,
+    safety_score: 10.84,
+    vt_test_price: 160.0,
+    min_price: 160.0,
+    max_price: 160.0,
+    avg_price: 160.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 60,
     name: 'MODROP MIPS',
     brand: 'ABUS',
     category: 'All Mountain',
@@ -882,7 +962,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 56,
+    id: 61,
     name: 'VINCI MIPS',
     brand: 'MET',
     category: 'All Mountain',
@@ -898,7 +978,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 57,
+    id: 62,
     name: 'BALLISTA MIPS',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -914,10 +994,10 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 58,
+    id: 63,
     name: 'EVADE 3',
     brand: 'SPECIALIZED',
-    category: 'All Mountain',
+    category: 'Road',
     star_rating: 5,
     safety_score: 10.93,
     vt_test_price: 300.0,
@@ -930,7 +1010,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 59,
+    id: 64,
     name: 'LOMA',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -946,7 +1026,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 60,
+    id: 65,
     name: 'ANVERZ NTA MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -962,7 +1042,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 61,
+    id: 66,
     name: 'LEE DESIGNS A3 MIPS',
     brand: 'TROY',
     category: 'All Mountain',
@@ -978,7 +1058,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 62,
+    id: 67,
     name: 'MASTER GEM',
     brand: 'OUTDOOR',
     category: 'All Mountain',
@@ -994,7 +1074,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 63,
+    id: 68,
     name: 'RAIL',
     brand: 'GIANT',
     category: 'All Mountain',
@@ -1010,7 +1090,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 64,
+    id: 69,
     name: 'RAIL',
     brand: 'LIV',
     category: 'All Mountain',
@@ -1026,7 +1106,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 65,
+    id: 70,
     name: 'STARVOS WAVECEL ASIA FIT',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -1042,7 +1122,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 66,
+    id: 71,
     name: 'STARVOS WAVECEL ROUND FIT',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -1058,7 +1138,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 67,
+    id: 72,
     name: 'PEDELEC 2.0 MIPS',
     brand: 'ABUS',
     category: 'All Mountain',
@@ -1074,7 +1154,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 68,
+    id: 73,
     name: 'PROJECT REBEL',
     brand: 'RUDY',
     category: 'All Mountain',
@@ -1090,7 +1170,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 69,
+    id: 74,
     name: 'RAIL SX MIPS',
     brand: 'GIANT',
     category: 'All Mountain',
@@ -1106,7 +1186,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 70,
+    id: 75,
     name: 'JACKAL MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -1122,7 +1202,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 71,
+    id: 76,
     name: 'ECLIPSE SPHERICAL',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -1138,7 +1218,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 72,
+    id: 77,
     name: 'STARVOS WAVECEL',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -1154,7 +1234,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 73,
+    id: 78,
     name: 'TYRANT SPHERICAL',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -1170,7 +1250,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 74,
+    id: 79,
     name: 'Z20 MIPS',
     brand: 'BELL',
     category: 'All Mountain',
@@ -1186,7 +1266,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 75,
+    id: 80,
     name: 'TRENTA MIPS',
     brand: 'MET',
     category: 'All Mountain',
@@ -1202,7 +1282,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 76,
+    id: 81,
     name: 'SHELTER',
     brand: 'MET',
     category: 'All Mountain',
@@ -1218,7 +1298,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 77,
+    id: 82,
     name: 'PROPERO 4',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -1234,10 +1314,10 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 78,
+    id: 83,
     name: 'PREVAIL 2 VENT MIPS',
     brand: 'SPECIALIZED',
-    category: 'All Mountain',
+    category: 'Road',
     star_rating: 5,
     safety_score: 11.28,
     vt_test_price: 250.0,
@@ -1250,7 +1330,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 79,
+    id: 84,
     name: 'RALLY WAVECEL',
     brand: 'TREK',
     category: 'All Mountain',
@@ -1266,7 +1346,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 80,
+    id: 85,
     name: 'BALLISTA MIPS',
     brand: 'TREK',
     category: 'All Mountain',
@@ -1282,7 +1362,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 81,
+    id: 86,
     name: 'BALLISTA MIPS ASIA FIT',
     brand: 'TREK',
     category: 'All Mountain',
@@ -1298,7 +1378,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 82,
+    id: 87,
     name: 'SOLSTICE MIPS',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -1314,7 +1394,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 83,
+    id: 88,
     name: 'MAJOR MIPS',
     brand: 'BERN',
     category: 'All Mountain',
@@ -1330,7 +1410,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 84,
+    id: 89,
     name: 'ARGO PLUS MIPS',
     brand: 'SCOTT',
     category: 'Road',
@@ -1346,7 +1426,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 85,
+    id: 90,
     name: 'CASCADE',
     brand: 'KALI',
     category: 'All Mountain',
@@ -1362,7 +1442,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 86,
+    id: 91,
     name: 'LEE DESIGNS A1 CLASSIC MIPS',
     brand: 'TROY',
     category: 'All Mountain',
@@ -1378,7 +1458,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 87,
+    id: 92,
     name: 'TECTAL RACE SPIN',
     brand: 'POC',
     category: 'All Mountain',
@@ -1394,7 +1474,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 88,
+    id: 93,
     name: 'CIRCUIT WAVECEL',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -1410,7 +1490,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 89,
+    id: 94,
     name: 'CAGE KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -1426,7 +1506,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 90,
+    id: 95,
     name: 'XXX WAVECEL',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -1442,7 +1522,23 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 91,
+    id: 96,
+    name: 'SONUS',
+    brand: 'NEAL',
+    category: 'All Mountain',
+    star_rating: 5,
+    safety_score: 11.78,
+    vt_test_price: 100.0,
+    min_price: 100.0,
+    max_price: 100.0,
+    avg_price: 100.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 97,
     name: 'SEARCH',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -1458,7 +1554,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 92,
+    id: 98,
     name: 'REV COMP',
     brand: 'GIANT',
     category: 'All Mountain',
@@ -1474,7 +1570,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 93,
+    id: 99,
     name: 'ELEMENTO',
     brand: 'KASK',
     category: 'All Mountain',
@@ -1490,7 +1586,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 94,
+    id: 100,
     name: 'FORMULA MIPS',
     brand: 'BELL',
     category: 'All Mountain',
@@ -1506,7 +1602,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 95,
+    id: 101,
     name: 'SOLSTICE MIPS ASIA FIT',
     brand: 'TREK',
     category: 'All Mountain',
@@ -1522,7 +1618,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 96,
+    id: 102,
     name: 'ROOST MIPS',
     brand: 'GIANT',
     category: 'All Mountain',
@@ -1538,7 +1634,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 97,
+    id: 103,
     name: 'PROTECTION PROMUTER MIPS',
     brand: 'SWEET',
     category: 'All Mountain',
@@ -1554,7 +1650,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 98,
+    id: 104,
     name: 'HEAD TRAUMA PROTECTION SYSTEM',
     brand: 'AIRNOGGIN',
     category: 'All Mountain',
@@ -1570,7 +1666,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 99,
+    id: 105,
     name: 'SOLSTICE MIPS',
     brand: 'TREK',
     category: 'All Mountain',
@@ -1586,7 +1682,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 100,
+    id: 106,
     name: 'RALLY WAVECEL',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -1602,7 +1698,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 101,
+    id: 107,
     name: 'REALM MIPS',
     brand: 'GIANT',
     category: 'All Mountain',
@@ -1618,7 +1714,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 102,
+    id: 108,
     name: 'CAMBER',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -1634,7 +1730,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 103,
+    id: 109,
     name: 'Z1 MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -1650,7 +1746,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 104,
+    id: 110,
     name: 'MACON 2.0 MIPS',
     brand: 'BERN',
     category: 'All Mountain',
@@ -1666,7 +1762,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 105,
+    id: 111,
     name: 'MANIFEST SPHERICAL',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -1682,7 +1778,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 106,
+    id: 112,
     name: 'ECHELON II MIPS',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -1698,7 +1794,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 107,
+    id: 113,
     name: 'VELOCIS MIPS',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -1714,7 +1810,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 108,
+    id: 114,
     name: 'PROJECT RACEMASTER MIPS',
     brand: 'RUDY',
     category: 'All Mountain',
@@ -1730,7 +1826,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 109,
+    id: 115,
     name: 'CRUIZER MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -1746,7 +1842,23 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 110,
+    id: 116,
+    name: 'BLADE',
+    brand: 'LAZER',
+    category: 'All Mountain',
+    star_rating: 5,
+    safety_score: 12.32,
+    vt_test_price: 100.0,
+    min_price: 100.0,
+    max_price: 100.0,
+    avg_price: 100.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 117,
     name: 'GARNEAU RAID MIPS',
     brand: 'LOUIS',
     category: 'All Mountain',
@@ -1762,7 +1874,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 111,
+    id: 118,
     name: 'Z20 AERO MIPS',
     brand: 'BELL',
     category: 'Road',
@@ -1778,7 +1890,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 112,
+    id: 119,
     name: 'LEE DESIGNS FLOWLINE SE',
     brand: 'TROY',
     category: 'All Mountain',
@@ -1794,7 +1906,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 113,
+    id: 120,
     name: 'GAMECHANGER 2.0 MIPS',
     brand: 'ABUS',
     category: 'All Mountain',
@@ -1810,7 +1922,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 114,
+    id: 121,
     name: 'PATH MIPS',
     brand: 'GIANT',
     category: 'All Mountain',
@@ -1826,7 +1938,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 115,
+    id: 122,
     name: 'RELAY MIPS',
     brand: 'GIANT',
     category: 'All Mountain',
@@ -1842,7 +1954,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 116,
+    id: 123,
     name: 'PATH MIPS',
     brand: 'LIV',
     category: 'All Mountain',
@@ -1858,7 +1970,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 117,
+    id: 124,
     name: 'RELAY MIPS',
     brand: 'LIV',
     category: 'All Mountain',
@@ -1874,7 +1986,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 118,
+    id: 125,
     name: 'AETHER SPHERICAL',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -1890,7 +2002,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 119,
+    id: 126,
     name: 'UNION MIPS',
     brand: 'BERN',
     category: 'All Mountain',
@@ -1906,10 +2018,10 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 120,
+    id: 127,
     name: 'S-WORKS PREVAIL II MIPS',
     brand: 'SPECIALIZED',
-    category: 'All Mountain',
+    category: 'Road',
     star_rating: 5,
     safety_score: 12.65,
     vt_test_price: 250.0,
@@ -1922,7 +2034,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 121,
+    id: 128,
     name: 'CYTAL CARBON',
     brand: 'POC',
     category: 'All Mountain',
@@ -1938,7 +2050,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 122,
+    id: 129,
     name: 'COYOTE KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -1954,7 +2066,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 123,
+    id: 130,
     name: 'REV ELITE MIPS',
     brand: 'GIANT',
     category: 'All Mountain',
@@ -1970,7 +2082,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 124,
+    id: 131,
     name: 'BLAZE WAVECEL',
     brand: 'TREK',
     category: 'All Mountain',
@@ -1986,7 +2098,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 125,
+    id: 132,
     name: 'RIVALE MIPS',
     brand: 'MET',
     category: 'All Mountain',
@@ -2002,7 +2114,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 126,
+    id: 133,
     name: 'KUDO AERO',
     brand: 'FIZIK',
     category: 'Road',
@@ -2018,7 +2130,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 127,
+    id: 134,
     name: 'CANNIBAL MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2034,7 +2146,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 128,
+    id: 135,
     name: 'KUDO',
     brand: 'FIZIK',
     category: 'All Mountain',
@@ -2050,7 +2162,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 129,
+    id: 136,
     name: 'ELEGANT MIPS',
     brand: 'PMT',
     category: 'All Mountain',
@@ -2066,7 +2178,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 130,
+    id: 137,
     name: 'STRATUS MIPS',
     brand: 'BELL',
     category: 'All Mountain',
@@ -2082,7 +2194,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 131,
+    id: 138,
     name: 'CHAPTER MIPS',
     brand: 'THOUSAND',
     category: 'All Mountain',
@@ -2098,7 +2210,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 132,
+    id: 139,
     name: 'ROLLER MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2114,7 +2226,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 133,
+    id: 140,
     name: 'SYNTHE MIPS',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -2130,7 +2242,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 134,
+    id: 141,
     name: 'CHIRU MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2146,7 +2258,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 135,
+    id: 142,
     name: 'HUDSON',
     brand: 'BERN',
     category: 'All Mountain',
@@ -2162,7 +2274,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 136,
+    id: 143,
     name: 'TONE',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -2178,7 +2290,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 137,
+    id: 144,
     name: 'CHAMONIX MIPS',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -2194,7 +2306,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 138,
+    id: 145,
     name: 'HYBAN 2.0 MIPS',
     brand: 'ABUS',
     category: 'All Mountain',
@@ -2210,7 +2322,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 139,
+    id: 146,
     name: 'LUPO KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2226,7 +2338,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 140,
+    id: 147,
     name: 'FINCH KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2242,7 +2354,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 141,
+    id: 148,
     name: 'BLAZE WAVECEL',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -2258,7 +2370,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 142,
+    id: 149,
     name: 'SUPRA PLUS MIPS',
     brand: 'SCOTT',
     category: 'Road',
@@ -2274,7 +2386,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 143,
+    id: 150,
     name: 'STEGO PLUS MIPS',
     brand: 'SCOTT',
     category: 'Road',
@@ -2290,7 +2402,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 144,
+    id: 151,
     name: 'SYNTAX MIPS',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -2306,7 +2418,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 145,
+    id: 152,
     name: 'RACING MAINFRAME MIPS',
     brand: 'FOX',
     category: 'All Mountain',
@@ -2322,7 +2434,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 146,
+    id: 153,
     name: 'RACING SPEEDFRAME',
     brand: 'FOX',
     category: 'All Mountain',
@@ -2338,7 +2450,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 147,
+    id: 154,
     name: 'MT500 FULL-FACE MIPS',
     brand: 'ENDURA',
     category: 'Full-Face',
@@ -2354,7 +2466,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 148,
+    id: 155,
     name: 'NOVA',
     brand: 'KAV',
     category: 'All Mountain',
@@ -2370,7 +2482,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 149,
+    id: 156,
     name: 'URBANIZE NTA MIPS',
     brand: 'LAZER',
     category: 'Urban',
@@ -2386,7 +2498,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 150,
+    id: 157,
     name: 'CHASE KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2402,7 +2514,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 151,
+    id: 158,
     name: 'STREET MIPS',
     brand: 'NUTCASE',
     category: 'All Mountain',
@@ -2418,7 +2530,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 152,
+    id: 159,
     name: 'TAGO PLUS MIPS',
     brand: 'SCOTT',
     category: 'Road',
@@ -2434,7 +2546,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 153,
+    id: 160,
     name: 'JACKAL KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2450,7 +2562,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 154,
+    id: 161,
     name: 'STRADA KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2466,7 +2578,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 155,
+    id: 162,
     name: 'CHARGE WAVECEL',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -2482,7 +2594,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 156,
+    id: 163,
     name: 'VENTO KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2498,7 +2610,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 157,
+    id: 164,
     name: 'ELEGANT 3.0',
     brand: 'PMT',
     category: 'All Mountain',
@@ -2514,7 +2626,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 158,
+    id: 165,
     name: 'KASSIS',
     brand: 'FIZIK',
     category: 'All Mountain',
@@ -2530,7 +2642,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 159,
+    id: 166,
     name: 'CHRONICLE MIPS',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -2546,7 +2658,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 160,
+    id: 167,
     name: 'CLIFFHANGER MIPS',
     brand: 'ABUS',
     category: 'All Mountain',
@@ -2562,7 +2674,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 161,
+    id: 168,
     name: 'KORA 3.0',
     brand: 'PMT',
     category: 'All Mountain',
@@ -2578,7 +2690,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 162,
+    id: 169,
     name: 'IMPALA MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2594,7 +2706,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 163,
+    id: 170,
     name: 'CADENCE PLUS',
     brand: 'SCOTT',
     category: 'Road',
@@ -2610,7 +2722,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 164,
+    id: 171,
     name: 'AMBUSH MIPS',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -2626,7 +2738,23 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 165,
+    id: 172,
+    name: 'GIANT',
+    brand: 'GIANT',
+    category: 'All Mountain',
+    star_rating: 4,
+    safety_score: 13.97,
+    vt_test_price: 350.0,
+    min_price: 350.0,
+    max_price: 350.0,
+    avg_price: 350.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 173,
     name: 'TRENTA 3K CARBON MIPS',
     brand: 'MET',
     category: 'All Mountain',
@@ -2642,7 +2770,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 166,
+    id: 174,
     name: 'ROUTE MIPS',
     brand: 'SMITH',
     category: 'All Mountain',
@@ -2658,7 +2786,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 167,
+    id: 175,
     name: 'COMPACT DLX MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2674,7 +2802,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 168,
+    id: 176,
     name: 'CIRCUIT MIPS',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -2690,7 +2818,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 169,
+    id: 177,
     name: 'CADEN MIPS',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -2706,7 +2834,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 170,
+    id: 178,
     name: 'TONIC KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2722,7 +2850,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 171,
+    id: 179,
     name: 'CERRO KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2738,7 +2866,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 172,
+    id: 180,
     name: 'ARX PLUS MIPS 2014',
     brand: 'SCOTT',
     category: 'Road',
@@ -2754,7 +2882,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 173,
+    id: 181,
     name: 'QUANTUM MIPS',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -2770,10 +2898,10 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 174,
+    id: 182,
     name: 'S-WORKS EVADE II MIPS',
     brand: 'SPECIALIZED',
-    category: 'All Mountain',
+    category: 'Road',
     star_rating: 4,
     safety_score: 14.41,
     vt_test_price: 275.0,
@@ -2786,7 +2914,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 175,
+    id: 183,
     name: 'ANNEX MIPS',
     brand: 'BELL',
     category: 'All Mountain',
@@ -2802,7 +2930,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 176,
+    id: 184,
     name: 'TEMPO KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2818,7 +2946,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 177,
+    id: 185,
     name: 'CODAX KINETICORE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2834,7 +2962,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 178,
+    id: 186,
     name: 'INTERCEPTOR 2.0',
     brand: 'KALI',
     category: 'All Mountain',
@@ -2850,7 +2978,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 179,
+    id: 187,
     name: 'TITLE',
     brand: 'MONGOOSE',
     category: 'All Mountain',
@@ -2866,7 +2994,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 180,
+    id: 188,
     name: 'CITYZEN KINETICORE',
     brand: 'LAZER',
     category: 'Urban',
@@ -2882,7 +3010,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 181,
+    id: 189,
     name: 'CAMELEON MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2898,7 +3026,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 182,
+    id: 190,
     name: 'COYOTE MIPS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -2914,7 +3042,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 183,
+    id: 191,
     name: 'CENTRO MIPS',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -2930,10 +3058,10 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 184,
+    id: 192,
     name: 'S-WORKS PREVAIL II',
     brand: 'SPECIALIZED',
-    category: 'All Mountain',
+    category: 'Road',
     star_rating: 4,
     safety_score: 14.84,
     vt_test_price: 225.0,
@@ -2946,7 +3074,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 185,
+    id: 193,
     name: 'RETRO LIFER E-HELMET',
     brand: 'S1',
     category: 'All Mountain',
@@ -2962,7 +3090,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 186,
+    id: 194,
     name: 'OVERTAKE',
     brand: 'SMITH',
     category: 'All Mountain',
@@ -2978,7 +3106,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 187,
+    id: 195,
     name: 'UNITED PODIUM',
     brand: 'DEMON',
     category: 'All Mountain',
@@ -2994,7 +3122,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 188,
+    id: 196,
     name: 'VIVO PLUS MIPS',
     brand: 'SCOTT',
     category: 'Road',
@@ -3010,7 +3138,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 189,
+    id: 197,
     name: 'WHISPER',
     brand: 'CATLIKE',
     category: 'All Mountain',
@@ -3026,7 +3154,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 190,
+    id: 198,
     name: 'SIGNAL MIPS',
     brand: 'SMITH',
     category: 'All Mountain',
@@ -3042,7 +3170,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 191,
+    id: 199,
     name: 'SAVANT',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -3058,7 +3186,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 192,
+    id: 200,
     name: 'UNITED FR LINK',
     brand: 'DEMON',
     category: 'All Mountain',
@@ -3074,7 +3202,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 193,
+    id: 201,
     name: 'MACON 2.0 DVRT',
     brand: 'BERN',
     category: 'All Mountain',
@@ -3090,7 +3218,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 194,
+    id: 202,
     name: 'SIXER MIPS',
     brand: 'BELL',
     category: 'All Mountain',
@@ -3106,7 +3234,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 195,
+    id: 203,
     name: 'RYKER AM MIPS',
     brand: 'CANNONDALE',
     category: 'All Mountain',
@@ -3122,7 +3250,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 196,
+    id: 204,
     name: 'DRAFT MIPS',
     brand: 'BELL',
     category: 'All Mountain',
@@ -3138,7 +3266,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 197,
+    id: 205,
     name: 'AMBUSH',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -3154,7 +3282,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 198,
+    id: 206,
     name: 'POWERDOME MIPS',
     brand: 'ABUS',
     category: 'All Mountain',
@@ -3170,7 +3298,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 199,
+    id: 207,
     name: 'SERVO',
     brand: 'BELL',
     category: 'All Mountain',
@@ -3186,7 +3314,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 200,
+    id: 208,
     name: 'MOTRIP',
     brand: 'ABUS',
     category: 'All Mountain',
@@ -3202,7 +3330,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 201,
+    id: 209,
     name: 'OCTAL',
     brand: 'POC',
     category: 'All Mountain',
@@ -3218,7 +3346,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 202,
+    id: 210,
     name: 'TT-29',
     brand: 'BIKEROO',
     category: 'Road',
@@ -3234,7 +3362,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 203,
+    id: 211,
     name: 'KORA',
     brand: 'PMT',
     category: 'All Mountain',
@@ -3250,7 +3378,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 204,
+    id: 212,
     name: 'PRO 24',
     brand: 'ZEFAL',
     category: 'All Mountain',
@@ -3266,7 +3394,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 205,
+    id: 213,
     name: 'OMNE AIR SPIN',
     brand: 'POC',
     category: 'All Mountain',
@@ -3282,7 +3410,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 206,
+    id: 214,
     name: 'TECTAL',
     brand: 'POC',
     category: 'All Mountain',
@@ -3298,7 +3426,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 207,
+    id: 215,
     name: 'FORAY MIPS',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -3314,7 +3442,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 208,
+    id: 216,
     name: 'GARNEAU COURSE',
     brand: 'LOUIS',
     category: 'All Mountain',
@@ -3330,7 +3458,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 209,
+    id: 217,
     name: 'HUMMVEE PLUS MIPS',
     brand: 'ENDURA',
     category: 'All Mountain',
@@ -3346,7 +3474,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 210,
+    id: 218,
     name: 'INTERCEPT',
     brand: 'SCHWINN',
     category: 'All Mountain',
@@ -3362,7 +3490,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 211,
+    id: 219,
     name: 'SYNTHE',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -3378,7 +3506,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 212,
+    id: 220,
     name: 'REGISTER',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -3394,7 +3522,23 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 213,
+    id: 221,
+    name: 'M2',
+    brand: 'IDP',
+    category: 'All Mountain',
+    star_rating: 3,
+    safety_score: 17.08,
+    vt_test_price: 100.0,
+    min_price: 100.0,
+    max_price: 100.0,
+    avg_price: 100.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 222,
     name: 'CADENCE PLUS MIPS',
     brand: 'SCOTT',
     category: 'Road',
@@ -3410,7 +3554,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 214,
+    id: 223,
     name: 'ULTRA',
     brand: 'LUMOS',
     category: 'All Mountain',
@@ -3426,7 +3570,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 215,
+    id: 224,
     name: 'VAULT',
     brand: 'SERFAS',
     category: 'All Mountain',
@@ -3442,7 +3586,39 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 216,
+    id: 225,
+    name: 'M1',
+    brand: 'IDP',
+    category: 'All Mountain',
+    star_rating: 3,
+    safety_score: 17.34,
+    vt_test_price: 90.0,
+    min_price: 90.0,
+    max_price: 90.0,
+    avg_price: 90.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 226,
+    name: 'ATB-1T EVO',
+    brand: 'D',
+    category: 'All Mountain',
+    star_rating: 3,
+    safety_score: 17.37,
+    vt_test_price: 210.0,
+    min_price: 210.0,
+    max_price: 210.0,
+    avg_price: 210.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 227,
     name: 'LIGHT UP',
     brand: 'ZEFAL',
     category: 'All Mountain',
@@ -3458,7 +3634,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 217,
+    id: 228,
     name: 'FIXTURE MIPS',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -3474,7 +3650,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 218,
+    id: 229,
     name: 'LIFER',
     brand: 'S1',
     category: 'All Mountain',
@@ -3490,7 +3666,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 219,
+    id: 230,
     name: 'VG 112',
     brand: 'VICTGOAL',
     category: 'All Mountain',
@@ -3506,7 +3682,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 220,
+    id: 231,
     name: 'SUTTON MIPS',
     brand: 'GIRO',
     category: 'Road',
@@ -3522,7 +3698,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 221,
+    id: 232,
     name: 'THERAPY',
     brand: 'KALI',
     category: 'All Mountain',
@@ -3538,7 +3714,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 222,
+    id: 233,
     name: 'SESSION',
     brand: 'MONGOOSE',
     category: 'All Mountain',
@@ -3554,7 +3730,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 223,
+    id: 234,
     name: 'DBX 3.0 ALL MOUNTAIN V19.2',
     brand: 'LEATT',
     category: 'Road',
@@ -3570,10 +3746,10 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 224,
+    id: 235,
     name: 'S-WORKS EVADE II',
     brand: 'SPECIALIZED',
-    category: 'All Mountain',
+    category: 'Road',
     star_rating: 3,
     safety_score: 18.5,
     vt_test_price: 250.0,
@@ -3586,7 +3762,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 225,
+    id: 236,
     name: 'INSIGHT ERT',
     brand: 'SCHWINN',
     category: 'All Mountain',
@@ -3602,7 +3778,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 226,
+    id: 237,
     name: 'FOREFRONT',
     brand: 'SMITH',
     category: 'All Mountain',
@@ -3618,7 +3794,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 227,
+    id: 238,
     name: 'HELMET LOOP',
     brand: 'CLOSCA',
     category: 'All Mountain',
@@ -3634,7 +3810,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 228,
+    id: 239,
     name: 'ONE',
     brand: 'FEND',
     category: 'All Mountain',
@@ -3650,7 +3826,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 229,
+    id: 240,
     name: 'PURL-Y',
     brand: 'ABUS',
     category: 'All Mountain',
@@ -3666,7 +3842,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 230,
+    id: 241,
     name: 'GARNEAU LE TOUR II',
     brand: 'LOUIS',
     category: 'All Mountain',
@@ -3682,7 +3858,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 231,
+    id: 242,
     name: 'ADRENALINE',
     brand: 'BELL',
     category: 'All Mountain',
@@ -3698,7 +3874,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 232,
+    id: 243,
     name: '8 DUAL CERTIFIED MIPS',
     brand: 'TRIPLE',
     category: 'All Mountain',
@@ -3714,7 +3890,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 233,
+    id: 244,
     name: 'GARNEAU EAGLE',
     brand: 'LOUIS',
     category: 'All Mountain',
@@ -3730,7 +3906,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 234,
+    id: 245,
     name: 'BLADE',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -3746,7 +3922,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 235,
+    id: 246,
     name: 'LEE DESIGNS A1 DRONE',
     brand: 'TROY',
     category: 'All Mountain',
@@ -3762,7 +3938,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 236,
+    id: 247,
     name: 'EXCURSION',
     brand: 'SCHWINN',
     category: 'All Mountain',
@@ -3778,7 +3954,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 237,
+    id: 248,
     name: 'ALLSTON',
     brand: 'BERN',
     category: 'All Mountain',
@@ -3794,7 +3970,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 238,
+    id: 249,
     name: 'SEQUEL ERT',
     brand: 'SCHWINN',
     category: 'All Mountain',
@@ -3810,7 +3986,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 239,
+    id: 250,
     name: 'HEX',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -3826,7 +4002,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 240,
+    id: 251,
     name: 'VALEGRO',
     brand: 'KASK',
     category: 'All Mountain',
@@ -3842,7 +4018,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 241,
+    id: 252,
     name: 'INTERCEPTOR',
     brand: 'KALI',
     category: 'All Mountain',
@@ -3858,7 +4034,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 242,
+    id: 253,
     name: 'MAYA 2.0',
     brand: 'KALI',
     category: 'All Mountain',
@@ -3874,7 +4050,23 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 243,
+    id: 254,
+    name: 'ALTIS',
+    brand: 'PERCENT',
+    category: 'All Mountain',
+    star_rating: 2,
+    safety_score: 19.86,
+    vt_test_price: 100.0,
+    min_price: 100.0,
+    max_price: 100.0,
+    avg_price: 100.0,
+    listing_count: 1,
+    available_count: 1,
+    image_url: null,
+    amazon_url: null
+  },
+  {
+    id: 255,
     name: 'REFLEX',
     brand: 'BELL',
     category: 'All Mountain',
@@ -3890,7 +4082,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 244,
+    id: 256,
     name: 'SOLSTICE',
     brand: 'BONTRAGER',
     category: 'All Mountain',
@@ -3906,7 +4098,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 245,
+    id: 257,
     name: 'BRENTWOOD',
     brand: 'BERN',
     category: 'All Mountain',
@@ -3922,7 +4114,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 246,
+    id: 258,
     name: 'DIVISION',
     brand: 'BELL',
     category: 'All Mountain',
@@ -3938,7 +4130,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 247,
+    id: 259,
     name: 'THRASHER',
     brand: 'SCHWINN',
     category: 'All Mountain',
@@ -3954,7 +4146,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 248,
+    id: 260,
     name: 'REVEL',
     brand: 'GIRO',
     category: 'All Mountain',
@@ -3970,7 +4162,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 249,
+    id: 261,
     name: 'FLASH',
     brand: 'SCHWINN',
     category: 'All Mountain',
@@ -3986,7 +4178,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 250,
+    id: 262,
     name: 'ULTRA LIGHT',
     brand: 'ZEFAL',
     category: 'All Mountain',
@@ -4002,7 +4194,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 251,
+    id: 263,
     name: 'HOLT',
     brand: 'SMITH',
     category: 'All Mountain',
@@ -4018,7 +4210,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 252,
+    id: 264,
     name: 'V-12',
     brand: 'RAZOR',
     category: 'All Mountain',
@@ -4034,7 +4226,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 253,
+    id: 265,
     name: 'TAVA',
     brand: 'KALI',
     category: 'All Mountain',
@@ -4050,7 +4242,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 254,
+    id: 266,
     name: 'CITY',
     brand: 'KALI',
     category: 'Urban',
@@ -4066,7 +4258,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 255,
+    id: 267,
     name: 'CAPTURE',
     brand: 'MONGOOSE',
     category: 'All Mountain',
@@ -4082,7 +4274,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 256,
+    id: 268,
     name: 'STREET',
     brand: 'NUTCASE',
     category: 'All Mountain',
@@ -4098,7 +4290,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 257,
+    id: 269,
     name: 'CAMP BC-019',
     brand: 'BASE',
     category: 'All Mountain',
@@ -4114,7 +4306,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 258,
+    id: 270,
     name: 'CENTRO',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -4130,10 +4322,10 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 259,
+    id: 271,
     name: 'HERITAGE 2.0',
     brand: 'THOUSAND',
-    category: 'All Mountain',
+    category: 'Urban',
     star_rating: 1,
     safety_score: 22.92,
     vt_test_price: 99.0,
@@ -4146,7 +4338,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 260,
+    id: 272,
     name: 'CHIC',
     brand: 'SCHWINN',
     category: 'All Mountain',
@@ -4162,7 +4354,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 261,
+    id: 273,
     name: 'HELMET',
     brand: 'ELECTRA',
     category: 'All Mountain',
@@ -4178,7 +4370,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 262,
+    id: 274,
     name: 'DAKOTA',
     brand: 'RETROSPEC',
     category: 'All Mountain',
@@ -4194,10 +4386,10 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 263,
+    id: 275,
     name: 'QUICK',
     brand: 'CANNONDALE',
-    category: 'All Mountain',
+    category: 'Urban',
     star_rating: 1,
     safety_score: 24.24,
     vt_test_price: 40.0,
@@ -4210,7 +4402,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 264,
+    id: 276,
     name: 'GENESIS',
     brand: 'LAZER',
     category: 'All Mountain',
@@ -4226,10 +4418,10 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 265,
+    id: 277,
     name: 'HERITAGE',
     brand: 'THOUSAND',
-    category: 'All Mountain',
+    category: 'Urban',
     star_rating: 1,
     safety_score: 24.93,
     vt_test_price: 90.0,
@@ -4242,7 +4434,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 266,
+    id: 278,
     name: 'CHAKRA SOLO',
     brand: 'KALI',
     category: 'All Mountain',
@@ -4258,7 +4450,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 267,
+    id: 279,
     name: 'ECHELON II',
     brand: 'SPECIALIZED',
     category: 'All Mountain',
@@ -4274,7 +4466,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 268,
+    id: 280,
     name: 'WATTS',
     brand: 'BERN',
     category: 'Road',
@@ -4290,7 +4482,7 @@ export const HELMETS: Helmet[] = [
     amazon_url: null
   },
   {
-    id: 269,
+    id: 281,
     name: 'CAMP URBAN COMMUTER',
     brand: 'BASE',
     category: 'Urban',
