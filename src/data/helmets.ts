@@ -199,7 +199,8 @@ export const HELMETS: Helmet[] = [
     avg_price: 82.88,
     listing_count: 4,
     available_count: 3,
-    image_url: null
+    image_url: null,
+    amazon_url: 'https://www.amazon.com/Giro-Fixture-MIPS-Adult-Helmet/dp/B08FCV5M3P'
   },
 
   // 2-STAR HELMETS (< 19.0 STAR score)
@@ -763,7 +764,8 @@ export const HELMETS: Helmet[] = [
     avg_price: 146.25,
     listing_count: 3,
     available_count: 2,
-    image_url: null
+    image_url: null,
+    amazon_url: 'https://www.amazon.com/SMITH-Optics-Network-Helmet-Yellow/dp/B07ZH78XSS'
   },
   {
     id: 50,
@@ -778,7 +780,8 @@ export const HELMETS: Helmet[] = [
     avg_price: 195.0,
     listing_count: 2,
     available_count: 2,
-    image_url: null
+    image_url: null,
+    amazon_url: 'https://www.amazon.com/Smith-Optics-Persist-Cycling-Helmet/dp/B0DWT66XQH'
   },
 
   // Additional Full-Face Helmets
@@ -795,7 +798,8 @@ export const HELMETS: Helmet[] = [
     avg_price: 390.0,
     listing_count: 2,
     available_count: 1,
-    image_url: null
+    image_url: null,
+    amazon_url: 'https://www.amazon.com/Bell-Super-MIPS-Adult-Helmet/dp/B07W4M5YFB'
   },
   {
     id: 52,

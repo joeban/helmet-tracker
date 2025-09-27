@@ -12,6 +12,7 @@ export interface Helmet {
   listing_count: number;
   available_count: number;
   image_url?: string | null;
+  amazon_url?: string | null;
 }
 
 export type SortOption = 'rating' | 'safety' | 'price';
