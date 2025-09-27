@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
 /**
  * Handle POST requests (if needed for webhook-style callbacks)
  */
-export async function POST(_request: NextRequest) {
+export async function POST() {
   return NextResponse.json(
     { error: 'POST method not supported for OAuth callback' },
     { status: 405 }

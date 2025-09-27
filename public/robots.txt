@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://helmetscore.com/sitemap.xml
+
+# Block unnecessary crawling of assets
+Disallow: /_next/
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
+
+# Allow important pages
+Allow: /about
+Allow: /methodology
+Allow: /sitemap.xml
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1
