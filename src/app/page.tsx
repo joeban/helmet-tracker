@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { HELMETS } from '@/data/helmets';
-import { Helmet, SortOption, CategoryFilter, BrandFilter } from '@/types/helmet';
+import { SortOption, CategoryFilter, BrandFilter } from '@/types/helmet';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,7 +18,7 @@ export default function Home() {
   }, []);
 
   const filteredAndSortedHelmets = useMemo(() => {
-    let filtered = HELMETS.filter(helmet => {
+    const filtered = HELMETS.filter(helmet => {
       const matchesSearch = helmet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            helmet.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            helmet.category.toLowerCase().includes(searchTerm.toLowerCase());
