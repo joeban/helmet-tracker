@@ -90,8 +90,8 @@ export default function Home() {
       {/* Header */}
       <header className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-8">
         <div className="max-w-6xl mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-2">🚴 Helmet Tracker</h1>
-          <p className="text-xl opacity-90">Virginia Tech helmet safety ratings with real-time pricing</p>
+          <h1 className="text-4xl font-bold mb-2">🛡️ HelmetScore</h1>
+          <p className="text-xl opacity-90">The definitive database of Virginia Tech helmet safety ratings</p>
         </div>
       </header>
 

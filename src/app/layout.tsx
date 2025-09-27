@@ -13,8 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Helmet Tracker - Virginia Tech Safety Ratings",
-  description: "Virginia Tech helmet safety ratings with real-time pricing and availability. Find the safest bicycle helmets based on STAR evaluation system.",
+  title: "HelmetScore - Virginia Tech Safety Ratings & Reviews",
+  description: "The definitive helmet safety database. Compare 281+ bicycle helmets with Virginia Tech STAR ratings, Amazon prices, and expert reviews. Find your safest helmet.",
+  keywords: "helmet safety, bike helmet ratings, Virginia Tech STAR, cycling safety, helmet reviews, bicycle helmet comparison",
+  authors: [{ name: "HelmetScore" }],
+  openGraph: {
+    title: "HelmetScore - The Ultimate Helmet Safety Database",
+    description: "Compare 281+ bicycle helmets with Virginia Tech STAR safety ratings. Find the safest helmet for your rides.",
+    url: "https://helmetscore.com",
+    siteName: "HelmetScore",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HelmetScore - Helmet Safety Ratings",
+    description: "The definitive database of Virginia Tech helmet safety ratings for cyclists.",
+  },
 };
 
 export default function RootLayout({
