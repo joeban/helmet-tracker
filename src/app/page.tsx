@@ -286,7 +286,7 @@ export default function Home() {
             <div className="lg:hidden mb-4">
               <button
                 onClick={() => setIsMobileFiltersOpen(true)}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="w-full flex items-center justify-center gap-2 px-4 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors touch-manipulation text-base font-medium"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
@@ -312,11 +312,11 @@ export default function Home() {
             </div>
 
             {/* Helmet Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
           {filteredAndSortedHelmets.map((helmet) => (
-            <div key={helmet.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <div key={helmet.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow touch-manipulation">
               {/* Helmet Image */}
-              <div className="h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
+              <div className="h-40 sm:h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
                 {helmet.image_url ? (
                   <img
                     src={helmet.image_url}
@@ -325,62 +325,62 @@ export default function Home() {
                   />
                 ) : (
                   <div className="text-gray-500 text-center">
-                    <div className="text-4xl mb-2">🚴</div>
-                    <div className="text-sm">No Image Available</div>
+                    <div className="text-3xl sm:text-4xl mb-2">🚴</div>
+                    <div className="text-xs sm:text-sm">No Image Available</div>
                   </div>
                 )}
               </div>
 
               {/* Helmet Details */}
-              <div className="p-6">
-                <div className="mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">
+              <div className="p-4 sm:p-6">
+                <div className="mb-3 sm:mb-4">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-1 leading-tight">
                     {helmet.brand} {helmet.name}
                   </h3>
-                  <span className="inline-block bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm">
+                  <span className="inline-block bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-xs sm:text-sm">
                     {helmet.category}
                   </span>
                 </div>
 
                 {/* Star Rating */}
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-yellow-500 text-xl tracking-wider">
+                <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                  <span className="text-yellow-500 text-lg sm:text-xl tracking-wider">
                     {renderStars(helmet.star_rating)}
                   </span>
                   <span className="text-gray-600 text-sm">({helmet.star_rating}/5)</span>
                 </div>
 
                 {/* Safety Score */}
-                <div className="mb-4 p-2 bg-gray-50 rounded border-l-4 border-green-500">
-                  <div className="text-sm text-gray-700">
+                <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-gray-50 rounded border-l-4 border-green-500">
+                  <div className="text-xs sm:text-sm text-gray-700">
                     <strong>Safety Score:</strong> {helmet.safety_score} (lower is better)
                   </div>
                 </div>
 
                 {/* Pricing */}
-                <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-4 rounded-lg">
-                  <div className="text-xl font-bold text-green-600 mb-1">
+                <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-3 sm:p-4 rounded-lg">
+                  <div className="text-lg sm:text-xl font-bold text-green-600 mb-1">
                     {helmet.min_price === helmet.max_price
                       ? formatPrice(helmet.min_price)
                       : `${formatPrice(helmet.min_price)} - ${formatPrice(helmet.max_price)}`
                     }
                   </div>
-                  <div className="text-sm text-gray-600 mb-1">
+                  <div className="text-xs sm:text-sm text-gray-600 mb-1">
                     VT Test Price: {formatPrice(helmet.vt_test_price)}
                   </div>
-                  <div className="text-sm text-gray-700 font-medium">
+                  <div className="text-xs sm:text-sm text-gray-700 font-medium">
                     {helmet.available_count} of {helmet.listing_count} retailers have it in stock
                   </div>
                 </div>
 
                 {/* Amazon Purchase Link */}
                 {helmet.amazon_url && (
-                  <div className="mt-4">
+                  <div className="mt-3 sm:mt-4">
                     <a
                       href={helmet.amazon_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full inline-flex items-center justify-center px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg transition-colors duration-200"
+                      className="w-full inline-flex items-center justify-center px-4 py-3 sm:py-2 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-medium rounded-lg transition-colors duration-200 touch-manipulation text-sm sm:text-base"
                     >
                       <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M13.74 12c-.092-.071-.306-.232-.306-.232V9.53c0-.105.008-.21.025-.314h1.745c.085.104.154.22.206.348.05.128.076.267.076.416v.457c0 .085-.02.168-.058.25-.036.082-.092.154-.17.214-.077.061-.178.109-.301.145-.123.036-.267.054-.432.054h-.785c-.085 0-.07.09-.07.175v.755zM10.26 12c.085-.071.306-.232.306-.232V9.53c0-.105-.008-.21-.025-.314H8.796c-.085.104-.154.22-.206.348-.05.128-.076.267-.076.416v.457c0 .085.02.168.058.25.036.082.092.154.17.214.077.061.178.109.301.145.123.036.267.054.432.054h.785c.085 0 .07.09.07.175v.755zM22.5 6.908V17.09c0 .604-.246 1.152-.643 1.549-.397.396-.945.643-1.549.643H3.692c-.604 0-1.152-.247-1.549-.643-.396-.397-.643-.945-.643-1.549V6.908c0-.604.247-1.152.643-1.549.397-.396.945-.643 1.549-.643h16.616c.604 0 1.152.247 1.549.643.397.397.643.945.643 1.549z"/>
@@ -422,7 +422,7 @@ export default function Home() {
                 <h3 className="text-lg font-semibold text-gray-900">Filters</h3>
                 <button
                   onClick={() => setIsMobileFiltersOpen(false)}
-                  className="p-2 hover:bg-gray-100 rounded-lg"
+                  className="p-3 hover:bg-gray-100 active:bg-gray-200 rounded-lg touch-manipulation"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -616,7 +616,7 @@ export default function Home() {
               <div className="p-4 border-t">
                 <button
                   onClick={() => setIsMobileFiltersOpen(false)}
-                  className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="w-full px-4 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-colors touch-manipulation text-base font-medium"
                 >
                   Apply Filters
                 </button>
