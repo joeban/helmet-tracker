@@ -111,8 +111,42 @@ export default function Home() {
           <h1 className="text-6xl font-semibold text-slate-800 mb-4 tracking-wide">
             Helmet<span className="text-blue-600 font-light">Score</span>
           </h1>
-          <p className="text-xl text-slate-600 font-medium mb-2">Virginia Tech Helmet Safety Database</p>
-          <p className="text-base text-slate-500 max-w-2xl">Comprehensive analysis of 281 bicycle helmets using STAR evaluation methodology</p>
+          <p className="text-2xl text-slate-700 font-semibold mb-4">🛡️ Find the Safest Bike Helmet for Your Life</p>
+          <p className="text-lg text-slate-600 font-medium mb-4">The only site with complete Virginia Tech safety test results for 281+ helmets.</p>
+          <p className="text-base text-slate-600 max-w-3xl mb-6">
+            See which helmets actually protect your brain in real crashes. Virginia Tech is the world&apos;s leading
+            independent helmet testing lab - their STAR ratings could save your life.
+          </p>
+
+          {/* Safety Score Explainer */}
+          <div className="bg-gradient-to-r from-green-50 to-red-50 rounded-lg p-4 mb-6 max-w-2xl">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-sm font-semibold text-slate-700">📊 How Safety Scores Work:</span>
+            </div>
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-green-700 font-medium">Lower Score = Better Protection</span>
+              <span className="text-red-700 font-medium">Higher Score = More Risk</span>
+            </div>
+            <div className="mt-2 text-xs text-slate-600">
+              Example: A score of 8.0 is 50% safer than 15.0
+            </div>
+          </div>
+
+          {/* Quick Action Buttons */}
+          <div className="flex flex-wrap gap-3">
+            <button
+              onClick={() => setSortBy('rating')}
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            >
+              🏆 Browse Safest Helmets
+            </button>
+            <a
+              href="/methodology"
+              className="bg-slate-200 text-slate-700 px-6 py-3 rounded-lg hover:bg-slate-300 transition-colors font-medium"
+            >
+              📚 Learn About Safety Testing
+            </a>
+          </div>
         </div>
       </header>
 
@@ -369,10 +403,40 @@ export default function Home() {
                 </div>
 
                 {/* Safety Score */}
-                <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-gray-50 rounded border-l-4 border-green-500">
-                  <div className="text-xs sm:text-sm text-gray-700">
-                    <strong>Safety Score:</strong> {helmet.safety_score} (lower is better)
+                <div className={`mb-3 sm:mb-4 p-2 sm:p-3 rounded border-l-4 ${
+                  helmet.safety_score <= 10
+                    ? 'bg-green-50 border-green-500'
+                    : helmet.safety_score <= 15
+                    ? 'bg-blue-50 border-blue-500'
+                    : helmet.safety_score <= 20
+                    ? 'bg-yellow-50 border-yellow-500'
+                    : helmet.safety_score <= 25
+                    ? 'bg-orange-50 border-orange-500'
+                    : 'bg-red-50 border-red-500'
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <div className="text-xs sm:text-sm text-gray-700">
+                      <strong>Safety Score:</strong> {helmet.safety_score}
+                    </div>
+                    <div className={`text-xs px-2 py-1 rounded font-medium ${
+                      helmet.safety_score <= 10
+                        ? 'bg-green-100 text-green-800'
+                        : helmet.safety_score <= 15
+                        ? 'bg-blue-100 text-blue-800'
+                        : helmet.safety_score <= 20
+                        ? 'bg-yellow-100 text-yellow-800'
+                        : helmet.safety_score <= 25
+                        ? 'bg-orange-100 text-orange-800'
+                        : 'bg-red-100 text-red-800'
+                    }`}>
+                      {helmet.safety_score <= 10 ? 'EXCELLENT'
+                       : helmet.safety_score <= 15 ? 'GOOD'
+                       : helmet.safety_score <= 20 ? 'FAIR'
+                       : helmet.safety_score <= 25 ? 'MARGINAL'
+                       : 'AVOID'}
+                    </div>
                   </div>
+                  <div className="text-xs text-gray-600 mt-1">Lower score = better protection</div>
                 </div>
 
                 {/* Pricing */}
