@@ -140,7 +140,7 @@ export default function AboutPage() {
                   <li>⭐⭐⭐⭐ 4 Stars: 10.1-15.0 (Good)</li>
                   <li>⭐⭐⭐ 3 Stars: 15.1-20.0 (Fair)</li>
                   <li>⭐⭐ 2 Stars: 20.1-25.0 (Marginal)</li>
-                  <li>⭐ 1 Star: > 25.0 (Not Recommended)</li>
+                  <li>⭐ 1 Star: &gt; 25.0 (Not Recommended)</li>
                 </ul>
               </div>
             </div>

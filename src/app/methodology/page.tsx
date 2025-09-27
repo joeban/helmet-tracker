@@ -143,7 +143,7 @@ export default function MethodologyPage() {
               <div className="flex items-center gap-4 p-4 bg-red-50 rounded-lg">
                 <div className="text-2xl">⭐</div>
                 <div>
-                  <div className="font-semibold text-slate-800">1 Star (> 25.0)</div>
+                  <div className="font-semibold text-slate-800">1 Star (&gt; 25.0)</div>
                   <div className="text-slate-600 text-sm">Not recommended - Poor safety performance</div>
                 </div>
               </div>
