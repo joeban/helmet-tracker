@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { isValidAmazonImageUrl, getHelmetFallbackImage } from '@/utils/amazonImages';
+import Image from 'next/image';
+import { isValidAmazonImageUrl } from '@/utils/amazonImages';
 
 interface HelmetImageProps {
   brand: string;
@@ -43,13 +44,15 @@ export default function HelmetImage({
             <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
         )}
-        <img
+        <Image
           src={imageUrl}
           alt={`${brand} ${name} helmet`}
           className={className}
           onError={handleImageError}
           onLoad={handleImageLoad}
-          loading="lazy"
+          width={300}
+          height={300}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         {/* Amazon compliance: Images must link to Amazon */}
         {amazonUrl && (

@@ -81,7 +81,7 @@ export class AmazonSpApiClient {
    * Update helmet database with fresh Amazon product data
    * @param helmetsWithAsins Array of helmet objects that have Amazon ASINs
    */
-  async updateHelmetImages(helmetsWithAsins: any[]): Promise<void> {
+  async updateHelmetImages(helmetsWithAsins: Array<{ id: number; amazon_url?: string | null }>): Promise<void> {
     // TODO: Implement database update logic
     // This will fetch fresh product data and update helmet image URLs
 
