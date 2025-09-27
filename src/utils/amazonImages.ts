@@ -17,10 +17,10 @@ export interface HelmetSearchResult {
  * This creates compliant affiliate links for manual verification
  */
 export function generateAmazonSearchUrl(brand: string, name: string, affiliateTag?: string): string {
-  const searchQuery = encodeURIComponent(`${brand} ${name} helmet bike cycling`);
+  const searchQuery = `${brand} ${name} helmet bike cycling`;
   const baseUrl = 'https://www.amazon.com/s';
   const params = new URLSearchParams({
-    k: searchQuery,
+    k: searchQuery, // URLSearchParams will handle encoding
     ref: 'sr_st_relevancerank',
     ...(affiliateTag && { tag: affiliateTag })
   });
