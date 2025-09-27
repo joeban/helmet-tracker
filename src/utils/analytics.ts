@@ -8,9 +8,9 @@ declare global {
     gtag: (
       command: 'config' | 'event' | 'js' | 'consent' | 'set',
       targetId: string | Date,
-      config?: Record<string, any>
+      config?: Record<string, unknown>
     ) => void;
-    dataLayer: Array<Record<string, any>>;
+    dataLayer: Array<Record<string, unknown>>;
   }
 }
 
@@ -23,7 +23,7 @@ export const isGAEnabled = (): boolean => {
 };
 
 // Enhanced page view tracking
-export const pageview = (url: string, title?: string, additionalData: Record<string, any> = {}) => {
+export const pageview = (url: string, title?: string, additionalData: Record<string, unknown> = {}) => {
   if (!isGAEnabled()) return;
 
   try {
@@ -50,7 +50,7 @@ export const event = ({
   category: string;
   label?: string;
   value?: number;
-  [key: string]: any;
+  [key: string]: unknown;
 }) => {
   if (!isGAEnabled()) return;
 
@@ -125,7 +125,7 @@ export const trackAmazonClick = (helmetName: string, brand: string, linkType: 'd
   });
 };
 
-export const trackSearch = (searchTerm: string, resultCount: number, filters: Record<string, any> = {}) => {
+export const trackSearch = (searchTerm: string, resultCount: number, filters: Record<string, unknown> = {}) => {
   event({
     action: 'search',
     category: 'search_interaction',

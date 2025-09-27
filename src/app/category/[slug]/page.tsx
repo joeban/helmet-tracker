@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import { HELMETS } from '@/data/helmets'
 import HelmetGrid from '@/components/HelmetGrid'
 
@@ -162,9 +163,9 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
           {/* Breadcrumb */}
           <nav className="mb-6">
             <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <a href="/" className="hover:text-blue-600">Home</a>
+              <Link href="/" className="hover:text-blue-600">Home</Link>
               <span>/</span>
-              <a href="/categories" className="hover:text-blue-600">Categories</a>
+              <Link href="/categories" className="hover:text-blue-600">Categories</Link>
               <span>/</span>
               <span className="text-gray-900">{category}</span>
             </div>
@@ -203,7 +204,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
               <h2 className="text-xl font-semibold text-slate-800 mb-3">About {category} Helmets</h2>
               <p className="text-gray-600 leading-relaxed">
                 {getCategoryDescription(category)} All helmets in this category have been independently tested
-                using Virginia Tech's STAR methodology, providing you with objective safety comparisons to help
+                using Virginia Tech&apos;s STAR methodology, providing you with objective safety comparisons to help
                 you choose the best protection for your {category.toLowerCase()} cycling activities.
               </p>
             </div>

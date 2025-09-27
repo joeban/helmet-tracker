@@ -46,12 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   // Individual helmet pages (if we implement them in the future)
-  const helmetPages: MetadataRoute.Sitemap = HELMETS.slice(0, 50).map(helmet => ({
-    url: `${baseUrl}/helmet/${helmet.id}`,
-    lastModified: currentDate,
-    changeFrequency: 'monthly' as const,
-    priority: 0.5,
-  }))
+  // const helmetPages: MetadataRoute.Sitemap = HELMETS.slice(0, 50).map(helmet => ({
+  //   url: `${baseUrl}/helmet/${helmet.id}`,
+  //   lastModified: currentDate,
+  //   changeFrequency: 'monthly' as const,
+  //   priority: 0.5,
+  // }))
 
   // Safety score range pages
   const safetyRangePages: MetadataRoute.Sitemap = [
