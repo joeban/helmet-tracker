@@ -15,5 +15,5 @@ export interface Helmet {
 }
 
 export type SortOption = 'rating' | 'safety' | 'price';
-export type CategoryFilter = '' | 'Road' | 'All Mountain' | 'Urban';
+export type CategoryFilter = '' | 'Road' | 'All Mountain' | 'Urban' | 'Multi-sport' | 'Full-Face';
 export type BrandFilter = '' | string;

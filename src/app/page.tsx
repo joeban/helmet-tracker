@@ -10,6 +10,7 @@ export default function Home() {
   const [brandFilter, setBrandFilter] = useState<BrandFilter>('');
   const [sortBy, setSortBy] = useState<SortOption>('rating');
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
+  const [priceRange, setPriceRange] = useState<{min: number; max: number}>({min: 0, max: 500});
 
   // Get unique brands for filter
   const uniqueBrands = useMemo(() => {
@@ -25,8 +26,9 @@ export default function Home() {
       const matchesCategory = !categoryFilter || helmet.category === categoryFilter;
       const matchesBrand = !brandFilter || helmet.brand === brandFilter;
       const matchesAvailability = !showAvailableOnly || helmet.available_count > 0;
+      const matchesPrice = helmet.min_price >= priceRange.min && helmet.max_price <= priceRange.max;
 
-      return matchesSearch && matchesCategory && matchesBrand && matchesAvailability;
+      return matchesSearch && matchesCategory && matchesBrand && matchesAvailability && matchesPrice;
     });
 
     return filtered.sort((a, b) => {
@@ -44,7 +46,7 @@ export default function Home() {
           return 0;
       }
     });
-  }, [searchTerm, categoryFilter, brandFilter, sortBy, showAvailableOnly]);
+  }, [searchTerm, categoryFilter, brandFilter, sortBy, showAvailableOnly, priceRange]);
 
   const renderStars = (rating: number) => {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
@@ -100,6 +102,8 @@ export default function Home() {
                   <option value="Road">Road</option>
                   <option value="All Mountain">All Mountain</option>
                   <option value="Urban">Urban</option>
+                  <option value="Multi-sport">Multi-sport</option>
+                  <option value="Full-Face">Full-Face</option>
                 </select>
               </div>
 
@@ -136,6 +140,35 @@ export default function Home() {
                 </select>
               </div>
 
+              {/* Price Range Filter */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Price Range
+                </label>
+                <div className="space-y-3">
+                  <div className="flex gap-2 items-center">
+                    <input
+                      type="number"
+                      placeholder="Min"
+                      value={priceRange.min}
+                      onChange={(e) => setPriceRange(prev => ({...prev, min: Number(e.target.value) || 0}))}
+                      className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                    />
+                    <span className="text-gray-500">to</span>
+                    <input
+                      type="number"
+                      placeholder="Max"
+                      value={priceRange.max}
+                      onChange={(e) => setPriceRange(prev => ({...prev, max: Number(e.target.value) || 500}))}
+                      className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                    />
+                  </div>
+                  <div className="text-xs text-gray-600">
+                    ${priceRange.min} - ${priceRange.max}
+                  </div>
+                </div>
+              </div>
+
               {/* Availability Filter */}
               <div className="mb-6">
                 <label className="flex items-center">
@@ -159,6 +192,7 @@ export default function Home() {
                   setBrandFilter('');
                   setSortBy('rating');
                   setShowAvailableOnly(false);
+                  setPriceRange({min: 0, max: 500});
                 }}
                 className="w-full px-4 py-2 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
               >
