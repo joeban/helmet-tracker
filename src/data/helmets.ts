@@ -399,7 +399,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: 'https://www.amazon.com/dp/B07P6RJZV5?tag=test-affiliate-20'
+    amazon_url: 'https://www.amazon.com/dp/B07P6RJZV5?tag=helmetscore-20'
   },
   {
     id: 26,
@@ -1263,7 +1263,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: 'https://www.amazon.com/dp/B07JC3Q6PG?tag=test-affiliate-20'
+    amazon_url: 'https://www.amazon.com/dp/B07JC3Q6PG?tag=helmetscore-20'
   },
   {
     id: 80,
@@ -1279,7 +1279,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: 'https://www.amazon.com/dp/B0993F24FM?tag=test-affiliate-20'
+    amazon_url: 'https://www.amazon.com/dp/B0993F24FM?tag=helmetscore-20'
   },
   {
     id: 81,
@@ -1887,7 +1887,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: 'https://www.amazon.com/dp/B07JC3Q6PG?tag=test-affiliate-20'
+    amazon_url: 'https://www.amazon.com/dp/B07JC3Q6PG?tag=helmetscore-20'
   },
   {
     id: 119,
@@ -1999,7 +1999,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: 'https://www.amazon.com/dp/B07FTSN2QP?tag=test-affiliate-20'
+    amazon_url: 'https://www.amazon.com/dp/B07FTSN2QP?tag=helmetscore-20'
   },
   {
     id: 126,
@@ -2239,7 +2239,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: 'https://www.amazon.com/dp/B017Y92QUQ?tag=test-affiliate-20'
+    amazon_url: 'https://www.amazon.com/dp/B017Y92QUQ?tag=helmetscore-20'
   },
   {
     id: 141,
@@ -2415,7 +2415,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: 'https://www.amazon.com/dp/B0CKRYSQ88?tag=test-affiliate-20'
+    amazon_url: 'https://www.amazon.com/dp/B0CKRYSQ88?tag=helmetscore-20'
   },
   {
     id: 152,
@@ -3135,7 +3135,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: 'https://www.amazon.com/dp/B08FBQ8HX3?tag=test-affiliate-20'
+    amazon_url: 'https://www.amazon.com/dp/B08FBQ8HX3?tag=helmetscore-20'
   },
   {
     id: 197,
@@ -3167,7 +3167,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: 'https://www.amazon.com/dp/B08WBMM4MG?tag=test-affiliate-20'
+    amazon_url: 'https://www.amazon.com/dp/B08WBMM4MG?tag=helmetscore-20'
   },
   {
     id: 199,
@@ -3263,7 +3263,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: 'https://www.amazon.com/dp/B07DLHCR2L?tag=test-affiliate-20'
+    amazon_url: 'https://www.amazon.com/dp/B07DLHCR2L?tag=helmetscore-20'
   },
   {
     id: 205,
@@ -3439,7 +3439,7 @@ export const HELMETS: Helmet[] = [
     listing_count: 1,
     available_count: 1,
     image_url: null,
-    amazon_url: 'https://www.amazon.com/dp/B07GT7F78H?tag=test-affiliate-20'
+    amazon_url: 'https://www.amazon.com/dp/B07GT7F78H?tag=helmetscore-20'
   },
   {
     id: 216,
