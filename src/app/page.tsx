@@ -12,6 +12,8 @@ export default function Home() {
   const [sortBy, setSortBy] = useState<SortOption>('rating');
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
   const [priceRange, setPriceRange] = useState<{min: number; max: number}>({min: 0, max: 600});
+  const [safetyScoreRange, setSafetyScoreRange] = useState<{min: number; max: number}>({min: 6.8, max: 27.0});
+  const [mipsOnly, setMipsOnly] = useState(false);
 
   // Debounce search term for better performance
   useEffect(() => {
@@ -37,8 +39,10 @@ export default function Home() {
       const matchesBrand = !brandFilter || helmet.brand === brandFilter;
       const matchesAvailability = !showAvailableOnly || helmet.available_count > 0;
       const matchesPrice = helmet.min_price >= priceRange.min && helmet.max_price <= priceRange.max;
+      const matchesSafetyScore = helmet.safety_score >= safetyScoreRange.min && helmet.safety_score <= safetyScoreRange.max;
+      const matchesMips = !mipsOnly || helmet.name.toLowerCase().includes('mips');
 
-      return matchesSearch && matchesCategory && matchesBrand && matchesAvailability && matchesPrice;
+      return matchesSearch && matchesCategory && matchesBrand && matchesAvailability && matchesPrice && matchesSafetyScore && matchesMips;
     });
 
     return filtered.sort((a, b) => {
@@ -56,7 +60,7 @@ export default function Home() {
           return 0;
       }
     });
-  }, [debouncedSearchTerm, categoryFilter, brandFilter, sortBy, showAvailableOnly, priceRange]);
+  }, [debouncedSearchTerm, categoryFilter, brandFilter, sortBy, showAvailableOnly, priceRange, safetyScoreRange, mipsOnly]);
 
   // Optimize rendering functions with useCallback
   const renderStars = useCallback((rating: number) => {
@@ -191,6 +195,56 @@ export default function Home() {
                 </div>
               </div>
 
+              {/* Safety Score Range */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Safety Score Range (STAR)
+                </label>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="number"
+                      placeholder="Min"
+                      value={safetyScoreRange.min}
+                      step="0.1"
+                      min="6.8"
+                      max="27.0"
+                      onChange={(e) => setSafetyScoreRange(prev => ({...prev, min: Number(e.target.value) || 6.8}))}
+                      className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                    />
+                    <span className="text-gray-500">to</span>
+                    <input
+                      type="number"
+                      placeholder="Max"
+                      value={safetyScoreRange.max}
+                      step="0.1"
+                      min="6.8"
+                      max="27.0"
+                      onChange={(e) => setSafetyScoreRange(prev => ({...prev, max: Number(e.target.value) || 27.0}))}
+                      className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                    />
+                  </div>
+                  <div className="text-xs text-gray-600">
+                    {safetyScoreRange.min} - {safetyScoreRange.max} (lower = safer)
+                  </div>
+                </div>
+              </div>
+
+              {/* MIPS Filter */}
+              <div className="mb-6">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={mipsOnly}
+                    onChange={(e) => setMipsOnly(e.target.checked)}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                  />
+                  <span className="ml-2 text-sm text-gray-700">
+                    MIPS technology only
+                  </span>
+                </label>
+              </div>
+
               {/* Availability Filter */}
               <div className="mb-6">
                 <label className="flex items-center">
@@ -214,7 +268,9 @@ export default function Home() {
                   setBrandFilter('');
                   setSortBy('rating');
                   setShowAvailableOnly(false);
-                  setPriceRange({min: 0, max: 500});
+                  setPriceRange({min: 0, max: 600});
+                  setSafetyScoreRange({min: 6.8, max: 27.0});
+                  setMipsOnly(false);
                 }}
                 className="w-full px-4 py-2 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
               >
