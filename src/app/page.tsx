@@ -97,7 +97,7 @@ export default function Home() {
         <div className="flex gap-8">
           {/* Left Sidebar - Filters */}
           <aside className="w-80 flex-shrink-0">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-8">
+            <div className="bg-white rounded-lg shadow-md p-6 sticky top-8 max-h-[calc(100vh-6rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
               <h3 className="text-lg font-semibold text-gray-900 mb-6">Filters</h3>
 
               {/* Search */}
