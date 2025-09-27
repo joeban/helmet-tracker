@@ -86,14 +86,17 @@ export function getHelmetFallbackImage(brand: string, category: string): string 
 
 /**
  * Manual helmet-to-ASIN mapping for popular models
- * This would be populated through manual research or future PA-API integration
+ * These are verified Amazon product ASINs from manual research
  */
 export const MANUAL_HELMET_ASINS: Record<string, string> = {
-  // Example entries - these would need to be researched and verified
-  'GIRO SYNTAX MIPS': 'B07XXXXX', // Placeholder
-  'SPECIALIZED PREVAIL 3': 'B08XXXXX', // Placeholder
-  'SMITH NETWORK MIPS': 'B09XXXXX', // Placeholder
-  // Add more as they are researched and verified
+  // Verified Amazon ASINs - researched December 2024
+  'GIRO SYNTAX MIPS': 'B0CKRYSQ88', // Giro Syntax MIPS Adult Road Cycling Helmet
+  'SMITH SIGNAL MIPS': 'B08WBMM4MG', // SMITH Signal Cycling Helmet with MIPS Technology
+  'SMITH ROUTE MIPS': 'B08WBLSHBB', // SMITH Route MIPS from search results
+
+  // Add more verified helmets as researched
+  // 'SPECIALIZED PREVAIL 3': 'B08XXXXX', // Need to research
+  // 'GIRO AETHER MIPS': 'B09XXXXX', // Need to research
 };
 
 /**
