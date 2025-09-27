@@ -1,102 +1,263 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useMemo } from 'react';
+import { HELMETS } from '@/data/helmets';
+import { Helmet, SortOption, CategoryFilter, BrandFilter } from '@/types/helmet';
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [searchTerm, setSearchTerm] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('');
+  const [brandFilter, setBrandFilter] = useState<BrandFilter>('');
+  const [sortBy, setSortBy] = useState<SortOption>('rating');
+  const [showAvailableOnly, setShowAvailableOnly] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // Get unique brands for filter
+  const uniqueBrands = useMemo(() => {
+    const brands = [...new Set(HELMETS.map(helmet => helmet.brand))].sort();
+    return brands;
+  }, []);
+
+  const filteredAndSortedHelmets = useMemo(() => {
+    let filtered = HELMETS.filter(helmet => {
+      const matchesSearch = helmet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           helmet.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           helmet.category.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = !categoryFilter || helmet.category === categoryFilter;
+      const matchesBrand = !brandFilter || helmet.brand === brandFilter;
+      const matchesAvailability = !showAvailableOnly || helmet.available_count > 0;
+
+      return matchesSearch && matchesCategory && matchesBrand && matchesAvailability;
+    });
+
+    return filtered.sort((a, b) => {
+      switch (sortBy) {
+        case 'rating':
+          if (a.star_rating !== b.star_rating) {
+            return b.star_rating - a.star_rating;
+          }
+          return a.safety_score - b.safety_score;
+        case 'safety':
+          return a.safety_score - b.safety_score;
+        case 'price':
+          return a.min_price - b.min_price;
+        default:
+          return 0;
+      }
+    });
+  }, [searchTerm, categoryFilter, brandFilter, sortBy, showAvailableOnly]);
+
+  const renderStars = (rating: number) => {
+    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  };
+
+  const formatPrice = (price: number) => {
+    return `$${price.toFixed(2)}`;
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <h1 className="text-4xl font-bold mb-2">🚴 Helmet Tracker</h1>
+          <p className="text-xl opacity-90">Virginia Tech helmet safety ratings with real-time pricing</p>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex gap-8">
+          {/* Left Sidebar - Filters */}
+          <aside className="w-80 flex-shrink-0">
+            <div className="bg-white rounded-lg shadow-md p-6 sticky top-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-6">Filters</h3>
+
+              {/* Search */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Search
+                </label>
+                <input
+                  type="text"
+                  placeholder="Search helmets..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              {/* Category Filter */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Category
+                </label>
+                <select
+                  value={categoryFilter}
+                  onChange={(e) => setCategoryFilter(e.target.value as CategoryFilter)}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="">All Categories</option>
+                  <option value="Road">Road</option>
+                  <option value="All Mountain">All Mountain</option>
+                  <option value="Urban">Urban</option>
+                </select>
+              </div>
+
+              {/* Brand Filter */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Brand
+                </label>
+                <select
+                  value={brandFilter}
+                  onChange={(e) => setBrandFilter(e.target.value as BrandFilter)}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="">All Brands</option>
+                  {uniqueBrands.map(brand => (
+                    <option key={brand} value={brand}>{brand}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Sort By */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Sort By
+                </label>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as SortOption)}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="rating">Best Rating</option>
+                  <option value="safety">Best Safety Score</option>
+                  <option value="price">Lowest Price</option>
+                </select>
+              </div>
+
+              {/* Availability Filter */}
+              <div className="mb-6">
+                <label className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={showAvailableOnly}
+                    onChange={(e) => setShowAvailableOnly(e.target.checked)}
+                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                  />
+                  <span className="ml-2 text-sm text-gray-700">
+                    Show available only
+                  </span>
+                </label>
+              </div>
+
+              {/* Clear Filters */}
+              <button
+                onClick={() => {
+                  setSearchTerm('');
+                  setCategoryFilter('');
+                  setBrandFilter('');
+                  setSortBy('rating');
+                  setShowAvailableOnly(false);
+                }}
+                className="w-full px-4 py-2 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Clear All Filters
+              </button>
+            </div>
+          </aside>
+
+          {/* Right Content - Results */}
+          <div className="flex-1">
+            {/* Results Header */}
+            <div className="mb-6">
+              <h2 className="text-2xl font-semibold text-gray-800">
+                {filteredAndSortedHelmets.length} Helmet{filteredAndSortedHelmets.length !== 1 ? 's' : ''} Found
+              </h2>
+            </div>
+
+            {/* Helmet Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          {filteredAndSortedHelmets.map((helmet) => (
+            <div key={helmet.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+              {/* Helmet Image Placeholder */}
+              <div className="h-48 bg-gray-100 flex items-center justify-center text-gray-500">
+                No Image Available
+              </div>
+
+              {/* Helmet Details */}
+              <div className="p-6">
+                <div className="mb-4">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                    {helmet.brand} {helmet.name}
+                  </h3>
+                  <span className="inline-block bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm">
+                    {helmet.category}
+                  </span>
+                </div>
+
+                {/* Star Rating */}
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-yellow-500 text-xl tracking-wider">
+                    {renderStars(helmet.star_rating)}
+                  </span>
+                  <span className="text-gray-600 text-sm">({helmet.star_rating}/5)</span>
+                </div>
+
+                {/* Safety Score */}
+                <div className="mb-4 p-2 bg-gray-50 rounded border-l-4 border-green-500">
+                  <div className="text-sm text-gray-700">
+                    <strong>Safety Score:</strong> {helmet.safety_score.toFixed(1)} (lower is better)
+                  </div>
+                </div>
+
+                {/* Pricing */}
+                <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-4 rounded-lg">
+                  <div className="text-xl font-bold text-green-600 mb-1">
+                    {helmet.min_price === helmet.max_price
+                      ? formatPrice(helmet.min_price)
+                      : `${formatPrice(helmet.min_price)} - ${formatPrice(helmet.max_price)}`
+                    }
+                  </div>
+                  <div className="text-sm text-gray-600 mb-1">
+                    VT Test Price: {formatPrice(helmet.vt_test_price)}
+                  </div>
+                  <div className="text-sm text-gray-700 font-medium">
+                    {helmet.available_count} of {helmet.listing_count} retailers have it in stock
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+            </div>
+
+            {/* No Results */}
+            {filteredAndSortedHelmets.length === 0 && (
+              <div className="text-center py-12">
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">No helmets found</h3>
+                <p className="text-gray-500">Try adjusting your search criteria</p>
+              </div>
+            )}
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white py-8 mt-12">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <p className="mb-2">
+            Safety data from{' '}
+            <a
+              href="https://www.helmet.beam.vt.edu/bicycle-helmet-ratings.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:underline"
+            >
+              Virginia Tech Helmet Lab
+            </a>
+          </p>
+          <p>Built with ♥ for cyclist safety</p>
+        </div>
       </footer>
     </div>
   );
