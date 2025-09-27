@@ -121,6 +121,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        {/* AvantLink Verification - Body Position */}
+        <script
+          type="text/javascript"
+          src="https://classic.avantlink.com/affiliate_app_confirm.php?mode=js&authResponse=0b7c0a9a6210d902e8394b526c8e2c05e76e0d96"
+        />
       </body>
     </html>
   );
