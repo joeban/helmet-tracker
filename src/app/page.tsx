@@ -165,7 +165,7 @@ export default function Home() {
 
               {/* Search */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-slate-800 mb-2">
                   Search
                 </label>
                 <input
@@ -173,19 +173,19 @@ export default function Home() {
                   placeholder="Search helmets..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-900"
                 />
               </div>
 
               {/* Category Filter */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-slate-800 mb-2">
                   Category
                 </label>
                 <select
                   value={categoryFilter}
                   onChange={(e) => setCategoryFilter(e.target.value as CategoryFilter)}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-900"
                 >
                   <option value="">All Categories</option>
                   <option value="Road">Road</option>
@@ -198,13 +198,13 @@ export default function Home() {
 
               {/* Brand Filter */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-slate-800 mb-2">
                   Brand
                 </label>
                 <select
                   value={brandFilter}
                   onChange={(e) => setBrandFilter(e.target.value as BrandFilter)}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-900"
                 >
                   <option value="">All Brands</option>
                   {uniqueBrands.map(brand => (
@@ -215,13 +215,13 @@ export default function Home() {
 
               {/* Sort By */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-slate-800 mb-2">
                   Sort By
                 </label>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as SortOption)}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-slate-900"
                 >
                   <option value="rating">Best Rating</option>
                   <option value="safety">Best Safety Score</option>
@@ -231,7 +231,7 @@ export default function Home() {
 
               {/* Price Range Filter */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-slate-800 mb-2">
                   Price Range
                 </label>
                 <div className="space-y-3">
@@ -241,15 +241,15 @@ export default function Home() {
                       placeholder="Min"
                       value={priceRange.min}
                       onChange={(e) => setPriceRange(prev => ({...prev, min: Number(e.target.value) || 0}))}
-                      className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                      className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-slate-900"
                     />
-                    <span className="text-gray-500">to</span>
+                    <span className="text-slate-700 font-medium">to</span>
                     <input
                       type="number"
                       placeholder="Max"
                       value={priceRange.max}
                       onChange={(e) => setPriceRange(prev => ({...prev, max: Number(e.target.value) || 500}))}
-                      className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                      className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-slate-900"
                     />
                   </div>
                   <div className="text-xs text-gray-600">
@@ -260,7 +260,7 @@ export default function Home() {
 
               {/* Safety Score Range */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-slate-800 mb-2">
                   Safety Score Range (STAR)
                 </label>
                 <div className="space-y-2">
@@ -273,9 +273,9 @@ export default function Home() {
                       min="6.8"
                       max="27.0"
                       onChange={(e) => setSafetyScoreRange(prev => ({...prev, min: Number(e.target.value) || 6.8}))}
-                      className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                      className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-slate-900"
                     />
-                    <span className="text-gray-500">to</span>
+                    <span className="text-slate-700 font-medium">to</span>
                     <input
                       type="number"
                       placeholder="Max"
@@ -284,7 +284,7 @@ export default function Home() {
                       min="6.8"
                       max="27.0"
                       onChange={(e) => setSafetyScoreRange(prev => ({...prev, max: Number(e.target.value) || 27.0}))}
-                      className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                      className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm text-slate-900"
                     />
                   </div>
                   <div className="text-xs text-gray-600">
@@ -302,7 +302,7 @@ export default function Home() {
                     onChange={(e) => setMipsOnly(e.target.checked)}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                   />
-                  <span className="ml-2 text-sm text-gray-700">
+                  <span className="ml-2 text-sm font-medium text-slate-800">
                     MIPS technology only
                   </span>
                 </label>
@@ -317,7 +317,7 @@ export default function Home() {
                     onChange={(e) => setShowAvailableOnly(e.target.checked)}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                   />
-                  <span className="ml-2 text-sm text-gray-700">
+                  <span className="ml-2 text-sm font-medium text-slate-800">
                     Show available only
                   </span>
                 </label>
@@ -396,7 +396,7 @@ export default function Home() {
                   <h3 className="text-base lg:text-lg font-bold text-gray-900 mb-1.5 lg:mb-2 leading-tight group-hover:text-blue-800 transition-colors duration-200">
                     {helmet.brand} {helmet.name}
                   </h3>
-                  <span className="inline-block bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 px-2.5 py-1 rounded-full text-xs font-medium">
+                  <span className="inline-block bg-gradient-to-r from-gray-100 to-gray-200 text-slate-800 px-2.5 py-1 rounded-full text-xs font-medium">
                     {helmet.category}
                   </span>
                 </div>
@@ -422,7 +422,7 @@ export default function Home() {
                     : 'bg-red-50 border-red-500'
                 }`}>
                   <div className="flex items-center justify-between">
-                    <div className="text-sm lg:text-base text-gray-700 font-medium">
+                    <div className="text-sm lg:text-base text-slate-800 font-medium">
                       <strong>Safety Score:</strong> {helmet.safety_score}
                     </div>
                     <div className={`text-xs px-2 py-1 rounded font-medium ${
@@ -457,7 +457,7 @@ export default function Home() {
                   <div className="text-xs lg:text-sm text-gray-600 mb-1">
                     VT Test Price: {formatPrice(helmet.vt_test_price)}
                   </div>
-                  <div className="text-xs lg:text-sm text-gray-700 font-medium">
+                  <div className="text-xs lg:text-sm text-slate-700 font-medium">
                     {helmet.available_count} of {helmet.listing_count} retailers have it in stock
                   </div>
                 </div>
@@ -529,7 +529,7 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                   </div>
-                  <h3 className="text-lg lg:text-xl font-bold text-gray-700 mb-2">No helmets found</h3>
+                  <h3 className="text-lg lg:text-xl font-bold text-slate-800 mb-2">No helmets found</h3>
                   <p className="text-gray-500 text-sm lg:text-base">Try adjusting your search criteria or clearing filters</p>
                 </div>
               </div>
@@ -567,7 +567,7 @@ export default function Home() {
               <div className="flex-1 overflow-y-auto p-6">
                 {/* Search */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-bold text-slate-800 mb-2">
                     Search
                   </label>
                   <input
@@ -581,7 +581,7 @@ export default function Home() {
 
                 {/* Category Filter */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-bold text-slate-800 mb-2">
                     Category
                   </label>
                   <select
@@ -600,7 +600,7 @@ export default function Home() {
 
                 {/* Brand Filter */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-bold text-slate-800 mb-2">
                     Brand
                   </label>
                   <select
@@ -619,7 +619,7 @@ export default function Home() {
 
                 {/* Sort By */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-bold text-slate-800 mb-2">
                     Sort By
                   </label>
                   <select
@@ -635,7 +635,7 @@ export default function Home() {
 
                 {/* Price Range */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-bold text-slate-800 mb-2">
                     Price Range
                   </label>
                   <div className="space-y-2">
@@ -647,7 +647,7 @@ export default function Home() {
                         onChange={(e) => setPriceRange(prev => ({...prev, min: Number(e.target.value) || 0}))}
                         className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                       />
-                      <span className="text-gray-500">to</span>
+                      <span className="text-slate-700 font-medium">to</span>
                       <input
                         type="number"
                         placeholder="Max"
@@ -664,7 +664,7 @@ export default function Home() {
 
                 {/* Safety Score Range */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-bold text-slate-800 mb-2">
                     Safety Score Range (STAR)
                   </label>
                   <div className="space-y-2">
@@ -679,7 +679,7 @@ export default function Home() {
                         onChange={(e) => setSafetyScoreRange(prev => ({...prev, min: Number(e.target.value) || 6.8}))}
                         className="w-20 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                       />
-                      <span className="text-gray-500">to</span>
+                      <span className="text-slate-700 font-medium">to</span>
                       <input
                         type="number"
                         placeholder="Max"
@@ -706,7 +706,7 @@ export default function Home() {
                       onChange={(e) => setMipsOnly(e.target.checked)}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                     />
-                    <span className="ml-2 text-sm text-gray-700">
+                    <span className="ml-2 text-sm font-medium text-slate-800">
                       MIPS technology only
                     </span>
                   </label>
@@ -721,7 +721,7 @@ export default function Home() {
                       onChange={(e) => setShowAvailableOnly(e.target.checked)}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                     />
-                    <span className="ml-2 text-sm text-gray-700">
+                    <span className="ml-2 text-sm font-medium text-slate-800">
                       Show available only
                     </span>
                   </label>
