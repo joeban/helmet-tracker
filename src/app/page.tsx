@@ -12,6 +12,7 @@ import {
   trackAdvancedSearch,
   trackAdvancedAffiliateClick
 } from '@/utils/analytics';
+import { CompactPriceTracker } from '@/components/PriceTracker';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -615,6 +616,11 @@ export default function Home() {
                       );
                     }
                   })()}
+                </div>
+
+                {/* Compact Price Tracker */}
+                <div className="mt-3 pt-3 border-t border-gray-100">
+                  <CompactPriceTracker helmet={helmet} />
                 </div>
               </div>
             </div>

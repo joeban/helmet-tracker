@@ -13,6 +13,7 @@ import {
 } from '@/utils/helmet-slug';
 import { getHelmetAmazonInfo, getHelmetFallbackImage } from '@/utils/amazonImages';
 import HelmetDetailTracker, { TrackedAmazonButton } from '@/components/HelmetDetailTracker';
+import PriceTracker from '@/components/PriceTracker';
 
 interface HelmetPageProps {
   params: { slug: string };
@@ -210,6 +211,11 @@ export default function HelmetPage({ params }: HelmetPageProps) {
                   <div className="text-sm opacity-90 mt-1">Find this helmet</div>
                 </TrackedAmazonButton>
               )}
+
+              {/* Price Tracking Component */}
+              <div className="mt-6">
+                <PriceTracker helmet={helmet} />
+              </div>
             </div>
           </div>
 

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import AnalyticsDashboard from '@/components/AnalyticsDashboard';
+import PriceAlertsButton from '@/components/PriceAlertsButton';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -270,6 +271,7 @@ export default function RootLayout({
       >
         {children}
         <AnalyticsDashboard />
+        <PriceAlertsButton />
         <Analytics />
         <SpeedInsights />
         {/* AvantLink Verification - Body Position */}
