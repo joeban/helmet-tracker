@@ -38,10 +38,15 @@ export default function Home() {
   const filteredAndSortedHelmets = useMemo(() => {
     const filtered = HELMETS.filter(helmet => {
       const searchTerm = debouncedSearchTerm.toLowerCase().trim();
-      const matchesSearch = !searchTerm ||
-                           helmet.name.toLowerCase().includes(searchTerm) ||
-                           helmet.brand.toLowerCase().includes(searchTerm) ||
-                           helmet.category.toLowerCase().includes(searchTerm);
+
+      // Improved search: split search terms and match each word individually
+      const matchesSearch = !searchTerm || (() => {
+        const searchWords = searchTerm.split(/\s+/).filter(word => word.length > 0);
+        const helmetText = `${helmet.brand} ${helmet.name} ${helmet.category}`.toLowerCase();
+
+        // All search words must be found somewhere in the helmet text
+        return searchWords.every(word => helmetText.includes(word));
+      })();
       const matchesCategory = !categoryFilter || helmet.category === categoryFilter;
       const matchesBrand = !brandFilter || helmet.brand === brandFilter;
       const matchesAvailability = !showAvailableOnly || helmet.available_count > 0;
