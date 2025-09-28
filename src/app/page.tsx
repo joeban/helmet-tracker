@@ -7,6 +7,11 @@ import { SortOption, CategoryFilter, BrandFilter } from '@/types/helmet';
 import HelmetImage from '@/components/HelmetImage';
 import { getHelmetAmazonInfo } from '@/utils/amazonImages';
 import { generateHelmetSlug } from '@/utils/helmet-slug';
+import {
+  initializeConversionTracking,
+  trackAdvancedSearch,
+  trackAdvancedAffiliateClick
+} from '@/utils/analytics';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,6 +28,10 @@ export default function Home() {
   // Pagination for performance optimization
   const [currentPage, setCurrentPage] = useState(1);
   const helmetsPerPage = 24; // 24 helmets = 8 per row on desktop (3 cols), 12 per row on mobile (2 cols)
+
+  // Loading state for better UX during search
+  const [isSearching, setIsSearching] = useState(false);
+  const [sessionId, setSessionId] = useState<string>('');
 
   // Debounce search term for better performance
   useEffect(() => {
@@ -95,6 +104,21 @@ export default function Home() {
     setCurrentPage(1);
   }, [debouncedSearchTerm, categoryFilter, brandFilter, showAvailableOnly, priceRange, safetyScoreRange, mipsOnly]);
 
+  // Track search events when debounced term changes
+  useEffect(() => {
+    if (debouncedSearchTerm && sessionId) {
+      const results = filteredAndSortedHelmets.length;
+      trackAdvancedSearch(debouncedSearchTerm, results, {
+        categoryFilter,
+        brandFilter,
+        showAvailableOnly,
+        priceRange,
+        safetyScoreRange,
+        mipsOnly
+      });
+    }
+  }, [debouncedSearchTerm, filteredAndSortedHelmets.length, sessionId, categoryFilter, brandFilter, showAvailableOnly, priceRange, safetyScoreRange, mipsOnly]);
+
   // Optimize rendering functions with useCallback
   const renderStars = useCallback((rating: number) => {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);
@@ -104,8 +128,11 @@ export default function Home() {
     return `$${price.toFixed(2)}`;
   }, []);
 
-  // Loading state for better UX during search
-  const [isSearching, setIsSearching] = useState(false);
+  // Initialize conversion tracking on mount
+  useEffect(() => {
+    const id = initializeConversionTracking();
+    setSessionId(id);
+  }, []);
 
   useEffect(() => {
     if (searchTerm !== debouncedSearchTerm) {
@@ -520,6 +547,16 @@ export default function Home() {
                           href={helmet.amazon_url}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={() => trackAdvancedAffiliateClick({
+                            id: helmet.id.toString(),
+                            name: helmet.name,
+                            brand: helmet.brand,
+                            category: helmet.category,
+                            star_rating: helmet.star_rating,
+                            safety_score: helmet.safety_score,
+                            min_price: helmet.min_price,
+                            amazon_url: helmet.amazon_url
+                          }, 'amazon', 'direct')}
                           className="w-full inline-flex items-center justify-center px-4 py-2.5 lg:py-3 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-semibold rounded-lg transition-all duration-200 touch-manipulation text-sm shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
                         >
                           <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -535,6 +572,15 @@ export default function Home() {
                           href={amazonInfo.productUrl}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={() => trackAdvancedAffiliateClick({
+                            id: helmet.id.toString(),
+                            name: helmet.name,
+                            brand: helmet.brand,
+                            category: helmet.category,
+                            star_rating: helmet.star_rating,
+                            safety_score: helmet.safety_score,
+                            min_price: helmet.min_price
+                          }, 'amazon', 'direct')}
                           className="w-full inline-flex items-center justify-center px-4 py-2.5 lg:py-3 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-semibold rounded-lg transition-all duration-200 touch-manipulation text-sm shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
                         >
                           <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -550,6 +596,15 @@ export default function Home() {
                           href={amazonInfo.searchUrl}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={() => trackAdvancedAffiliateClick({
+                            id: helmet.id.toString(),
+                            name: helmet.name,
+                            brand: helmet.brand,
+                            category: helmet.category,
+                            star_rating: helmet.star_rating,
+                            safety_score: helmet.safety_score,
+                            min_price: helmet.min_price
+                          }, 'amazon', 'search')}
                           className="w-full inline-flex items-center justify-center px-4 lg:px-6 py-3 lg:py-4 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-200 touch-manipulation text-sm lg:text-base shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                         >
                           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

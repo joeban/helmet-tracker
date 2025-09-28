@@ -12,6 +12,7 @@ import {
   generateHelmetSlug
 } from '@/utils/helmet-slug';
 import { getHelmetAmazonInfo, getHelmetFallbackImage } from '@/utils/amazonImages';
+import HelmetDetailTracker, { TrackedAmazonButton } from '@/components/HelmetDetailTracker';
 
 interface HelmetPageProps {
   params: { slug: string };
@@ -138,6 +139,8 @@ export default function HelmetPage({ params }: HelmetPageProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Advanced conversion tracking */}
+      <HelmetDetailTracker helmet={helmet} />
 
       {/* Breadcrumbs */}
       <div className="bg-white border-b">
@@ -187,25 +190,25 @@ export default function HelmetPage({ params }: HelmetPageProps) {
 
               {/* Amazon Purchase CTA */}
               {amazonInfo.hasAmazonLink && amazonInfo.productUrl ? (
-                <a
-                  href={amazonInfo.productUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <TrackedAmazonButton
+                  helmet={helmet}
+                  url={amazonInfo.productUrl}
+                  type="direct"
                   className="w-full bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-bold py-4 px-6 rounded-lg text-center block transition-all duration-200 transform hover:scale-105 shadow-lg mb-4"
                 >
                   🛒 Buy on Amazon
                   <div className="text-sm opacity-90 mt-1">Direct product link</div>
-                </a>
+                </TrackedAmazonButton>
               ) : (
-                <a
-                  href={amazonInfo.searchUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <TrackedAmazonButton
+                  helmet={helmet}
+                  url={amazonInfo.searchUrl}
+                  type="search"
                   className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-4 px-6 rounded-lg text-center block transition-all duration-200 transform hover:scale-105 shadow-lg mb-4"
                 >
                   🔍 Search on Amazon
                   <div className="text-sm opacity-90 mt-1">Find this helmet</div>
-                </a>
+                </TrackedAmazonButton>
               )}
             </div>
           </div>
