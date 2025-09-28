@@ -9,6 +9,8 @@ import {
 } from '@/utils/comparison';
 import HelmetComparison from '@/components/HelmetComparison';
 import { AddToComparisonButton } from '@/components/ComparisonWidget';
+import { trackAdvancedSearch, trackFilterUsage, initializeConversionTracking } from '@/utils/analytics';
+import { useDebounce } from '@/hooks/useDebounce';
 
 interface ComparisonPageClientProps {
   preselectedHelmets: Helmet[];
@@ -21,6 +23,16 @@ export default function ComparisonPageClient({ preselectedHelmets, allHelmets }:
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
+  const [sessionId, setSessionId] = useState<string>('');
+
+  // Debounce search term for analytics
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+  // Initialize analytics session
+  useEffect(() => {
+    const id = initializeConversionTracking();
+    setSessionId(id);
+  }, []);
 
   // Get unique categories and brands for filters
   const categories = Array.from(new Set(allHelmets.map(h => h.category))).sort();
@@ -62,6 +74,30 @@ export default function ComparisonPageClient({ preselectedHelmets, allHelmets }:
 
   // Sort helmets by safety score (best first)
   const sortedHelmets = filteredHelmets.sort((a, b) => a.safety_score - b.safety_score);
+
+  // Track search events when debounced term changes
+  useEffect(() => {
+    if (debouncedSearchTerm && sessionId) {
+      const results = filteredHelmets.length;
+      trackAdvancedSearch(debouncedSearchTerm, results, {
+        selectedCategory,
+        selectedBrand
+      });
+    }
+  }, [debouncedSearchTerm, filteredHelmets.length, sessionId, selectedCategory, selectedBrand]);
+
+  // Track filter usage
+  useEffect(() => {
+    if (selectedCategory && sessionId) {
+      trackFilterUsage('category', selectedCategory, filteredHelmets.length);
+    }
+  }, [selectedCategory, filteredHelmets.length, sessionId]);
+
+  useEffect(() => {
+    if (selectedBrand && sessionId) {
+      trackFilterUsage('brand', selectedBrand, filteredHelmets.length);
+    }
+  }, [selectedBrand, filteredHelmets.length, sessionId]);
 
   const renderStars = (rating: number) => {
     return '★'.repeat(rating) + '☆'.repeat(5 - rating);

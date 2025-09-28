@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import AnalyticsDashboard from '@/components/AnalyticsDashboard';
+import PopularSearchDashboard from '@/components/PopularSearchDashboard';
 import PriceAlertsButton from '@/components/PriceAlertsButton';
 import ComparisonWidget from '@/components/ComparisonWidget';
 import "./globals.css";
@@ -272,6 +273,7 @@ export default function RootLayout({
       >
         {children}
         <AnalyticsDashboard />
+        <PopularSearchDashboard />
         <PriceAlertsButton />
         <ComparisonWidget />
         <Analytics />
