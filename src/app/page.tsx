@@ -15,6 +15,9 @@ import {
 import { CompactPriceTracker } from '@/components/PriceTracker';
 import { AddToComparisonButton } from '@/components/ComparisonWidget';
 import AmazonButton from '@/components/AmazonButton';
+import HelmetRecommendationWizard from '@/components/HelmetRecommendationWizard';
+import SocialProofBadge, { UrgencyMessage } from '@/components/SocialProofBadge';
+import TopHelmetSections from '@/components/TopHelmetSections';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -214,6 +217,16 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* Recommendation Wizard */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <HelmetRecommendationWizard />
+      </div>
+
+      {/* Top Helmet Sections */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <TopHelmetSections />
+      </div>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-8">
@@ -445,6 +458,13 @@ export default function Home() {
             return (
             <div key={helmet.id} className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-200 group relative">
 
+              {/* Social Proof Badge */}
+              <SocialProofBadge
+                helmet={helmet}
+                index={(currentPage - 1) * helmetsPerPage + index}
+                totalResults={filteredAndSortedHelmets.length}
+              />
+
               {/* Link overlay for helmet details - excludes Amazon button area */}
               <Link
                 href={`/helmet/${helmetSlug}`}
@@ -533,8 +553,11 @@ export default function Home() {
                   <div className="text-xs lg:text-sm text-gray-600 mb-1">
                     VT Test Price: {formatPrice(helmet.vt_test_price)}
                   </div>
-                  <div className="text-xs lg:text-sm text-slate-700 font-medium">
-                    {helmet.available_count} of {helmet.listing_count} retailers have it in stock
+                  <div className="flex justify-between items-center">
+                    <div className="text-xs lg:text-sm text-slate-700 font-medium">
+                      {helmet.available_count} of {helmet.listing_count} retailers have it in stock
+                    </div>
+                    <UrgencyMessage helmet={helmet} />
                   </div>
                 </div>
 
