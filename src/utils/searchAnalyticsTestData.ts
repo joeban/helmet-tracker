@@ -40,7 +40,7 @@ export function generateTestSearchData() {
           urgency: string;
           specificity: string;
         };
-        filters: Record<string, string> | {};
+        filters: Record<string, string> | Record<string, never>;
       };
     }>,
     userAgent: navigator.userAgent,
@@ -63,7 +63,7 @@ export function generateTestSearchData() {
         },
         filters: Math.random() > 0.5 ? {
           category: ['road', 'mountain', 'urban'][Math.floor(Math.random() * 3)]
-        } : {}
+        } : {} as Record<string, never>
       }
     };
     session.events.push(event);
