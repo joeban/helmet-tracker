@@ -10,8 +10,6 @@ import {
   getStoredPriceAlerts,
   getStoredWatchlist,
   updatePriceHistory,
-  PriceAlert,
-  WatchlistItem,
   DealAnalysis
 } from '@/utils/priceTracking';
 
@@ -45,7 +43,7 @@ export default function PriceTracker({ helmet }: PriceTrackerProps) {
   }, [helmet]);
 
   const handleCreateAlert = () => {
-    const alert = createPriceAlert({
+    createPriceAlert({
       helmetId: helmet.id,
       helmetName: helmet.name,
       helmetBrand: helmet.brand,
@@ -258,7 +256,7 @@ export default function PriceTracker({ helmet }: PriceTrackerProps) {
               </label>
               <select
                 value={alertType}
-                onChange={(e) => setAlertType(e.target.value as any)}
+                onChange={(e) => setAlertType(e.target.value as 'target_price' | 'price_drop' | 'deal_threshold')}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               >
                 <option value="target_price">Target Price</option>
@@ -331,7 +329,7 @@ export function CompactPriceTracker({ helmet }: CompactPriceTrackerProps) {
   if (!dealAnalysis) return null;
 
   const getDealIndicator = () => {
-    const { recommendation, dealScore } = dealAnalysis;
+    const { recommendation } = dealAnalysis;
 
     if (recommendation === 'excellent_deal') {
       return (

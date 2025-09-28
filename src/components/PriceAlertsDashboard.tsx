@@ -23,7 +23,7 @@ export default function PriceAlertsDashboard({ isVisible = false, onClose }: Pri
   const [watchlist, setWatchlist] = useState<WatchlistItem[]>([]);
   const [priceHistory, setPriceHistory] = useState<PriceHistory[]>([]);
   const [activeTab, setActiveTab] = useState<'alerts' | 'watchlist' | 'history' | 'analytics'>('alerts');
-  const [priceReport, setPriceReport] = useState<any>(null);
+  const [priceReport, setPriceReport] = useState<ReturnType<typeof generatePriceReport> | null>(null);
 
   useEffect(() => {
     if (isVisible) {
@@ -116,7 +116,7 @@ export default function PriceAlertsDashboard({ isVisible = false, onClose }: Pri
             ].map(tab => (
               <button
                 key={tab.key}
-                onClick={() => setActiveTab(tab.key as any)}
+                onClick={() => setActiveTab(tab.key as 'alerts' | 'watchlist' | 'history' | 'analytics')}
                 className={`py-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === tab.key
                     ? 'border-blue-500 text-blue-600'
@@ -266,7 +266,7 @@ export default function PriceAlertsDashboard({ isVisible = false, onClose }: Pri
                 <div className="text-center py-12">
                   <div className="text-gray-400 text-6xl mb-4">📊</div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">No price history yet</h3>
-                  <p className="text-gray-500">Price changes will appear here as they're tracked</p>
+                  <p className="text-gray-500">Price changes will appear here as they&apos;re tracked</p>
                 </div>
               ) : (
                 <div className="space-y-2">
