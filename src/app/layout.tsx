@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import AnalyticsDashboard from '@/components/AnalyticsDashboard';
 import PopularSearchDashboard from '@/components/PopularSearchDashboard';
+import ABTestDashboard, { ABTestConfigPanel } from '@/components/ABTestDashboard';
 import PriceAlertsButton from '@/components/PriceAlertsButton';
 import ComparisonWidget from '@/components/ComparisonWidget';
 import "./globals.css";
