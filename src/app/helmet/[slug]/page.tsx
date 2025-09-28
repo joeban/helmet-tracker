@@ -14,6 +14,7 @@ import {
 import { getHelmetAmazonInfo, getHelmetFallbackImage } from '@/utils/amazonImages';
 import HelmetDetailTracker, { TrackedAmazonButton } from '@/components/HelmetDetailTracker';
 import PriceTracker from '@/components/PriceTracker';
+import { AddToComparisonButton } from '@/components/ComparisonWidget';
 
 interface HelmetPageProps {
   params: { slug: string };
@@ -211,6 +212,15 @@ export default function HelmetPage({ params }: HelmetPageProps) {
                   <div className="text-sm opacity-90 mt-1">Find this helmet</div>
                 </TrackedAmazonButton>
               )}
+
+              {/* Comparison Button */}
+              <div className="mt-4">
+                <AddToComparisonButton
+                  helmet={helmet}
+                  source="detail_page"
+                  className="w-full"
+                />
+              </div>
 
               {/* Price Tracking Component */}
               <div className="mt-6">

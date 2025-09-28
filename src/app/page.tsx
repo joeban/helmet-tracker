@@ -13,6 +13,7 @@ import {
   trackAdvancedAffiliateClick
 } from '@/utils/analytics';
 import { CompactPriceTracker } from '@/components/PriceTracker';
+import { AddToComparisonButton } from '@/components/ComparisonWidget';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -618,8 +619,14 @@ export default function Home() {
                   })()}
                 </div>
 
-                {/* Compact Price Tracker */}
-                <div className="mt-3 pt-3 border-t border-gray-100">
+                {/* Comparison and Price Tracking */}
+                <div className="mt-3 pt-3 border-t border-gray-100 space-y-3">
+                  <AddToComparisonButton
+                    helmet={helmet}
+                    source="homepage"
+                    variant="button"
+                    className="w-full"
+                  />
                   <CompactPriceTracker helmet={helmet} />
                 </div>
               </div>
