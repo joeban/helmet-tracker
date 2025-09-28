@@ -275,6 +275,8 @@ export default function RootLayout({
         {children}
         <AnalyticsDashboard />
         <PopularSearchDashboard />
+        <ABTestDashboard />
+        <ABTestConfigPanel />
         <PriceAlertsButton />
         <ComparisonWidget />
         <Analytics />

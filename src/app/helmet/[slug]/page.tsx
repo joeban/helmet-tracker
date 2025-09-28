@@ -15,6 +15,7 @@ import { getHelmetAmazonInfo, getHelmetFallbackImage } from '@/utils/amazonImage
 import HelmetDetailTracker, { TrackedAmazonButton } from '@/components/HelmetDetailTracker';
 import PriceTracker from '@/components/PriceTracker';
 import { AddToComparisonButton } from '@/components/ComparisonWidget';
+import AmazonButton from '@/components/AmazonButton';
 
 interface HelmetPageProps {
   params: { slug: string };
@@ -190,28 +191,15 @@ export default function HelmetPage({ params }: HelmetPageProps) {
                 )}
               </div>
 
-              {/* Amazon Purchase CTA */}
-              {amazonInfo.hasAmazonLink && amazonInfo.productUrl ? (
-                <TrackedAmazonButton
+              {/* Amazon Purchase CTA with A/B Testing */}
+              <div className="mb-4">
+                <AmazonButton
                   helmet={helmet}
-                  url={amazonInfo.productUrl}
-                  type="direct"
-                  className="w-full bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-bold py-4 px-6 rounded-lg text-center block transition-all duration-200 transform hover:scale-105 shadow-lg mb-4"
-                >
-                  🛒 Buy on Amazon
-                  <div className="text-sm opacity-90 mt-1">Direct product link</div>
-                </TrackedAmazonButton>
-              ) : (
-                <TrackedAmazonButton
-                  helmet={helmet}
-                  url={amazonInfo.searchUrl}
-                  type="search"
-                  className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-4 px-6 rounded-lg text-center block transition-all duration-200 transform hover:scale-105 shadow-lg mb-4"
-                >
-                  🔍 Search on Amazon
-                  <div className="text-sm opacity-90 mt-1">Find this helmet</div>
-                </TrackedAmazonButton>
-              )}
+                  testId="amazon_button_color_test_1"
+                  size="lg"
+                  className="w-full"
+                />
+              </div>
 
               {/* Comparison Button */}
               <div className="mt-4">

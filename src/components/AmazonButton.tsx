@@ -43,7 +43,10 @@ export default function AmazonButton({
     }
 
     // Track advanced affiliate click for analytics
-    trackAdvancedAffiliateClick(helmet, 'amazon', 'direct');
+    trackAdvancedAffiliateClick({
+      ...helmet,
+      id: helmet.id.toString()
+    }, 'amazon', 'direct');
 
     // Open Amazon with affiliate link
     const amazonUrl = helmet.amazon_url ||
@@ -210,7 +213,10 @@ export function AmazonSearchButton({
       trackButtonClick(testId);
     }
 
-    trackAdvancedAffiliateClick(helmet, 'amazon', 'search');
+    trackAdvancedAffiliateClick({
+      ...helmet,
+      id: helmet.id.toString()
+    }, 'amazon', 'search');
 
     const searchUrl = `https://amazon.com/s?k=${encodeURIComponent(`${helmet.brand} ${helmet.name} helmet`)}&tag=${process.env.NEXT_PUBLIC_AMAZON_AFFILIATE_TAG || 'helmetscore-20'}`;
     window.open(searchUrl, '_blank');
@@ -263,7 +269,10 @@ export function AmazonLink({
     trackButtonClick(testId);
 
     // Track analytics
-    trackAdvancedAffiliateClick(helmet, 'amazon', 'direct');
+    trackAdvancedAffiliateClick({
+      ...helmet,
+      id: helmet.id.toString()
+    }, 'amazon', 'direct');
   };
 
   const amazonUrl = helmet.amazon_url ||
