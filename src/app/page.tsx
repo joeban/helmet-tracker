@@ -20,6 +20,10 @@ export default function Home() {
   const [mipsOnly, setMipsOnly] = useState(false);
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
+  // Pagination for performance optimization
+  const [currentPage, setCurrentPage] = useState(1);
+  const helmetsPerPage = 24; // 24 helmets = 8 per row on desktop (3 cols), 12 per row on mobile (2 cols)
+
   // Debounce search term for better performance
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -73,6 +77,23 @@ export default function Home() {
       }
     });
   }, [debouncedSearchTerm, categoryFilter, brandFilter, sortBy, showAvailableOnly, priceRange, safetyScoreRange, mipsOnly]);
+
+  // Paginated helmets for performance optimization
+  const paginatedHelmets = useMemo(() => {
+    const startIndex = (currentPage - 1) * helmetsPerPage;
+    const endIndex = startIndex + helmetsPerPage;
+    return filteredAndSortedHelmets.slice(startIndex, endIndex);
+  }, [filteredAndSortedHelmets, currentPage, helmetsPerPage]);
+
+  // Pagination calculations
+  const totalPages = Math.ceil(filteredAndSortedHelmets.length / helmetsPerPage);
+  const hasNextPage = currentPage < totalPages;
+  const hasPrevPage = currentPage > 1;
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [debouncedSearchTerm, categoryFilter, brandFilter, showAvailableOnly, priceRange, safetyScoreRange, mipsOnly]);
 
   // Optimize rendering functions with useCallback
   const renderStars = useCallback((rating: number) => {
@@ -386,8 +407,10 @@ export default function Home() {
 
             {/* Helmet Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
-          {filteredAndSortedHelmets.map((helmet) => {
+          {paginatedHelmets.map((helmet, index) => {
             const helmetSlug = generateHelmetSlug(helmet.brand, helmet.name);
+            // First 6 helmets get priority loading (above the fold)
+            const isPriority = index < 6;
 
             return (
             <div key={helmet.id} className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-200 group relative">
@@ -409,6 +432,7 @@ export default function Home() {
                   category={helmet.category}
                   imageUrl={helmet.image_url}
                   amazonUrl={helmet.amazon_url}
+                  priority={isPriority}
                 />
               </div>
 
@@ -555,6 +579,39 @@ export default function Home() {
                   <h3 className="text-lg lg:text-xl font-bold text-slate-800 mb-2">No helmets found</h3>
                   <p className="text-gray-500 text-sm lg:text-base">Try adjusting your search criteria or clearing filters</p>
                 </div>
+              </div>
+            )}
+
+            {/* Pagination Controls */}
+            {filteredAndSortedHelmets.length > helmetsPerPage && (
+              <div className="flex justify-center items-center gap-4 mt-8 lg:mt-12">
+                <button
+                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                  disabled={!hasPrevPage}
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                    hasPrevPage
+                      ? 'bg-blue-500 text-white hover:bg-blue-600'
+                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  }`}
+                >
+                  Previous
+                </button>
+
+                <span className="text-sm text-gray-600">
+                  Page {currentPage} of {totalPages} ({filteredAndSortedHelmets.length} total helmets)
+                </span>
+
+                <button
+                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                  disabled={!hasNextPage}
+                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                    hasNextPage
+                      ? 'bg-blue-500 text-white hover:bg-blue-600'
+                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  }`}
+                >
+                  Next
+                </button>
               </div>
             )}
           </div>

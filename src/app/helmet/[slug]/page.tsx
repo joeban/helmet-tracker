@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { HELMETS } from '@/data/helmets';
 import { Helmet } from '@/types/helmet';
 import {
@@ -160,10 +161,14 @@ export default function HelmetPage({ params }: HelmetPageProps) {
             <div className="bg-white rounded-lg shadow-sm p-6">
               <div className="aspect-square bg-gray-100 rounded-lg mb-6 flex items-center justify-center">
                 {helmet.image_url ? (
-                  <img
+                  <Image
                     src={helmet.image_url}
                     alt={`${getHelmetDisplayTitle(helmet)} helmet`}
+                    width={400}
+                    height={400}
                     className="max-w-full max-h-full object-contain rounded-lg"
+                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 ) : (
                   <div className="text-center p-8">
@@ -320,10 +325,13 @@ export default function HelmetPage({ params }: HelmetPageProps) {
                   >
                     <div className="aspect-square bg-gray-100 rounded-lg mb-3 flex items-center justify-center">
                       {similarHelmet.image_url ? (
-                        <img
+                        <Image
                           src={similarHelmet.image_url}
                           alt={`${similarHelmet.brand} ${similarHelmet.name}`}
+                          width={120}
+                          height={120}
                           className="max-w-full max-h-full object-contain rounded-lg"
+                          sizes="120px"
                         />
                       ) : (
                         <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">

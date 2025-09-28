@@ -205,7 +205,16 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://amazon.com" />
+        <link rel="dns-prefetch" href="https://m.media-amazon.com" />
+        <link rel="dns-prefetch" href="https://images-na.ssl-images-amazon.com" />
         <link rel="dns-prefetch" href="https://www.helmet.beam.vt.edu" />
+        <link rel="dns-prefetch" href="https://classic.avantlink.com" />
+
+        {/* Performance hints */}
+        <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#2563eb" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#1e40af" media="(prefers-color-scheme: dark)" />
 
         {/* Favicon and App Icons */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -214,7 +223,6 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
 
         {/* Theme and App Configuration */}
-        <meta name="theme-color" content="#2563eb" />
         <meta name="color-scheme" content="light" />
         <meta name="application-name" content="HelmetScore" />
         <meta name="apple-mobile-web-app-title" content="HelmetScore" />
