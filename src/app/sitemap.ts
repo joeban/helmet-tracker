@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { HELMETS } from '@/data/helmets'
+import { generateHelmetSlug } from '@/utils/helmet-slug'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://helmetscore.com'
@@ -45,13 +46,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  // Individual helmet pages (if we implement them in the future)
-  // const helmetPages: MetadataRoute.Sitemap = HELMETS.slice(0, 50).map(helmet => ({
-  //   url: `${baseUrl}/helmet/${helmet.id}`,
-  //   lastModified: currentDate,
-  //   changeFrequency: 'monthly' as const,
-  //   priority: 0.5,
-  // }))
+  // Individual helmet pages for maximum SEO coverage
+  const helmetPages: MetadataRoute.Sitemap = HELMETS.map(helmet => ({
+    url: `${baseUrl}/helmet/${generateHelmetSlug(helmet.brand, helmet.name)}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly' as const,
+    priority: helmet.star_rating >= 4 ? 0.8 : 0.6, // Higher priority for VT recommended helmets
+  }))
 
   // Safety score range pages
   const safetyRangePages: MetadataRoute.Sitemap = [
@@ -81,7 +82,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...categoryPages,
     ...brandPages,
     ...safetyRangePages,
-    // Uncomment when individual helmet pages are implemented
-    // ...helmetPages,
+    ...helmetPages, // Now including all 281+ helmet detail pages
   ]
 }
