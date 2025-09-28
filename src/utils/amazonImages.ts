@@ -96,8 +96,8 @@ export const MANUAL_HELMET_ASINS: Record<string, string> = {
 
   // First batch of Amazon ASINs - December 2024
   'GIRO AETHER SPHERICAL': 'B07FTSN2QP', // Giro Aether Spherical Adult Road Cycling Helmet
-  'BELL Z20 MIPS': 'B07JC3Q6PG', // BELL Z20 Aero MIPS Adult Road Bike Helmet
-  'BELL Z20 AERO MIPS': 'B07JC3Q6PG', // Same product, alternate name match
+  // 'BELL Z20 MIPS': 'B07JC3Q6PG', // Incorrect - this ASIN points to Z20 Aero model
+  'BELL Z20 AERO MIPS': 'B07JC3Q6PG', // BELL Z20 Aero MIPS Adult Road Bike Helmet
   'POC VENTRAL AIR MIPS': 'B09Q5S7BYB', // POC Ventral Air MIPS Road Cycling Helmet
 
   // Comprehensive search batch - December 2024
@@ -117,6 +117,24 @@ export const MANUAL_HELMET_ASINS: Record<string, string> = {
   'LAZER BLADE PLUS MIPS': 'B085TCXJ7D', // Lazer Blade+ MIPS Road Cycling Helmet
   'OAKLEY ARO3': 'B07QGXZ6G8', // Oakley ARO3 Road Cycling Helmet
   'KASK MOJITO 3': 'B07HRGJ6KL', // KASK Mojito 3 Road Cycling Helmet
+
+  // Manual research batch - January 2025
+  'FOX RACING SPEEDFRAME PRO': 'B0988PTB2Z', // FOX SPEEDFRAME PRO Mountain Biking Helmet
+  'FOX RACING SPEEDFRAME RS': 'B0C83KZQX2', // Fox Racing Speedframe Rs Helmet
+  'POC CYTAL': 'B0FBKCB2L1', // POC Cytal Helmet
+  'GIRO ARIES SPHERICAL': 'B0BHXT7LZP', // Giro Aries Spherical Adult Helmet
+  'FOX RACING DROPFRAME PRO': 'B084DLL36R', // Fox Racing Dropframe Helmet
+  'FOX RACING CROSSFRAME PRO': 'B0BQPYDL2J', // Fox Racing Crossframe Mountain Helmet
+  'TROY LEE DESIGNS A2 MIPS': 'B09RMM7QHM', // Troy Lee Designs A2 Mountain Helmet
+  'SCOTT CENTRIC PLUS MIPS': 'B076MHBNZJ', // Scott Centric Plus Helmet
+  'POC OCTAL X SPIN': 'B079YGSVHF', // POC Octal X SPIN Helmet
+  'SCOTT ARX PLUS MIPS 2020': 'B08PQ6HSJH', // Scott ARX Plus CPSC Cycling Helmet
+  'SCOTT ARGO PLUS MIPS': 'B09G1ZTJLX', // SCOTT Argo Plus Helmet
+  'TROY LEE DESIGNS FLOWLINE': 'B0DXC8QQLY', // Troy Lee Designs Flowline Mountain Helmet
+  'GIRO ECLIPSE SPHERICAL': 'B09VCYLQPX', // Giro Eclipse Spherical Cycling Helmet
+  'GIRO TYRANT': 'B07YF1CSTC', // Giro Tyrant Mountain Cycling Helmet
+  'GIRO MANIFEST SPHERICAL': 'B09JC9PK54', // Giro Manifest Spherical Mountain Cycling Helmet
+  'GIRO CHRONICLE MIPS': 'B07WTWBYCH', // Giro Chronicle MIPS Mountain Helmet
 
   // Add more verified helmets as researched
   // 'SPECIALIZED PREVAIL 3': 'B08XXXXX', // Need to research

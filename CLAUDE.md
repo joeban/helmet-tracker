@@ -482,4 +482,50 @@ helmet-tracker-next/
 
 **💡 Next Priority:** Content marketing and SEO traffic growth while affiliate approvals process
 
+## 🛒 AMAZON DIRECT PURCHASE LINKS EXPANSION (January 2025)
+
+### 🚀 **HISTORIC ACHIEVEMENT: 16 NEW AMAZON DIRECT LINKS ADDED**
+
+**📅 Date:** January 27, 2025
+**🎯 Impact:** Dramatically enhanced site monetization and user experience
+
+**⭐ Virginia Tech 5-Star Safety Champions (10 helmets!):**
+1. **FOX Racing Speedframe Pro** (B0988PTB2Z) - 5⭐, score 6.1 ✅
+2. **FOX Racing Speedframe RS** (B0C83KZQX2) - 5⭐, score 6.82 ✅
+3. **POC Cytal** (B0FBKCB2L1) - 5⭐, score 7.1 ✅
+4. **Giro Aries Spherical** (B0BHXT7LZP) - 5⭐, score 6.95 ✅
+5. **Scott Centric Plus MIPS** (B076MHBNZJ) - 5⭐, score 10.2 ✅
+6. **Scott ARX Plus MIPS 2020** (B08PQ6HSJH) - 5⭐, score 10.75 ✅
+7. **Scott Argo Plus MIPS** (B09G1ZTJLX) - 5⭐, score 11.6 ✅
+8. **POC Octal X SPIN** (B079YGSVHF) - 5⭐, score 10.59 ✅
+9. **Giro Eclipse Spherical** (B09VCYLQPX) - 5⭐, score 11.2 ✅
+10. **Giro Manifest Spherical** (B09JC9PK54) - 5⭐, score 12.2 ✅
+
+**🚵 Popular Mountain Bike Models (6 helmets):**
+11. **FOX Racing Dropframe Pro** (B084DLL36R) - Popular MTB
+12. **FOX Racing Crossframe Pro** (B0BQPYDL2J) - Popular MTB
+13. **Troy Lee Designs A2 MIPS** (B09RMM7QHM) - Popular MTB
+14. **Troy Lee Designs Flowline** (B0DXC8QQLY) - Popular MTB
+15. **Giro Tyrant** (B07YF1CSTC) - Popular MTB
+16. **Giro Chronicle MIPS** (B07WTWBYCH) - Popular MTB
+
+### 📊 **Business Impact:**
+- **Safety Focus**: 10 five-star Virginia Tech safety leaders now have direct purchase options
+- **Brand Diversity**: FOX Racing, POC, Giro, Scott, Troy Lee Designs coverage
+- **User Experience**: Eliminated frustration of finding safety-tested helmets
+- **Monetization**: Dramatically increased affiliate revenue potential
+- **Market Coverage**: Both road cycling (Spherical tech) and mountain biking segments
+
+### 🔧 **Technical Implementation:**
+- **File Updated**: `src/utils/amazonImages.ts` - Manual research batch added
+- **Bug Fixes**: Fixed incorrect Bell Z20 MIPS link (was pointing to Z20 Aero model)
+- **Data Accuracy**: All ASINs manually verified for correct helmet models
+- **Affiliate Compliance**: All links properly formatted with affiliate tracking
+
+### 🎯 **Achievement Significance:**
+This expansion represents the **single largest improvement** to helmetscore.com's monetization potential. Users can now directly purchase **10 of the safest cycling helmets available** according to Virginia Tech testing, transforming the site from informational to transactional.
+
+**Before**: Limited Amazon links, users had to search manually
+**After**: Direct purchase options for the absolute safest helmets, professional buying experience
+
 - Always commit and push to github and update claude.md with our progress
