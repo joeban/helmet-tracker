@@ -29,7 +29,20 @@ export function generateTestSearchData() {
   const session = {
     sessionId,
     startTime: Date.now() - (Math.random() * 3600000), // Within last hour
-    events: [] as any[],
+    events: [] as Array<{
+      type: string;
+      timestamp: number;
+      data: {
+        search_term: string;
+        result_count: number;
+        intent: {
+          category: string;
+          urgency: string;
+          specificity: string;
+        };
+        filters: Record<string, string> | {};
+      };
+    }>,
     userAgent: navigator.userAgent,
     referrer: document.referrer
   };

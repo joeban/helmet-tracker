@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import Link from 'next/link';
 import { HELMETS } from '@/data/helmets';
 import { Helmet } from '@/types/helmet';
 import ComparisonPageClient from './ComparisonPageClient';
@@ -40,9 +41,9 @@ export default function ComparePage({ searchParams }: ComparePageProps) {
             <nav className="flex" aria-label="Breadcrumb">
               <ol className="flex items-center space-x-2">
                 <li>
-                  <a href="/" className="text-gray-400 hover:text-gray-500">
+                  <Link href="/" className="text-gray-400 hover:text-gray-500">
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <svg className="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">

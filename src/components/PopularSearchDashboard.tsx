@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { generateConversionReport } from '@/utils/analytics';
-import { generateTestSearchData, clearTestSearchData } from '@/utils/searchAnalyticsTestData';
+import { generateTestSearchData } from '@/utils/searchAnalyticsTestData';
 
 interface SearchAnalytics {
   popular_searches: Array<{
@@ -32,6 +31,22 @@ interface SearchAnalytics {
     conversion_rate: number;
     total_value: number;
   }>;
+}
+
+interface SearchEvent {
+  term: string;
+  timestamp: number;
+  intent: string;
+  filters: Record<string, unknown>;
+  result_count: number;
+  sessionId?: string;
+}
+
+interface ConversionEvent {
+  sessionId: string;
+  helmetId: string;
+  timestamp: number;
+  value: number;
 }
 
 export default function PopularSearchDashboard() {
@@ -90,7 +105,7 @@ export default function PopularSearchDashboard() {
         <div className="flex items-center space-x-2">
           <select
             value={timeRange}
-            onChange={(e) => setTimeRange(e.target.value as any)}
+            onChange={(e) => setTimeRange(e.target.value as '1h' | '24h' | '7d' | '30d')}
             className="text-xs border border-gray-300 rounded px-2 py-1"
           >
             <option value="1h">Last Hour</option>
@@ -273,14 +288,8 @@ function generateSearchAnalytics(timeRange: '1h' | '24h' | '7d' | '30d'): Search
   };
 }
 
-function getStoredSearchData(cutoffTime: number) {
-  const searches: Array<{
-    term: string;
-    timestamp: number;
-    intent: string;
-    filters: Record<string, any>;
-    result_count: number;
-  }> = [];
+function getStoredSearchData(cutoffTime: number): SearchEvent[] {
+  const searches: SearchEvent[] = [];
 
   // Check for search events in analytics data
   for (let i = 0; i < localStorage.length; i++) {
@@ -292,8 +301,16 @@ function getStoredSearchData(cutoffTime: number) {
         // Extract search events from session data
         if (data.events) {
           data.events
-            .filter((event: any) => event.type === 'search' && event.timestamp > cutoffTime)
-            .forEach((event: any) => {
+            .filter((event: { type: string; timestamp: number }) => event.type === 'search' && event.timestamp > cutoffTime)
+            .forEach((event: {
+              data: {
+                search_term?: string;
+                intent?: { category?: string };
+                filters?: Record<string, unknown>;
+                result_count?: number
+              };
+              timestamp: number
+            }) => {
               searches.push({
                 term: event.data.search_term || '',
                 timestamp: event.timestamp,
@@ -312,13 +329,8 @@ function getStoredSearchData(cutoffTime: number) {
   return searches;
 }
 
-function getConversionData(cutoffTime: number) {
-  const conversions: Array<{
-    sessionId: string;
-    helmetId: string;
-    timestamp: number;
-    value: number;
-  }> = [];
+function getConversionData(cutoffTime: number): ConversionEvent[] {
+  const conversions: ConversionEvent[] = [];
 
   // Get attribution data
   try {
@@ -326,8 +338,8 @@ function getConversionData(cutoffTime: number) {
     if (attributions) {
       const data = JSON.parse(attributions);
       data
-        .filter((attr: any) => attr.clickTimestamp > cutoffTime)
-        .forEach((attr: any) => {
+        .filter((attr: { clickTimestamp: number }) => attr.clickTimestamp > cutoffTime)
+        .forEach((attr: { sessionId: string; helmetId: string; clickTimestamp: number; conversionValue?: number }) => {
           conversions.push({
             sessionId: attr.sessionId,
             helmetId: attr.helmetId,
@@ -343,7 +355,7 @@ function getConversionData(cutoffTime: number) {
   return conversions;
 }
 
-function getPopularSearches(searchData: Array<any>) {
+function getPopularSearches(searchData: SearchEvent[]) {
   const termCounts = searchData.reduce((acc, search) => {
     const term = search.term.toLowerCase();
     if (!acc[term]) {
@@ -356,10 +368,10 @@ function getPopularSearches(searchData: Array<any>) {
     acc[term].count += 1;
     acc[term].last_searched = Math.max(acc[term].last_searched, search.timestamp);
     return acc;
-  }, {} as Record<string, any>);
+  }, {} as Record<string, { count: number; intent: string; last_searched: number }>);
 
   return Object.entries(termCounts)
-    .map(([term, data]: [string, any]) => ({
+    .map(([term, data]: [string, { count: number; intent: string; last_searched: number }]) => ({
       term,
       count: data.count,
       intent: data.intent,
@@ -369,7 +381,7 @@ function getPopularSearches(searchData: Array<any>) {
     .slice(0, 20);
 }
 
-function getSearchTrends(searchData: Array<any>, timeRange: string) {
+function getSearchTrends(searchData: SearchEvent[], timeRange: string) {
   const groupBy = timeRange === '1h' ? 'hour' : timeRange === '24h' ? 'hour' : 'day';
   const trends: Record<string, { total_searches: number; unique_terms: Set<string> }> = {};
 
@@ -395,11 +407,11 @@ function getSearchTrends(searchData: Array<any>, timeRange: string) {
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 }
 
-function getFilterUsage(searchData: Array<any>) {
+function getFilterUsage(searchData: SearchEvent[]) {
   const filterCounts: Record<string, number> = {};
 
   searchData.forEach(search => {
-    Object.entries(search.filters || {}).forEach(([filterType, filterValue]) => {
+    Object.entries(search.filters || {}).forEach(([filterType, filterValue]: [string, unknown]) => {
       if (filterValue && filterValue !== '') {
         const key = `${filterType}-${filterValue}`;
         filterCounts[key] = (filterCounts[key] || 0) + 1;
@@ -416,8 +428,7 @@ function getFilterUsage(searchData: Array<any>) {
     .slice(0, 10);
 }
 
-function getConversionBySearch(searchData: Array<any>, conversionData: Array<any>) {
-  const searchSessions = new Set(searchData.map(s => s.sessionId).filter(Boolean));
+function getConversionBySearch(searchData: SearchEvent[], conversionData: ConversionEvent[]) {
   const conversionSessions = new Set(conversionData.map(c => c.sessionId));
 
   const termConversions: Record<string, { searches: number; conversions: number }> = {};
@@ -447,7 +458,7 @@ function getConversionBySearch(searchData: Array<any>, conversionData: Array<any
     .slice(0, 10);
 }
 
-function getTopConvertingTerms(searchData: Array<any>, conversionData: Array<any>) {
+function getTopConvertingTerms(searchData: SearchEvent[], conversionData: ConversionEvent[]) {
   const termValues: Record<string, { conversions: number; total_value: number; searches: number }> = {};
 
   searchData.forEach(search => {

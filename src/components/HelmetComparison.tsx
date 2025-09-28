@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Helmet } from '@/types/helmet';
 import {
   getStoredComparison,
   removeFromComparison,
@@ -173,7 +172,7 @@ export default function HelmetComparison({ isOpen, onClose }: HelmetComparisonPr
                   ].map(tab => (
                     <button
                       key={tab.key}
-                      onClick={() => setActiveTab(tab.key as any)}
+                      onClick={() => setActiveTab(tab.key as 'overview' | 'details' | 'charts')}
                       className={`py-4 px-1 border-b-2 font-medium text-sm ${
                         activeTab === tab.key
                           ? 'border-blue-500 text-blue-600'
