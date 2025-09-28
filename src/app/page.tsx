@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useMemo, useCallback, useEffect } from 'react';
+import Link from 'next/link';
 import { HELMETS } from '@/data/helmets';
 import { SortOption, CategoryFilter, BrandFilter } from '@/types/helmet';
 import HelmetImage from '@/components/HelmetImage';
 import { getHelmetAmazonInfo } from '@/utils/amazonImages';
+import { generateHelmetSlug } from '@/utils/helmet-slug';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -35,9 +37,11 @@ export default function Home() {
 
   const filteredAndSortedHelmets = useMemo(() => {
     const filtered = HELMETS.filter(helmet => {
-      const matchesSearch = helmet.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
-                           helmet.brand.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
-                           helmet.category.toLowerCase().includes(debouncedSearchTerm.toLowerCase());
+      const searchTerm = debouncedSearchTerm.toLowerCase().trim();
+      const matchesSearch = !searchTerm ||
+                           helmet.name.toLowerCase().includes(searchTerm) ||
+                           helmet.brand.toLowerCase().includes(searchTerm) ||
+                           helmet.category.toLowerCase().includes(searchTerm);
       const matchesCategory = !categoryFilter || helmet.category === categoryFilter;
       const matchesBrand = !brandFilter || helmet.brand === brandFilter;
       const matchesAvailability = !showAvailableOnly || helmet.available_count > 0;
@@ -377,8 +381,21 @@ export default function Home() {
 
             {/* Helmet Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
-          {filteredAndSortedHelmets.map((helmet) => (
-            <div key={helmet.id} className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-200 group">
+          {filteredAndSortedHelmets.map((helmet) => {
+            const helmetSlug = generateHelmetSlug(helmet.brand, helmet.name);
+
+            return (
+            <div key={helmet.id} className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-200 group relative">
+
+              {/* Link overlay for helmet details - excludes Amazon button area */}
+              <Link
+                href={`/helmet/${helmetSlug}`}
+                className="absolute inset-0 z-10"
+                style={{ bottom: '60px' }} // Excludes the Amazon button area
+              >
+                <span className="sr-only">View {helmet.brand} {helmet.name} details</span>
+              </Link>
+
               {/* Helmet Image */}
               <div className="h-40 lg:h-48 bg-slate-50 flex items-center justify-center overflow-hidden group-hover:bg-slate-100 transition-colors duration-200">
                 <HelmetImage
@@ -463,7 +480,7 @@ export default function Home() {
                 </div>
 
                 {/* Amazon Shopping Links */}
-                <div className="mt-3 lg:mt-4 space-y-2">
+                <div className="mt-3 lg:mt-4 space-y-2 relative z-20">
                   {(() => {
                     const amazonInfo = getHelmetAmazonInfo(helmet.brand, helmet.name);
 
@@ -517,7 +534,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
             </div>
 
             {/* No Results */}
