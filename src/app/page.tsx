@@ -187,7 +187,7 @@ export default function Home() {
             </h1>
 
             <p className="text-lg lg:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-              The only comprehensive database of Virginia Tech's independent safety ratings.
+              The only comprehensive database of Virginia Tech&apos;s independent safety ratings.
               Make informed decisions with real crash test data.
             </p>
 
