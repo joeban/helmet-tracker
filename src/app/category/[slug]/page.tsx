@@ -22,8 +22,9 @@ function getCategoryFromSlug(slug: string): string | null {
 }
 
 // Generate metadata for each category page
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const category = getCategoryFromSlug(params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const category = getCategoryFromSlug(slug)
 
   if (!category) {
     return {
@@ -63,13 +64,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description: `${categoryHelmets.length} ${category.toLowerCase()} helmets with Virginia Tech safety ratings`,
     },
     alternates: {
-      canonical: `https://helmetscore.com/category/${params.slug}`,
+      canonical: `https://helmetscore.com/category/${slug}`,
     },
   }
 }
 
-export default function CategoryPage({ params }: { params: { slug: string } }) {
-  const category = getCategoryFromSlug(params.slug)
+export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const category = getCategoryFromSlug(slug)
 
   if (!category) {
     notFound()
@@ -92,7 +94,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
     "@type": "CollectionPage",
     "name": `${category} Bike Helmets`,
     "description": `Comprehensive collection of ${category.toLowerCase()} bicycle helmets with Virginia Tech STAR safety ratings`,
-    "url": `https://helmetscore.com/category/${params.slug}`,
+    "url": `https://helmetscore.com/category/${slug}`,
     "mainEntity": {
       "@type": "ItemList",
       "numberOfItems": categoryHelmets.length,

@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: HelmetPageProps): Promise<Met
 
   const title = getHelmetDisplayTitle(helmet);
   const description = getHelmetSEODescription(helmet);
-  const canonicalUrl = `https://helmetscore.com/helmet/${params.slug}`;
+  const canonicalUrl = `https://helmetscore.com/helmet/${slug}`;
 
   return {
     title: `${title} - Safety Rating & Review | HelmetScore`,

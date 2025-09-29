@@ -16,11 +16,12 @@ export const metadata = {
 };
 
 interface ComparePageProps {
-  searchParams: { helmets?: string };
+  searchParams: Promise<{ helmets?: string }>;
 }
 
-function ComparisonPageContent({ searchParams }: ComparePageProps) {
-  const helmetsParam = searchParams.helmets;
+async function ComparisonPageContent({ searchParams }: ComparePageProps) {
+  const params = await searchParams;
+  const helmetsParam = params.helmets;
   let preselectedHelmets: Helmet[] = [];
 
   if (helmetsParam) {
@@ -31,7 +32,7 @@ function ComparisonPageContent({ searchParams }: ComparePageProps) {
   return <ComparisonPageClient preselectedHelmets={preselectedHelmets} allHelmets={HELMETS} />;
 }
 
-export default function ComparePage({ searchParams }: ComparePageProps) {
+export default async function ComparePage({ searchParams }: ComparePageProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Page Header */}
