@@ -87,7 +87,7 @@ function QuickPickCard({ helmet, rank, category }: QuickPickCardProps) {
             category={helmet.category}
             imageUrl={helmet.image_url}
             amazonUrl={amazonInfo}
-            size="sm"
+            className="w-full h-full object-contain"
             priority={rank <= 3}
           />
         </div>
