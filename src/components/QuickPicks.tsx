@@ -28,7 +28,7 @@ function QuickPickCard({ helmet, rank, category }: QuickPickCardProps) {
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition-all duration-200 group">
+    <div className="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition-all duration-200 group overflow-hidden">
       <div className="flex items-start gap-4">
         {/* Rank Badge */}
         <div className={`${getBadgeColor()} text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-base flex-shrink-0 shadow-md`}>
@@ -39,7 +39,7 @@ function QuickPickCard({ helmet, rank, category }: QuickPickCardProps) {
         <div className="flex-1 min-w-0">
           {/* Title and Rating */}
           <div className="mb-2">
-            <h4 className="font-semibold text-gray-800 text-base group-hover:text-blue-600 transition-colors">
+            <h4 className="font-semibold text-gray-800 text-base group-hover:text-blue-600 transition-colors truncate" title={`${helmet.brand} ${helmet.name}`}>
               {helmet.brand} {helmet.name}
             </h4>
             <div className="flex items-center gap-1.5 mt-1">
@@ -68,11 +68,11 @@ function QuickPickCard({ helmet, rank, category }: QuickPickCardProps) {
               helmet={helmet}
               testId={`quick_pick_${category}_amazon`}
               size="sm"
-              className="text-xs"
+              className="text-xs whitespace-nowrap"
             />
             <Link
               href={`/helmet/${helmetSlug}`}
-              className="flex items-center justify-center px-3 py-2 text-xs border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+              className="flex items-center justify-center px-2 py-2 text-xs border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium whitespace-nowrap"
             >
               View Details
             </Link>
