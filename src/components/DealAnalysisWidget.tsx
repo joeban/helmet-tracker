@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from '@/types/helmet';
 import { analyzeEnhancedDeals, DealAnalysis } from '@/utils/priceTracking';
-import PriceChart, { CompactPriceChart } from './PriceChart';
+import { CompactPriceChart } from './PriceChart';
 
 interface DealAnalysisWidgetProps {
   helmet: Helmet;
@@ -324,7 +324,7 @@ export function DealAlertSuggestion({ helmet }: { helmet: Helmet }) {
           <h4 className="text-sm font-medium text-blue-900">Price Alert Suggestion</h4>
           <p className="text-xs text-blue-700 mt-1">
             Set an alert for ${suggestedPrice} to catch a good deal on this helmet.
-            That's about 15% below the average price of ${analysis.averagePrice.toFixed(0)}.
+            That&apos;s about 15% below the average price of ${analysis.averagePrice.toFixed(0)}.
           </p>
           <button className="text-xs text-blue-600 hover:text-blue-800 mt-2 font-medium">
             Create Alert →

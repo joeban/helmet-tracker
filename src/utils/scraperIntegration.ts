@@ -213,7 +213,7 @@ export class ScraperIntegration {
    * Get scraping statistics for dashboard
    */
   getScrapingStats(helmets: Helmet[]) {
-    let totalHelmets = helmets.length;
+    const totalHelmets = helmets.length;
     let helmetsWithASINs = 0;
     let totalASINs = 0;
     let verifiedASINs = 0;

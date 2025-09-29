@@ -13,8 +13,14 @@ export default function ScraperDashboard({ className = '' }: ScraperDashboardPro
   const [integration] = useState(() => new ScraperIntegration());
   const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'plan' | 'import' | 'export'>('overview');
-  const [stats, setStats] = useState<any>(null);
-  const [scrapingPlan, setScrapingPlan] = useState<any[]>([]);
+  const [stats, setStats] = useState<{
+    totalHelmets: number;
+    helmetsWithASINs: number;
+    coveragePercentage: number;
+    scraperASINs: number;
+    needingScraping: number;
+  } | null>(null);
+  const [scrapingPlan, setScrapingPlan] = useState<{helmet: any; priority: number; reason: string}[]>([]);
   const [importData, setImportData] = useState('');
   const [importStatus, setImportStatus] = useState<string | null>(null);
 
@@ -70,10 +76,6 @@ export default function ScraperDashboard({ className = '' }: ScraperDashboardPro
     URL.revokeObjectURL(url);
   };
 
-  const generateCSVCommand = (helmets: Helmet[]) => {
-    const helmetIds = helmets.map(h => h.id).join(',');
-    return `node scripts/scrape-asins.js --limit ${helmets.length} --output scraping-results.json --helmet-ids ${helmetIds}`;
-  };
 
   if (!isVisible) {
     return (
@@ -116,7 +118,7 @@ export default function ScraperDashboard({ className = '' }: ScraperDashboardPro
         ].map(tab => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
+            onClick={() => setActiveTab(tab.id as 'overview' | 'plan' | 'import' | 'export')}
             className={`px-4 py-2 text-sm font-medium ${
               activeTab === tab.id
                 ? 'border-b-2 border-purple-500 text-purple-600'
