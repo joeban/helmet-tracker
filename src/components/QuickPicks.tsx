@@ -110,7 +110,7 @@ export default function QuickPicks() {
     .filter(h => h.min_price <= 150 && h.star_rating >= 4)
     .sort((a, b) => {
       // Sort by value ratio (safety per dollar), lower is better
-      const aValue = h.safety_score / h.min_price;
+      const aValue = a.safety_score / a.min_price;
       const bValue = b.safety_score / b.min_price;
       return aValue - bValue;
     })
