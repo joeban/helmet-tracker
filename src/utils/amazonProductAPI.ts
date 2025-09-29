@@ -5,13 +5,76 @@
  * Documentation: https://webservices.amazon.com/paapi5/documentation/
  */
 
-import crypto from 'crypto';
+import aws4 from 'aws4';
+
+// Type definitions for Amazon API responses
+interface AmazonItem {
+  ASIN: string;
+  ItemInfo?: {
+    Title?: {
+      DisplayValue?: string;
+    };
+    Features?: {
+      DisplayValues?: string[];
+    };
+    ProductInfo?: {
+      Color?: {
+        DisplayValue?: string;
+      };
+      Size?: {
+        DisplayValue?: string;
+      };
+    };
+  };
+  Images?: {
+    Primary?: {
+      Large?: {
+        URL?: string;
+      };
+    };
+  };
+  Offers?: {
+    Listings?: Array<{
+      Price?: {
+        Amount?: string;
+        Currency?: string;
+        DisplayAmount?: string;
+      };
+      Availability?: {
+        Message?: string;
+      };
+      DeliveryInfo?: {
+        IsPrimeEligible?: boolean;
+      };
+    }>;
+  };
+  CustomerReviews?: {
+    StarRating?: {
+      Value?: number;
+    };
+    Count?: number;
+  };
+  DetailPageURL?: string;
+}
+
+interface SearchItemsResponse {
+  SearchResult?: {
+    Items?: AmazonItem[];
+    TotalResultCount?: number;
+  };
+}
+
+interface GetItemsResponse {
+  ItemsResult?: {
+    Items?: AmazonItem[];
+  };
+}
 
 // API Configuration
 const API_CONFIG = {
   host: 'webservices.amazon.com',
   region: 'us-east-1',
-  endpoint: 'https://webservices.amazon.com/paapi5/searchitems',
+  service: 'ProductAdvertisingAPI',
   accessKey: process.env.AMAZON_ACCESS_KEY || '',
   secretKey: process.env.AMAZON_SECRET_KEY || '',
   partnerTag: process.env.NEXT_PUBLIC_AMAZON_AFFILIATE_TAG || 'helmetscore-20'
@@ -41,6 +104,53 @@ export interface SearchResult {
 }
 
 /**
+ * Make a signed request to Amazon PA-API
+ */
+async function makeSignedRequest(operation: string, payload: Record<string, unknown>): Promise<unknown> {
+  const endpoint = `https://${API_CONFIG.host}/paapi5/${operation.toLowerCase()}`;
+
+  // Prepare request
+  const request = {
+    host: API_CONFIG.host,
+    method: 'POST',
+    path: `/paapi5/${operation.toLowerCase()}`,
+    headers: {
+      'content-type': 'application/json; charset=utf-8',
+      'x-amz-target': `com.amazon.paapi5.v1.ProductAdvertisingAPIv1.${operation}`,
+      'content-encoding': 'amz-1.0'
+    },
+    body: JSON.stringify(payload),
+    service: API_CONFIG.service,
+    region: API_CONFIG.region
+  };
+
+  // Sign the request with AWS Signature Version 4
+  const signedRequest = aws4.sign(request, {
+    accessKeyId: API_CONFIG.accessKey,
+    secretAccessKey: API_CONFIG.secretKey
+  });
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: signedRequest.headers as HeadersInit,
+      body: signedRequest.body as string
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Amazon API Error (${response.status}):`, errorText);
+      throw new Error(`Amazon API request failed: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (err) {
+    console.error('Request failed:', err);
+    throw err;
+  }
+}
+
+/**
  * Search for products on Amazon
  * @param keywords - Search query (e.g., "Bell Z20 MIPS helmet")
  * @param options - Additional search options
@@ -64,7 +174,7 @@ export async function searchProducts(
       'ItemInfo.Title',
       'ItemInfo.Features',
       'Offers.Listings.Price',
-      'Offers.Listings.Availability',
+      'Offers.Listings.Availability.Message',
       'Offers.Listings.DeliveryInfo.IsPrimeEligible'
     ],
     ItemCount: maxResults,
@@ -75,21 +185,50 @@ export async function searchProducts(
   };
 
   // Add price filters if specified
+  type PayloadType = typeof payload & {
+    MinPrice?: number;
+    MaxPrice?: number;
+  };
+  const payloadWithPrice = payload as PayloadType;
   if (options.minPrice !== undefined) {
-    (payload as any).MinPrice = options.minPrice * 100; // Convert to cents
+    payloadWithPrice.MinPrice = options.minPrice * 100; // Convert to cents
   }
   if (options.maxPrice !== undefined) {
-    (payload as any).MaxPrice = options.maxPrice * 100; // Convert to cents
+    payloadWithPrice.MaxPrice = options.maxPrice * 100; // Convert to cents
   }
 
   try {
-    // TODO: Implement request signing (requires AWS Signature Version 4)
-    // For now, return mock data for development
-    console.warn('Amazon Product API not configured. Using mock data.');
+    if (!isAPIConfigured()) {
+      console.warn('Amazon Product API not configured. Using mock data.');
+      return getMockSearchResults(keywords);
+    }
+
+    const response = await makeSignedRequest('SearchItems', payload) as SearchItemsResponse;
+
+    // Parse response
+    const products: AmazonProduct[] = (response.SearchResult?.Items || []).map((item: AmazonItem) => ({
+      asin: item.ASIN,
+      title: item.ItemInfo?.Title?.DisplayValue || 'Unknown Product',
+      price: item.Offers?.Listings?.[0]?.Price ? {
+        amount: parseFloat(item.Offers.Listings[0].Price.Amount || '0'),
+        currency: item.Offers.Listings[0].Price.Currency || 'USD',
+        displayAmount: item.Offers.Listings[0].Price.DisplayAmount || ''
+      } : undefined,
+      imageUrl: item.Images?.Primary?.Large?.URL,
+      detailPageUrl: item.DetailPageURL || buildAffiliateLink(item.ASIN),
+      availability: item.Offers?.Listings?.[0]?.Availability?.Message,
+      isPrime: item.Offers?.Listings?.[0]?.DeliveryInfo?.IsPrimeEligible || false
+    }));
+
+    return {
+      products,
+      totalResults: response.SearchResult?.TotalResultCount || 0,
+      searchUrl: `https://www.amazon.com/s?k=${encodeURIComponent(keywords)}&tag=${API_CONFIG.partnerTag}`
+    };
+  } catch (err) {
+    console.error('Amazon Product API error:', err);
+    // Fallback to mock data if API fails
     return getMockSearchResults(keywords);
-  } catch (error) {
-    console.error('Amazon Product API error:', error);
-    throw new Error('Failed to search Amazon products');
   }
 }
 
@@ -106,7 +245,7 @@ export async function getProductByASIN(asin: string): Promise<AmazonProduct | nu
       'ItemInfo.Features',
       'ItemInfo.ProductInfo',
       'Offers.Listings.Price',
-      'Offers.Listings.Availability',
+      'Offers.Listings.Availability.Message',
       'Offers.Listings.DeliveryInfo.IsPrimeEligible',
       'CustomerReviews.StarRating',
       'CustomerReviews.Count'
@@ -117,12 +256,36 @@ export async function getProductByASIN(asin: string): Promise<AmazonProduct | nu
   };
 
   try {
-    // TODO: Implement request signing
-    console.warn('Amazon Product API not configured. Using mock data.');
+    if (!isAPIConfigured()) {
+      console.warn('Amazon Product API not configured. Using mock data.');
+      return getMockProductByASIN(asin);
+    }
+
+    const response = await makeSignedRequest('GetItems', payload) as GetItemsResponse;
+
+    if (!response.ItemsResult?.Items?.length) {
+      return null;
+    }
+
+    const item = response.ItemsResult.Items[0];
+    return {
+      asin: item.ASIN,
+      title: item.ItemInfo?.Title?.DisplayValue || 'Unknown Product',
+      price: item.Offers?.Listings?.[0]?.Price ? {
+        amount: parseFloat(item.Offers.Listings[0].Price.Amount || '0'),
+        currency: item.Offers.Listings[0].Price.Currency || 'USD',
+        displayAmount: item.Offers.Listings[0].Price.DisplayAmount || ''
+      } : undefined,
+      imageUrl: item.Images?.Primary?.Large?.URL,
+      detailPageUrl: item.DetailPageURL || buildAffiliateLink(item.ASIN),
+      availability: item.Offers?.Listings?.[0]?.Availability?.Message,
+      isPrime: item.Offers?.Listings?.[0]?.DeliveryInfo?.IsPrimeEligible || false,
+      rating: item.CustomerReviews?.StarRating?.Value,
+      reviewCount: item.CustomerReviews?.Count
+    };
+  } catch (err) {
+    console.error('Amazon Product API error:', err);
     return getMockProductByASIN(asin);
-  } catch (error) {
-    console.error('Amazon Product API error:', error);
-    return null;
   }
 }
 
@@ -142,7 +305,7 @@ export async function getProductsByASINs(asins: string[]): Promise<AmazonProduct
       'Images.Primary.Large',
       'ItemInfo.Title',
       'Offers.Listings.Price',
-      'Offers.Listings.Availability'
+      'Offers.Listings.Availability.Message'
     ],
     PartnerTag: API_CONFIG.partnerTag,
     PartnerType: 'Associates',
@@ -150,12 +313,29 @@ export async function getProductsByASINs(asins: string[]): Promise<AmazonProduct
   };
 
   try {
-    // TODO: Implement request signing
-    console.warn('Amazon Product API not configured. Using mock data.');
+    if (!isAPIConfigured()) {
+      console.warn('Amazon Product API not configured. Using mock data.');
+      return asins.map(asin => getMockProductByASIN(asin)).filter(Boolean) as AmazonProduct[];
+    }
+
+    const response = await makeSignedRequest('GetItems', payload) as GetItemsResponse;
+
+    return (response.ItemsResult?.Items || []).map((item: AmazonItem) => ({
+      asin: item.ASIN,
+      title: item.ItemInfo?.Title?.DisplayValue || 'Unknown Product',
+      price: item.Offers?.Listings?.[0]?.Price ? {
+        amount: parseFloat(item.Offers.Listings[0].Price.Amount || '0'),
+        currency: item.Offers.Listings[0].Price.Currency || 'USD',
+        displayAmount: item.Offers.Listings[0].Price.DisplayAmount || ''
+      } : undefined,
+      imageUrl: item.Images?.Primary?.Large?.URL,
+      detailPageUrl: item.DetailPageURL || buildAffiliateLink(item.ASIN),
+      availability: item.Offers?.Listings?.[0]?.Availability?.Message,
+      isPrime: item.Offers?.Listings?.[0]?.DeliveryInfo?.IsPrimeEligible || false
+    }));
+  } catch (err) {
+    console.error('Amazon Product API error:', err);
     return asins.map(asin => getMockProductByASIN(asin)).filter(Boolean) as AmazonProduct[];
-  } catch (error) {
-    console.error('Amazon Product API error:', error);
-    return [];
   }
 }
 
@@ -212,7 +392,8 @@ function getMockProductByASIN(asin: string): AmazonProduct {
  * Configuration check
  */
 export function isAPIConfigured(): boolean {
-  return !!(API_CONFIG.accessKey && API_CONFIG.secretKey);
+  return !!(API_CONFIG.accessKey && API_CONFIG.secretKey &&
+           API_CONFIG.accessKey !== 'YOUR_ACCESS_KEY_HERE');
 }
 
 /**
@@ -226,8 +407,8 @@ export function getAPIStatus(): {
 } {
   return {
     configured: isAPIConfigured(),
-    hasAccessKey: !!API_CONFIG.accessKey,
-    hasSecretKey: !!API_CONFIG.secretKey,
+    hasAccessKey: !!API_CONFIG.accessKey && API_CONFIG.accessKey !== 'YOUR_ACCESS_KEY_HERE',
+    hasSecretKey: !!API_CONFIG.secretKey && API_CONFIG.secretKey !== 'YOUR_SECRET_KEY_HERE',
     partnerTag: API_CONFIG.partnerTag
   };
 }

@@ -11,6 +11,7 @@
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
+    "aws4": "^1.13.2",
     "next": "15.5.4",
     "playwright": "^1.55.1",
     "react": "19.1.0",
@@ -19,11 +20,14 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/aws4": "^1.11.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.2.2",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
+    "node-fetch": "^3.3.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
