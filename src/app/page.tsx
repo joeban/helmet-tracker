@@ -149,69 +149,127 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <header className="bg-gradient-to-b from-slate-50 to-white border-b border-slate-200 py-4 lg:py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Navigation */}
-          <nav className="flex justify-end mb-4 lg:mb-6">
+      {/* Enhanced Hero Section */}
+      <header className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white overflow-hidden">
+        {/* Background pattern for visual interest */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.5'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundSize: '60px 60px'
+          }}></div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-12">
+          {/* Top Navigation */}
+          <nav className="flex justify-between items-center mb-8">
+            <div className="text-2xl font-bold">
+              Helmet<span className="text-blue-400">Score</span>
+            </div>
             <div className="flex gap-6 lg:gap-8">
-              <a
-                href="/about"
-                className="text-slate-600 hover:text-blue-600 font-medium transition-colors text-sm lg:text-base"
-              >
-                About
-              </a>
-              <a
-                href="/methodology"
-                className="text-slate-600 hover:text-blue-600 font-medium transition-colors text-sm lg:text-base"
-              >
-                Methodology
-              </a>
+              <a href="/compare" className="text-white/80 hover:text-white font-medium transition-colors text-sm lg:text-base">Compare</a>
+              <a href="/about" className="text-white/80 hover:text-white font-medium transition-colors text-sm lg:text-base">About</a>
+              <a href="/methodology" className="text-white/80 hover:text-white font-medium transition-colors text-sm lg:text-base">Methodology</a>
             </div>
           </nav>
 
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-slate-800 mb-2 lg:mb-4 tracking-wide leading-tight">
-              Helmet<span className="text-blue-600 font-light">Score</span>
-            </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-slate-700 font-semibold mb-2 lg:mb-3 leading-tight">Find the Safest Bike Helmet for Your Life</p>
-            <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium mb-4 lg:mb-6 max-w-3xl mx-auto">The only site with complete Virginia Tech safety test results for 281+ helmets.</p>
+          <div className="text-center max-w-5xl mx-auto">
+            {/* Trust Badge */}
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20">
+              <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <span className="text-sm font-medium">281+ Helmets Tested by Virginia Tech</span>
+            </div>
 
-            {/* Safety Score Explainer */}
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 lg:p-5 mb-4 lg:mb-6 max-w-3xl mx-auto border border-green-100">
-              <div className="mb-2 lg:mb-3">
-                <span className="text-sm lg:text-base font-semibold text-slate-700">Virginia Tech Safety Ratings:</span>
-              </div>
-              <div className="flex flex-col sm:flex-row justify-between items-center gap-2 lg:gap-4 text-xs lg:text-sm">
-                <span className="text-green-700 font-semibold">★★★★★ or ★★★★☆ = VT Recommended</span>
-                <span className="text-yellow-600 font-semibold">★★★☆☆ or lower = Not Recommended</span>
-              </div>
-              <div className="mt-2 lg:mt-3 text-xs lg:text-sm text-slate-600 font-medium">
-                Virginia Tech recommends any helmet with 4 or 5 stars for optimal protection
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+              Find the Safest Bike Helmet
+              <span className="block text-3xl sm:text-4xl lg:text-5xl text-blue-400 mt-2">Based on Scientific Testing</span>
+            </h1>
+
+            <p className="text-lg lg:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+              The only comprehensive database of Virginia Tech's independent safety ratings.
+              Make informed decisions with real crash test data.
+            </p>
+
+            {/* Search Bar */}
+            <div className="max-w-2xl mx-auto mb-8">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search by brand, model, or category..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full px-6 py-4 pr-12 text-lg rounded-xl text-gray-900 placeholder-gray-500 bg-white shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400/50"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && searchTerm) {
+                      const resultsSection = document.querySelector('main');
+                      if (resultsSection) {
+                        resultsSection.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }
+                  }}
+                />
+                <button
+                  onClick={() => {
+                    if (searchTerm) {
+                      const resultsSection = document.querySelector('main');
+                      if (resultsSection) {
+                        resultsSection.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }
+                  }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </button>
               </div>
             </div>
 
-            {/* Quick Action Buttons */}
-            <div className="flex flex-col sm:flex-row justify-center gap-3 lg:gap-4">
+            {/* Quick Stats */}
+            <div className="grid grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                <div className="text-3xl font-bold text-white">281+</div>
+                <div className="text-sm text-white/80">Helmets Tested</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                <div className="text-3xl font-bold text-green-400">124</div>
+                <div className="text-sm text-white/80">5-Star Rated</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                <div className="text-3xl font-bold text-blue-400">$45+</div>
+                <div className="text-sm text-white/80">Starting Price</div>
+              </div>
+            </div>
+
+            {/* Primary CTAs */}
+            <div className="flex flex-col sm:flex-row justify-center gap-3 lg:gap-4 mb-6">
               <button
                 onClick={() => {
                   setSortBy('rating');
-                  // Scroll to results section
                   const resultsSection = document.querySelector('main');
                   if (resultsSection) {
                     resultsSection.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className="bg-blue-600 text-white px-5 sm:px-6 lg:px-8 py-2.5 lg:py-3 rounded-lg hover:bg-blue-700 active:bg-blue-800 transition-all duration-200 font-semibold text-sm lg:text-base shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                className="bg-white text-slate-900 px-6 lg:px-8 py-3 lg:py-4 rounded-xl hover:bg-gray-100 transition-all duration-200 font-semibold text-base lg:text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5"
               >
-                Browse VT Recommended Helmets
+                Browse All Helmets
               </button>
               <a
-                href="/methodology"
-                className="bg-slate-200 text-slate-700 px-5 sm:px-6 lg:px-8 py-2.5 lg:py-3 rounded-lg hover:bg-slate-300 active:bg-slate-400 transition-all duration-200 font-semibold text-sm lg:text-base shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+                href="/compare"
+                className="bg-blue-500/20 backdrop-blur-sm text-white border border-white/30 px-6 lg:px-8 py-3 lg:py-4 rounded-xl hover:bg-blue-500/30 transition-all duration-200 font-semibold text-base lg:text-lg"
               >
-                Learn About Safety Testing
+                Compare Helmets
               </a>
+            </div>
+
+            {/* Rating Legend - Simplified */}
+            <div className="text-sm text-white/80">
+              <span className="inline-flex items-center gap-2">
+                <span className="text-yellow-400">★★★★+</span> = Virginia Tech Recommended
+              </span>
             </div>
           </div>
         </div>
