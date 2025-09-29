@@ -17,8 +17,8 @@ const helmetsData = require('../src/data/helmets.ts');
 // Configuration
 const PROGRESS_FILE = path.join(__dirname, '../data/asin-discovery-progress.json');
 const ASIN_MAP_FILE = path.join(__dirname, '../data/helmet-asin-map.json');
-const DELAY_BETWEEN_SEARCHES = 2000; // 2 seconds
-const MAX_SEARCHES_PER_SESSION = 1; // Test with just 1 helmet for now
+const DELAY_BETWEEN_SEARCHES = 10000; // 10 seconds - ultra safe for 1 TPS limit
+const MAX_SEARCHES_PER_SESSION = 360; // 360 per hour stays well under daily limit
 
 // Load or initialize progress
 async function loadProgress() {

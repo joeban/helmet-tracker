@@ -16,7 +16,7 @@ import { AddToComparisonButton } from '@/components/ComparisonWidget';
 import AmazonButton from '@/components/AmazonButton';
 import HelmetRecommendationWizard from '@/components/HelmetRecommendationWizard';
 import SocialProofBadge, { UrgencyMessage } from '@/components/SocialProofBadge';
-import TopHelmetSections from '@/components/TopHelmetSections';
+import QuickPicks from '@/components/QuickPicks';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -222,14 +222,14 @@ export default function Home() {
         <HelmetRecommendationWizard />
       </div>
 
-      {/* Top Helmet Sections */}
+      {/* Quick Picks - Refined to 2 Key Options */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <TopHelmetSections />
+        <QuickPicks />
       </div>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-8">
-        <div className="flex gap-4 lg:gap-6">
+        <div className="flex gap-4 lg:gap-6" id="filter-section">
           {/* Desktop Sidebar - Filters */}
           <aside className="hidden lg:block w-72 xl:w-80 flex-shrink-0">
             <div className="bg-white rounded-xl shadow-md border border-slate-200 p-4 lg:p-6 sticky top-4 max-h-[calc(100vh-4rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
