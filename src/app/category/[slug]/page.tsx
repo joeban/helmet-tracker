@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `${category} Bike Helmets - Safety Ratings & Reviews`,
       description: `Compare ${categoryHelmets.length} ${category.toLowerCase()} bike helmets with Virginia Tech STAR safety ratings. Find the safest ${category.toLowerCase()} helmet for your rides.`,
-      url: `https://helmetscore.com/category/${params.slug}`,
+      url: `https://helmetscore.com/category/${slug}`,
       type: 'website',
     },
     twitter: {
@@ -143,7 +143,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           "@type": "ListItem",
           "position": 3,
           "name": category,
-          "item": `https://helmetscore.com/category/${params.slug}`
+          "item": `https://helmetscore.com/category/${slug}`
         }
       ]
     }
