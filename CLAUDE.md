@@ -899,3 +899,128 @@ This ASIN database integration represents a **major monetization enhancement** f
 **Coverage Goal Achieved:** Successfully converted 15% of helmet inventory to direct purchase links, establishing foundation for continued expansion and affiliate revenue growth.
 
 - Always commit and push to github and update claude.md with our progress
+
+## 🏪 AMAZON PRODUCT ADVERTISING API INTEGRATION (September 2025)
+
+### ✅ **COMPLETE ARCHITECTURAL TRANSFORMATION** - From Scraping to PA-API
+
+**📅 Date:** September 28, 2025
+**🎯 Impact:** Removed 60KB+ of over-engineered scraping code, implemented clean API solution
+**⚡ Result:** Professional Amazon integration with rate limiting mitigation
+
+#### **🧹 Massive Simplification Achieved:**
+
+**Removed Systems (60KB+ of complexity):**
+- ❌ `src/utils/amazonScraper.ts` - Complex browser automation (19KB)
+- ❌ `src/utils/scraperIntegration.ts` - Unnecessary orchestration layer
+- ❌ `src/utils/priceTracking.ts` - Over-engineered price monitoring
+- ❌ `src/utils/bulkASINDiscovery.ts` - Unreliable scraping attempts
+- ❌ `src/components/ScraperDashboard.tsx` - Complex management UI
+- ❌ Multiple price tracking components - Unnecessary for MVP
+
+**Assessment:** "This looks like using a Boeing 747 to cross the street" - Complete over-engineering for a simple data display site.
+
+#### **📊 Amazon PA-API 5.0 Implementation:**
+
+**Core Integration:**
+- ✅ **AWS Signature V4** - Proper request signing with aws4 library
+- ✅ **PA-API 5.0 Endpoints** - GetItems and SearchItems operations
+- ✅ **Rate Limiting Strategy** - 1-hour cache, 1.5s delays between requests
+- ✅ **Error Handling** - Graceful 429 rate limit management
+
+**Technical Implementation:**
+```typescript
+// src/utils/amazonProductAPI.ts
+const API_CONFIG = {
+  accessKey: process.env.AMAZON_ACCESS_KEY!,
+  secretKey: process.env.AMAZON_SECRET_KEY!,
+  partnerTag: 'helmetscore-20',
+  host: 'webservices.amazon.com',
+  region: 'us-east-1'
+};
+
+// AWS4 signing for authenticated requests
+const signedRequest = aws4.sign(request, {
+  accessKeyId: API_CONFIG.accessKey,
+  secretAccessKey: API_CONFIG.secretKey
+});
+```
+
+#### **🚨 Critical Discovery: Severe Rate Limiting**
+
+**Problem:** Amazon PA-API has extremely strict rate limits
+- Initial attempts: Continuous 429 errors after just 3-5 requests
+- Rate limit: Approximately 1 request per second maximum
+- Recovery time: Several hours after hitting limits
+
+**User Decision:** "Since we're so easily rate limited, should we remove the ability of the site to access the amazon api on the public side, and instead just use it here locally?"
+
+#### **🏗️ Architectural Pivot: Local-Only API Usage**
+
+**New Architecture:**
+1. **Local Update Script** (`scripts/update-amazon-data.js`)
+   - Runs manually via `npm run update-amazon`
+   - Fetches product data with 1.5s delays
+   - Saves to static cache files
+
+2. **Static Data Serving** (`src/data/amazonProductCache.ts`)
+   - Pre-cached product information
+   - No public API calls
+   - Zero rate limiting risk
+
+3. **Static Components** (`src/components/StaticAmazonInfo.tsx`)
+   - Display cached data only
+   - Direct ASIN links where available
+   - Search fallbacks for missing ASINs
+
+**Result:** Professional Amazon integration without rate limiting exposure
+
+#### **📋 Current ASIN Coverage:**
+
+**43 ASINs Manually Collected:**
+- Giro: SYNTAX MIPS, AETHER SPHERICAL, SYNTHE MIPS, etc.
+- Smith: SIGNAL MIPS, ROUTE MIPS, PERSIST MIPS
+- Bell: Z20 MIPS, DRAFT MIPS
+- POC: VENTRAL AIR MIPS, CYTAL, OCTAL X SPIN
+- Fox Racing: SPEEDFRAME PRO/RS, DROPFRAME PRO, CROSSFRAME PRO
+- Troy Lee Designs: A2 MIPS, FLOWLINE
+- And more...
+
+#### **🔧 Implementation Files:**
+
+**Created:**
+- ✅ `src/utils/amazonProductAPI.ts` - Core PA-API integration
+- ✅ `scripts/update-amazon-data.js` - Local data update script
+- ✅ `scripts/fetch-amazon-asins.js` - ASIN discovery helper
+- ✅ `src/data/amazonProductCache.ts` - Static data storage
+- ✅ `src/components/StaticAmazonInfo.tsx` - Static display component
+
+**Modified:**
+- ✅ `src/components/HelmetGrid.tsx` - Replaced dynamic with static components
+- ✅ `src/app/api/helmet-price/route.ts` - Disabled public API (returns 503)
+
+#### **📈 Business Benefits:**
+
+**Reliability:**
+- No rate limiting errors for users
+- Consistent performance
+- No API key exposure
+
+**Cost Control:**
+- API calls only during controlled local updates
+- Predictable API usage
+- No surprise overages
+
+**User Experience:**
+- Instant page loads (no API waiting)
+- Always available data
+- Professional presentation
+
+#### **🚀 Future Roadmap:**
+
+1. **Expand ASIN Collection** - Continue adding ASINs as rate limits allow
+2. **Automate Updates** - Scheduled local updates (daily/weekly)
+3. **Multi-Marketplace** - Add other affiliate programs as approved
+4. **Price Tracking** - Historical data from cached updates
+
+**Achievement:** Successfully transformed from an over-engineered scraping system to a clean, professional Amazon PA-API integration with intelligent rate limiting mitigation through local-only updates.
