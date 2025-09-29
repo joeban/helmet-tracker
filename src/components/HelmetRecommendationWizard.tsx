@@ -63,13 +63,13 @@ const WIZARD_STEPS: WizardStep[] = [
     options: [
       {
         id: 'budget',
-        label: '💰 Budget ($30-80)',
+        label: '💰 Budget ($30-100)',
         value: 'budget',
         description: 'Great value, solid protection'
       },
       {
         id: 'mid',
-        label: '💎 Mid-Range ($80-150)',
+        label: '💎 Mid-Range ($60-200)',
         value: 'mid',
         description: 'Best balance of features & safety'
       },
@@ -126,41 +126,71 @@ export default function HelmetRecommendationWizard() {
   };
 
   const generateRecommendations = (prefs: UserPreferences) => {
+    console.log('🔍 Generating recommendations with preferences:', prefs);
     let filtered = [...HELMETS];
+    console.log('📊 Starting with', filtered.length, 'helmets');
 
-    // Filter by budget
+    // Filter by budget - more flexible ranges
     if (prefs.budget === 'budget') {
-      filtered = filtered.filter(h => h.min_price <= 80);
+      filtered = filtered.filter(h => h.min_price <= 100); // Increased from 80
     } else if (prefs.budget === 'mid') {
-      filtered = filtered.filter(h => h.min_price >= 80 && h.min_price <= 150);
+      filtered = filtered.filter(h => h.min_price >= 60 && h.min_price <= 200); // More flexible range
     } else if (prefs.budget === 'premium') {
       filtered = filtered.filter(h => h.min_price >= 150);
     }
+    console.log('💰 After budget filter:', filtered.length, 'helmets');
 
-    // Filter by safety priority
+    // Filter by safety priority - more flexible
     if (prefs.safetyPriority === 'maximum') {
-      filtered = filtered.filter(h => h.star_rating === 5);
+      filtered = filtered.filter(h => h.star_rating >= 4 && h.safety_score <= 12); // More inclusive
     } else if (prefs.safetyPriority === 'balanced') {
-      filtered = filtered.filter(h => h.star_rating >= 4);
+      filtered = filtered.filter(h => h.star_rating >= 3); // More inclusive
     }
+    // For 'basic', don't filter by safety
+    console.log('🛡️ After safety filter:', filtered.length, 'helmets');
 
-    // Filter by riding style (category matching)
+    // Filter by riding style (category matching) - more flexible
     if (prefs.ridingStyle === 'road') {
-      filtered = filtered.filter(h => h.category === 'Road');
+      filtered = filtered.filter(h => h.category === 'Road' || h.category === 'Multi-sport');
     } else if (prefs.ridingStyle === 'mountain') {
-      filtered = filtered.filter(h => h.category === 'All Mountain');
+      filtered = filtered.filter(h => h.category === 'All Mountain' || h.category === 'Multi-sport');
     } else if (prefs.ridingStyle === 'commuting') {
-      filtered = filtered.filter(h => h.category === 'Urban' || h.category === 'Multi-sport');
+      filtered = filtered.filter(h => h.category === 'Urban' || h.category === 'Multi-sport' || h.category === 'Road');
     }
+    // For 'casual', include all categories
+    console.log('🚴 After riding style filter:', filtered.length, 'helmets');
 
-    // Sort by best value (safety score and price)
-    filtered.sort((a, b) => {
-      const aScore = (6 - a.star_rating) + (a.safety_score / 5); // Lower is better
-      const bScore = (6 - b.star_rating) + (b.safety_score / 5);
-      return aScore - bScore;
-    });
+    // If we have very few results, be more flexible
+    if (filtered.length < 3) {
+      console.log('⚠️ Too few results, relaxing filters...');
+      filtered = [...HELMETS];
+
+      // Apply only budget filter if specified
+      if (prefs.budget === 'budget') {
+        filtered = filtered.filter(h => h.min_price <= 120);
+      } else if (prefs.budget === 'premium') {
+        filtered = filtered.filter(h => h.min_price >= 100);
+      }
+
+      // Prefer higher rated helmets but don't exclude others
+      filtered.sort((a, b) => {
+        const aScore = (5 - a.star_rating) * 2 + (a.safety_score / 10); // Prioritize rating
+        const bScore = (5 - b.star_rating) * 2 + (b.safety_score / 10);
+        return aScore - bScore;
+      });
+    } else {
+      // Sort by best value (safety score and price)
+      filtered.sort((a, b) => {
+        const aScore = (6 - a.star_rating) + (a.safety_score / 5); // Lower is better
+        const bScore = (6 - b.star_rating) + (b.safety_score / 5);
+        return aScore - bScore;
+      });
+    }
 
     const topRecommendations = filtered.slice(0, 3);
+    console.log('✅ Final recommendations:', topRecommendations.length, 'helmets');
+    console.log('🏆 Recommended helmets:', topRecommendations.map(h => `${h.brand} ${h.name} ($${h.min_price})`));
+
     setRecommendations(topRecommendations);
     setIsComplete(true);
 
