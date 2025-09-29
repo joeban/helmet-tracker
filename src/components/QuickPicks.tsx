@@ -28,37 +28,37 @@ function QuickPickCard({ helmet, rank, category }: QuickPickCardProps) {
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-lg transition-all duration-200 group">
-      <div className="flex items-start gap-4">
+    <div className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-200 group">
+      <div className="flex items-start gap-3">
         {/* Rank Badge */}
-        <div className={`${getBadgeColor()} text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 shadow-md`}>
+        <div className={`${getBadgeColor()} text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-sm`}>
           {rank}
         </div>
 
         {/* Content */}
         <div className="flex-1 min-w-0">
           {/* Title and Rating */}
-          <div className="mb-2">
-            <h4 className="font-bold text-gray-800 text-base group-hover:text-blue-600 transition-colors">
+          <div className="mb-1.5">
+            <h4 className="font-semibold text-gray-800 text-sm group-hover:text-blue-600 transition-colors">
               {helmet.brand} {helmet.name}
             </h4>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="text-yellow-500">
+            <div className="flex items-center gap-1.5 mt-0.5">
+              <span className="text-yellow-500 text-sm">
                 {'★'.repeat(helmet.star_rating)}{'☆'.repeat(5 - helmet.star_rating)}
               </span>
-              <span className="text-xs text-gray-600">({helmet.star_rating}/5)</span>
+              <span className="text-xs text-gray-500">({helmet.star_rating}/5)</span>
             </div>
           </div>
 
           {/* Safety Score and Price */}
-          <div className="grid grid-cols-2 gap-2 mb-3">
-            <div className="bg-green-50 px-2 py-1 rounded">
-              <div className="text-xs text-gray-600">Safety Score</div>
-              <div className="font-bold text-green-700">{helmet.safety_score}</div>
+          <div className="grid grid-cols-2 gap-1.5 mb-2">
+            <div className="bg-green-50 px-1.5 py-0.5 rounded">
+              <div className="text-xs text-gray-600">Safety</div>
+              <div className="font-bold text-green-700 text-sm">{helmet.safety_score}</div>
             </div>
-            <div className="bg-blue-50 px-2 py-1 rounded">
+            <div className="bg-blue-50 px-1.5 py-0.5 rounded">
               <div className="text-xs text-gray-600">Price</div>
-              <div className="font-bold text-blue-700">${helmet.min_price}</div>
+              <div className="font-bold text-blue-700 text-sm">${helmet.min_price}</div>
             </div>
           </div>
 
@@ -128,40 +128,27 @@ export default function QuickPicks() {
   };
 
   return (
-    <div className="mb-12">
-      {/* Header */}
-      <div className="text-center mb-8">
-        <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-3">
-          🎯 Quick Picks for Smart Shoppers
-        </h2>
-        <p className="text-gray-600 max-w-3xl mx-auto text-lg">
-          Skip hours of research. We've analyzed all 281 helmets to bring you the two choices that matter most.
-        </p>
-      </div>
-
-      {/* Two Main Quick Pick Sections */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="mb-8">
+      {/* Two Main Quick Pick Sections - No header needed */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top Safety Picks */}
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 lg:p-8 shadow-md">
-          <div className="mb-6">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="text-3xl">🛡️</div>
-              <h3 className="text-2xl font-bold text-gray-800">Top Safety Picks</h3>
-            </div>
-            <p className="text-gray-600">
-              The absolute safest helmets money can buy. All 5-star rated with the lowest injury risk scores.
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 lg:p-6 shadow-sm">
+          <div className="mb-4">
+            <h3 className="text-xl font-bold text-gray-800 mb-2">Top Safety Picks</h3>
+            <p className="text-sm text-gray-600">
+              The absolute safest helmets. All 5-star rated with lowest injury risk.
             </p>
-            <div className="mt-3 flex items-center gap-4 text-sm">
-              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full font-medium">
+            <div className="mt-2 flex items-center gap-3 text-xs">
+              <span className="bg-green-100 text-green-800 px-2 py-0.5 rounded-full font-medium">
                 5-Star Only
               </span>
               <span className="text-gray-500">
-                Avg. Safety Score: {(topSafetyPicks.slice(0, 5).reduce((sum, h) => sum + h.safety_score, 0) / 5).toFixed(1)}
+                Avg Score: {(topSafetyPicks.slice(0, 5).reduce((sum, h) => sum + h.safety_score, 0) / 5).toFixed(1)}
               </span>
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {topSafetyPicks.slice(0, getDisplayCount('safety')).map((helmet, index) => (
               <QuickPickCard
                 key={helmet.id}
@@ -187,26 +174,23 @@ export default function QuickPicks() {
         </div>
 
         {/* Best Value Under $150 */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 lg:p-8 shadow-md">
-          <div className="mb-6">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="text-3xl">💎</div>
-              <h3 className="text-2xl font-bold text-gray-800">Best Value Under $150</h3>
-            </div>
-            <p className="text-gray-600">
-              Maximum safety on a budget. 4+ star helmets that won't break the bank.
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 lg:p-6 shadow-sm">
+          <div className="mb-4">
+            <h3 className="text-xl font-bold text-gray-800 mb-2">Best Value Under $150</h3>
+            <p className="text-sm text-gray-600">
+              Maximum safety on a budget. 4+ star helmets under $150.
             </p>
-            <div className="mt-3 flex items-center gap-4 text-sm">
-              <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">
+            <div className="mt-2 flex items-center gap-3 text-xs">
+              <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-medium">
                 Max $150
               </span>
               <span className="text-gray-500">
-                Avg. Price: ${Math.round(bestValuePicks.slice(0, 5).reduce((sum, h) => sum + h.min_price, 0) / 5)}
+                Avg Price: ${Math.round(bestValuePicks.slice(0, 5).reduce((sum, h) => sum + h.min_price, 0) / 5)}
               </span>
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {bestValuePicks.slice(0, getDisplayCount('value')).map((helmet, index) => (
               <QuickPickCard
                 key={helmet.id}
@@ -229,24 +213,6 @@ export default function QuickPicks() {
               )}
             </button>
           </div>
-        </div>
-      </div>
-
-      {/* Call to Action */}
-      <div className="mt-8 text-center bg-gray-50 rounded-xl p-6">
-        <p className="text-gray-600 mb-3">
-          Still not sure? Use our filters below to find the perfect helmet for your specific needs.
-        </p>
-        <div className="flex justify-center gap-4">
-          <button
-            onClick={() => {
-              const filterSection = document.getElementById('filter-section');
-              filterSection?.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors font-medium"
-          >
-            Browse All 281 Helmets
-          </button>
         </div>
       </div>
     </div>
