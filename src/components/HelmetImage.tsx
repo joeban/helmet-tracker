@@ -105,40 +105,13 @@ export default function HelmetImage({
     );
   }
 
-  // Professional fallback display
+  // Professional fallback display - simplified for small containers
   return (
-    <div ref={imgRef} className="relative w-full h-full bg-white border border-slate-300 rounded-lg shadow-sm flex flex-col items-center justify-center p-5">
-      {/* Clean geometric placeholder */}
-      <div className="w-14 h-14 border-2 border-slate-400 rounded-lg mb-4 flex items-center justify-center bg-slate-50">
-        <div className="w-7 h-7 bg-slate-300 rounded-md"></div>
+    <div ref={imgRef} className="relative w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center overflow-hidden">
+      {/* Simple icon for small spaces */}
+      <div className="w-8 h-8 border-2 border-slate-400 rounded-lg flex items-center justify-center bg-white/80">
+        <div className="w-4 h-4 bg-slate-400 rounded"></div>
       </div>
-
-      {/* Brand and model info */}
-      <div className="text-center">
-        <div className="text-sm font-bold text-slate-800 mb-1 uppercase tracking-wider">{brand}</div>
-        <div className="text-xs text-slate-600 font-medium leading-tight">{name}</div>
-        <div className="text-xs text-slate-500 mt-1">{category}</div>
-      </div>
-
-      {/* Amazon link indicator if available */}
-      {amazonUrl && (
-        <div className="absolute top-3 right-3">
-          <div className="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded-md border border-blue-200 font-medium">
-            Available
-          </div>
-        </div>
-      )}
-
-      {/* Click overlay for Amazon links */}
-      {amazonUrl && (
-        <a
-          href={amazonUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute inset-0 z-10 hover:bg-blue-50 hover:bg-opacity-20 transition-colors rounded-lg"
-          aria-label={`View ${brand} ${name} on Amazon`}
-        />
-      )}
     </div>
   );
 }
