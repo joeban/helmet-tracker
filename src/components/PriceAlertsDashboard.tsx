@@ -254,7 +254,7 @@ export default function PriceAlertsDashboard({
               <div className="text-center py-8 text-gray-500">
                 <div className="text-4xl mb-2">🔔</div>
                 <p>No price alerts created yet</p>
-                <p className="text-sm">Click "Create Alert" to get started</p>
+                <p className="text-sm">Click &quot;Create Alert&quot; to get started</p>
               </div>
             ) : (
               alerts.map(alert => {
@@ -413,7 +413,7 @@ export default function PriceAlertsDashboard({
               <div className="text-center py-8 text-gray-500">
                 <div className="text-4xl mb-2">💰</div>
                 <p>No deals analyzed yet</p>
-                <p className="text-sm">Click "Find Deals" to analyze current helmet prices</p>
+                <p className="text-sm">Click &quot;Find Deals&quot; to analyze current helmet prices</p>
               </div>
             ) : (
               deals.map(deal => {
@@ -563,7 +563,7 @@ export default function PriceAlertsDashboard({
                 </label>
                 <select
                   value={notificationMethod}
-                  onChange={(e) => setNotificationMethod(e.target.value as any)}
+                  onChange={(e) => setNotificationMethod(e.target.value as 'browser' | 'email' | 'both')}
                   className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="browser">Browser Notification</option>

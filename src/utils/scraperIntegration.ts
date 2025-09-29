@@ -196,13 +196,13 @@ export class ScraperIntegration {
     const metadata = {
       exportedAt: new Date().toISOString(),
       totalHelmets: Object.keys(parsed).length,
-      helmetsWithASINs: Object.values(parsed).filter((asins: any) => asins.length > 0).length,
-      totalASINs: Object.values(parsed).reduce((sum: number, asins: any) => sum + asins.length, 0),
-      verifiedASINs: Object.values(parsed).reduce((sum: number, asins: any) => {
-        return sum + asins.filter((asin: any) => asin.verified).length;
+      helmetsWithASINs: Object.values(parsed).filter((asins) => Array.isArray(asins) && asins.length > 0).length,
+      totalASINs: Object.values(parsed).reduce((sum: number, asins) => sum + (Array.isArray(asins) ? asins.length : 0), 0),
+      verifiedASINs: Object.values(parsed).reduce((sum: number, asins) => {
+        return sum + (Array.isArray(asins) ? asins.filter((asin) => asin && asin.verified).length : 0);
       }, 0),
-      scraperGenerated: Object.values(parsed).reduce((sum: number, asins: any) => {
-        return sum + asins.filter((asin: any) => asin.source === 'scraper').length;
+      scraperGenerated: Object.values(parsed).reduce((sum: number, asins) => {
+        return sum + (Array.isArray(asins) ? asins.filter((asin) => asin && asin.source === 'scraper').length : 0);
       }, 0)
     };
 

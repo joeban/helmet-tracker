@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Helmet } from '@/types/helmet';
-import { getStoredPriceHistory, PriceHistory } from '@/utils/priceTracking';
+import { getStoredPriceHistory } from '@/utils/priceTracking';
 
 interface PriceChartProps {
   helmet: Helmet;

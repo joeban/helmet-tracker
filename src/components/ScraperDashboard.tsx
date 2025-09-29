@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { HELMETS } from '@/data/helmets';
-import { Helmet } from '@/types/helmet';
 import { ScraperIntegration } from '@/utils/scraperIntegration';
 
 interface ScraperDashboardProps {
@@ -20,7 +19,7 @@ export default function ScraperDashboard({ className = '' }: ScraperDashboardPro
     scraperASINs: number;
     needingScraping: number;
   } | null>(null);
-  const [scrapingPlan, setScrapingPlan] = useState<{helmet: any; priority: number; reason: string}[]>([]);
+  const [scrapingPlan, setScrapingPlan] = useState<{helmet: {id: number; brand: string; name: string}; priority: number; reason: string}[]>([]);
   const [importData, setImportData] = useState('');
   const [importStatus, setImportStatus] = useState<string | null>(null);
 
