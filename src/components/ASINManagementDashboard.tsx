@@ -5,13 +5,11 @@ import { HELMETS } from '@/data/helmets';
 import { Helmet } from '@/types/helmet';
 import {
   ASINDiscoveryManager,
-  ASINCandidate,
   generateSearchQueries,
-  isValidASIN,
   extractASINFromURL,
-  buildAmazonURL,
-  getBestAmazonURL
+  buildAmazonURL
 } from '@/utils/amazonASINDiscovery';
+// Keepa API removed - using manual ASIN discovery only
 
 interface ASINManagementDashboardProps {
   className?: string;
@@ -22,12 +20,18 @@ export default function ASINManagementDashboard({ className = '' }: ASINManageme
   const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'discover' | 'contribute' | 'verify'>('overview');
   const [selectedHelmet, setSelectedHelmet] = useState<Helmet | null>(null);
-  const [statistics, setStatistics] = useState<any>(null);
+  const [statistics, setStatistics] = useState<{
+    helmetsWithASINs: number;
+    verifiedASINs: number;
+    coveragePercentage: number;
+    totalHelmets: number;
+  } | null>(null);
   const [userSubmission, setUserSubmission] = useState({
     helmetId: '',
     amazonUrl: '',
     productTitle: ''
   });
+  // Keepa functionality removed
 
   useEffect(() => {
     // Show in development or with query param
@@ -78,6 +82,8 @@ export default function ASINManagementDashboard({ className = '' }: ASINManageme
     manager.verifyASIN(helmetId, asin, verified);
     loadData();
   };
+
+  // Keepa search function removed
 
   const exportDatabase = () => {
     const data = manager.exportDatabase();
@@ -131,7 +137,7 @@ export default function ASINManagementDashboard({ className = '' }: ASINManageme
         ].map(tab => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
+            onClick={() => setActiveTab(tab.id as 'overview' | 'discover' | 'contribute' | 'verify')}
             className={`px-4 py-2 text-sm font-medium ${
               activeTab === tab.id
                 ? 'border-b-2 border-blue-500 text-blue-600'
@@ -256,6 +262,7 @@ export default function ASINManagementDashboard({ className = '' }: ASINManageme
             )}
           </div>
         )}
+
 
         {activeTab === 'contribute' && (
           <div className="space-y-4">

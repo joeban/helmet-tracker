@@ -18,6 +18,7 @@ import AmazonButton from '@/components/AmazonButton';
 import HelmetRecommendationWizard from '@/components/HelmetRecommendationWizard';
 import SocialProofBadge, { UrgencyMessage } from '@/components/SocialProofBadge';
 import TopHelmetSections from '@/components/TopHelmetSections';
+import ScraperDashboard from '@/components/ScraperDashboard';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -858,6 +859,9 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* Scraper Dashboard */}
+      <ScraperDashboard />
 
       {/* Footer */}
       <footer className="bg-gradient-to-r from-gray-800 to-gray-900 text-white py-8 lg:py-12 mt-8 lg:mt-12">
