@@ -13,7 +13,6 @@ import {
 } from '@/utils/helmet-slug';
 import { getHelmetAmazonInfo, getHelmetFallbackImage } from '@/utils/amazonImages';
 import HelmetDetailTracker, { TrackedAmazonButton } from '@/components/HelmetDetailTracker';
-import PriceTracker from '@/components/PriceTracker';
 import { AddToComparisonButton } from '@/components/ComparisonWidget';
 import AmazonButton from '@/components/AmazonButton';
 
@@ -212,7 +211,6 @@ export default function HelmetPage({ params }: HelmetPageProps) {
 
               {/* Price Tracking Component */}
               <div className="mt-6">
-                <PriceTracker helmet={helmet} />
               </div>
             </div>
           </div>

@@ -12,7 +12,6 @@ import {
   trackAdvancedSearch,
   trackAdvancedAffiliateClick
 } from '@/utils/analytics';
-import { CompactPriceTracker } from '@/components/PriceTracker';
 import { AddToComparisonButton } from '@/components/ComparisonWidget';
 import AmazonButton from '@/components/AmazonButton';
 import HelmetRecommendationWizard from '@/components/HelmetRecommendationWizard';
@@ -571,15 +570,14 @@ export default function Home() {
                   />
                 </div>
 
-                {/* Comparison and Price Tracking */}
-                <div className="mt-3 pt-3 border-t border-gray-100 space-y-3">
+                {/* Comparison */}
+                <div className="mt-3 pt-3 border-t border-gray-100">
                   <AddToComparisonButton
                     helmet={helmet}
                     source="homepage"
                     variant="button"
                     className="w-full"
                   />
-                  <CompactPriceTracker helmet={helmet} />
                 </div>
               </div>
             </div>

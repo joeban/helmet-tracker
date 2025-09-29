@@ -15,7 +15,6 @@ import {
   ComparisonAnalysis,
   ComparisonMetrics
 } from '@/utils/comparison';
-import { analyzeDeal } from '@/utils/priceTracking';
 import { TrackedAmazonButton } from '@/components/HelmetDetailTracker';
 import { generateHelmetSlug } from '@/utils/helmet-slug';
 
@@ -219,7 +218,6 @@ export default function HelmetComparison({ isOpen, onClose }: HelmetComparisonPr
                     {/* Helmet Cards Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                       {comparison.map(item => {
-                        const dealAnalysis = analyzeDeal(item.helmet);
                         return (
                           <div key={item.helmet.id} className="bg-gray-50 rounded-lg p-4 relative">
                             <button
@@ -255,18 +253,6 @@ export default function HelmetComparison({ isOpen, onClose }: HelmetComparisonPr
                                 <span className="text-gray-600">Price:</span>
                                 <span className="ml-2 font-bold text-green-600">${item.helmet.min_price}</span>
                               </div>
-                              {dealAnalysis.recommendation !== 'fair_price' && (
-                                <div className="text-xs">
-                                  <span className={`px-2 py-1 rounded ${
-                                    dealAnalysis.recommendation === 'excellent_deal' ? 'bg-green-100 text-green-800' :
-                                    dealAnalysis.recommendation === 'good_deal' ? 'bg-blue-100 text-blue-800' :
-                                    dealAnalysis.recommendation === 'overpriced' ? 'bg-red-100 text-red-800' :
-                                    'bg-yellow-100 text-yellow-800'
-                                  }`}>
-                                    {dealAnalysis.recommendation.replace('_', ' ')}
-                                  </span>
-                                </div>
-                              )}
                             </div>
 
                             <div className="mt-4 space-y-2">
