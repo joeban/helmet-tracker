@@ -147,7 +147,21 @@ export class ASINDiscoveryManager {
       const stored = localStorage.getItem('helmet_asin_database');
       if (stored) {
         const data = JSON.parse(stored);
-        this.asinDatabase = new Map(data.entries || []);
+
+        // Handle both Map format (entries) and direct object format
+        if (data.entries && Array.isArray(data.entries)) {
+          // New Map format
+          this.asinDatabase = new Map(data.entries);
+        } else if (typeof data === 'object' && data !== null) {
+          // Direct object format from batch import
+          this.asinDatabase = new Map();
+          Object.entries(data).forEach(([key, value]) => {
+            const helmetId = parseInt(key);
+            if (!isNaN(helmetId) && Array.isArray(value)) {
+              this.asinDatabase.set(helmetId, value as ASINCandidate[]);
+            }
+          });
+        }
       }
     } catch (error) {
       console.warn('Failed to load ASIN database:', error);

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual ASIN Adder - HelmetScore</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #2563eb;
+        }
+        .btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+        .quick-add {
+            background: #f0fdf4;
+            border: 1px solid #16a34a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .quick-add h3 {
+            color: #15803d;
+            margin-top: 0;
+        }
+        .quick-btn {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            margin: 4px;
+        }
+        .quick-btn:hover {
+            background: #15803d;
+        }
+        .helmet-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 16px;
+            background: #f9fafb;
+        }
+        .helmet-item {
+            padding: 8px 12px;
+            margin: 4px 0;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .helmet-item:hover {
+            background: #f3f4f6;
+        }
+        .helmet-item.selected {
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+        .instructions {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .instructions h3 {
+            color: #92400e;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔧 Manual ASIN Adder</h1>
+        <p>Add Amazon ASINs directly to your helmet database</p>
+    </div>
+
+    <div class="instructions">
+        <h3>📋 How to Use</h3>
+        <ol>
+            <li><strong>Find ASINs:</strong> Use the search helper to find helmet ASINs on Amazon</li>
+            <li><strong>Select Helmet:</strong> Choose the helmet from the list below</li>
+            <li><strong>Enter ASIN:</strong> Add the 10-character ASIN code (e.g., B0BHXS8VG9)</li>
+            <li><strong>Add Details:</strong> Include title, price, and confidence level</li>
+            <li><strong>Save:</strong> Click "Add ASIN" to save to localStorage</li>
+            <li><strong>Test:</strong> Visit your site to see direct Amazon links working!</li>
+        </ol>
+    </div>
+
+    <div class="quick-add">
+        <h3>⚡ Quick Add - Known ASINs</h3>
+        <p>Click to instantly add ASINs we've already found:</p>
+        <button class="quick-btn" onclick="quickAddASIN(8, 'B0BHXS8VG9', 'Giro Aries Spherical Adult Helmet', '$250')">
+            Giro Aries Spherical (B0BHXS8VG9)
+        </button>
+        <button class="quick-btn" onclick="quickAddASIN(3, 'B0BHXS8VG9', 'POC Cularis', '$240')" disabled>
+            POC Cularis (Find ASIN)
+        </button>
+        <button class="quick-btn" onclick="quickAddASIN(12, 'B0BHXS8VG9', 'Specialized Prevail 3', '$300')" disabled>
+            Specialized Prevail 3 (Find ASIN)
+        </button>
+    </div>
+
+    <div class="section">
+        <h2>🎯 Add ASIN Manually</h2>
+
+        <form id="asinForm">
+            <div class="form-group">
+                <label for="helmetSelect">Select Helmet:</label>
+                <div class="helmet-list" id="helmetList">
+                    <div class="helmet-item" data-id="8" data-brand="GIRO" data-name="ARIES SPHERICAL">
+                        ID: 8 - GIRO ARIES SPHERICAL
+                    </div>
+                    <div class="helmet-item" data-id="3" data-brand="POC" data-name="CULARIS">
+                        ID: 3 - POC CULARIS
+                    </div>
+                    <div class="helmet-item" data-id="12" data-brand="SPECIALIZED" data-name="PREVAIL 3">
+                        ID: 12 - SPECIALIZED PREVAIL 3
+                    </div>
+                    <div class="helmet-item" data-id="11" data-brand="SPECIALIZED" data-name="TACTIC 4">
+                        ID: 11 - SPECIALIZED TACTIC 4
+                    </div>
+                    <div class="helmet-item" data-id="4" data-brand="FOX" data-name="RACING SPEEDFRAME RS">
+                        ID: 4 - FOX RACING SPEEDFRAME RS
+                    </div>
+                    <div class="helmet-item" data-id="6" data-brand="FOX" data-name="RACING SPEEDFRAME PRO">
+                        ID: 6 - FOX RACING SPEEDFRAME PRO
+                    </div>
+                    <!-- Add more helmet options as needed -->
+                </div>
+                <input type="hidden" id="helmetId" name="helmetId" required>
+            </div>
+
+            <div class="form-group">
+                <label for="asin">Amazon ASIN:</label>
+                <input type="text" id="asin" name="asin" placeholder="B0BHXS8VG9" pattern="B[0-9A-Z]{9}" maxlength="10" required>
+                <small style="color: #6b7280; font-size: 12px;">10-character code starting with 'B' (e.g., B0BHXS8VG9)</small>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Product Title:</label>
+                <input type="text" id="title" name="title" placeholder="Giro Aries Spherical Adult Helmet">
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="text" id="price" name="price" placeholder="$250.00">
+            </div>
+
+            <div class="form-group">
+                <label for="confidence">Confidence Level:</label>
+                <select id="confidence" name="confidence">
+                    <option value="0.95">High (95%) - Exact match</option>
+                    <option value="0.85">Good (85%) - Very likely match</option>
+                    <option value="0.75">Medium (75%) - Likely match</option>
+                    <option value="0.65">Low (65%) - Possible match</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Notes (Optional):</label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Color variants, specific model year, etc."></textarea>
+            </div>
+
+            <button type="submit" class="btn">Add ASIN to Database</button>
+        </form>
+
+        <div id="status" class="status" style="display: none;"></div>
+    </div>
+
+    <div class="section">
+        <h2>💾 Current ASIN Database</h2>
+        <button class="btn" onclick="showCurrentDatabase()">View Current ASINs</button>
+        <button class="btn" onclick="clearDatabase()" style="background: #ef4444; margin-left: 10px;">Clear All ASINs</button>
+        <div id="databaseDisplay" style="margin-top: 20px;"></div>
+    </div>
+
+    <script>
+        // Helmet selection
+        document.getElementById('helmetList').addEventListener('click', function(e) {
+            if (e.target.classList.contains('helmet-item')) {
+                // Remove previous selection
+                document.querySelectorAll('.helmet-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+
+                // Add selection to clicked item
+                e.target.classList.add('selected');
+
+                // Set hidden field
+                document.getElementById('helmetId').value = e.target.dataset.id;
+
+                // Auto-fill title if empty
+                const titleField = document.getElementById('title');
+                if (!titleField.value) {
+                    titleField.value = `${e.target.dataset.brand} ${e.target.dataset.name} Helmet`;
+                }
+            }
+        });
+
+        // Form submission
+        document.getElementById('asinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+
+            addASINToDatabase(data);
+        });
+
+        function addASINToDatabase(data) {
+            try {
+                // Get existing database
+                const existing = JSON.parse(localStorage.getItem('helmet_asin_database') || '{}');
+
+                // Create ASIN candidate
+                const candidate = {
+                    asin: data.asin,
+                    title: data.title || `Helmet ${data.helmetId}`,
+                    price: data.price || '',
+                    confidence: parseFloat(data.confidence),
+                    url: `https://amazon.com/dp/${data.asin}`,
+                    imageUrl: '',
+                    source: 'manual',
+                    timestamp: Date.now(),
+                    verified: true,
+                    lastChecked: new Date().toISOString(),
+                    notes: data.notes || ''
+                };
+
+                // Add to database
+                if (!existing[data.helmetId]) {
+                    existing[data.helmetId] = [];
+                }
+
+                // Check for duplicates
+                const duplicateIndex = existing[data.helmetId].findIndex(item => item.asin === data.asin);
+                if (duplicateIndex >= 0) {
+                    existing[data.helmetId][duplicateIndex] = candidate;
+                    showStatus('✅ ASIN updated successfully!', 'success');
+                } else {
+                    existing[data.helmetId].push(candidate);
+                    showStatus('✅ ASIN added successfully!', 'success');
+                }
+
+                // Save to localStorage
+                localStorage.setItem('helmet_asin_database', JSON.stringify(existing));
+
+                // Clear form
+                document.getElementById('asinForm').reset();
+                document.querySelectorAll('.helmet-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+
+            } catch (error) {
+                showStatus('❌ Error adding ASIN: ' + error.message, 'error');
+            }
+        }
+
+        function quickAddASIN(helmetId, asin, title, price) {
+            const data = {
+                helmetId: helmetId.toString(),
+                asin: asin,
+                title: title,
+                price: price,
+                confidence: '0.95',
+                notes: 'Added via quick-add'
+            };
+
+            addASINToDatabase(data);
+        }
+
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+            statusEl.style.display = 'block';
+
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 5000);
+        }
+
+        function showCurrentDatabase() {
+            const database = JSON.parse(localStorage.getItem('helmet_asin_database') || '{}');
+            const display = document.getElementById('databaseDisplay');
+
+            if (Object.keys(database).length === 0) {
+                display.innerHTML = '<p style="color: #6b7280;">No ASINs in database yet.</p>';
+                return;
+            }
+
+            let html = '<div style="background: #f9fafb; border-radius: 6px; padding: 16px; border: 1px solid #e5e7eb;">';
+            html += '<h4 style="margin-top: 0;">Stored ASINs:</h4>';
+
+            for (const [helmetId, asins] of Object.entries(database)) {
+                html += `<div style="margin-bottom: 16px; padding: 12px; background: white; border-radius: 4px;">`;
+                html += `<strong>Helmet ID ${helmetId}:</strong><br>`;
+
+                asins.forEach((asin, index) => {
+                    html += `<div style="margin-left: 16px; margin-top: 8px; font-size: 14px;">`;
+                    html += `• <strong>${asin.asin}</strong> - ${asin.title}<br>`;
+                    html += `  <span style="color: #6b7280;">Confidence: ${(asin.confidence * 100).toFixed(0)}% | Source: ${asin.source}</span><br>`;
+                    html += `  <a href="https://amazon.com/dp/${asin.asin}" target="_blank" style="color: #3b82f6;">View on Amazon</a>`;
+                    html += `</div>`;
+                });
+
+                html += `</div>`;
+            }
+
+            html += '</div>';
+            display.innerHTML = html;
+        }
+
+        function clearDatabase() {
+            if (confirm('Are you sure you want to clear all ASINs? This cannot be undone.')) {
+                localStorage.removeItem('helmet_asin_database');
+                showStatus('🗑️ Database cleared successfully!', 'success');
+                document.getElementById('databaseDisplay').innerHTML = '';
+            }
+        }
+
+        // Load and show current database on page load
+        window.addEventListener('load', function() {
+            showCurrentDatabase();
+        });
+    </script>
+</body>
+</html>

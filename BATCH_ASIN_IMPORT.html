@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch ASIN Import - HelmetScore</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #2563eb;
+        }
+        .btn.success {
+            background: #10b981;
+        }
+        .btn.danger {
+            background: #ef4444;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #3b82f6);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+        .asin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 15px;
+        }
+        .asin-item {
+            padding: 10px;
+            background: #f9fafb;
+            border-radius: 4px;
+            border-left: 4px solid #3b82f6;
+            font-size: 12px;
+        }
+        .asin-item.success {
+            border-left-color: #10b981;
+            background: #ecfdf5;
+        }
+        .asin-item.error {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 Batch ASIN Import</h1>
+        <p>Import all 43 collected ASINs into your helmet database</p>
+    </div>
+
+    <div class="section">
+        <h2>Import Progress</h2>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p id="progressText">Ready to import 43 ASINs</p>
+
+        <button class="btn" onclick="importAllASINs()" id="importBtn">🚀 Import All 43 ASINs</button>
+        <button class="btn success" onclick="showCurrentDatabase()" id="viewBtn">👀 View Current Database</button>
+        <button class="btn danger" onclick="clearDatabase()" id="clearBtn">🗑️ Clear Database</button>
+
+        <div id="status" class="status" style="display: none;"></div>
+    </div>
+
+    <div class="section">
+        <h2>ASIN Import Status</h2>
+        <div id="asinGrid" class="asin-grid"></div>
+    </div>
+
+    <script>
+        // Complete ASIN database with all 43 collected ASINs
+        const asinDatabase = [
+            { helmetId: 'sweet-protection-falconer-mips', asin: 'B0BYLFS6KZ', title: 'Sweet Protection Falconer MIPS Helmet', price: '$300', confidence: 0.95 },
+            { helmetId: 'sweet-protection-trailblazer-mips', asin: 'B0851WRLPY', title: 'Sweet Protection Trailblazer MIPS Helmet', price: '$250', confidence: 0.95 },
+            { helmetId: 'sweet-protection-bushwhacker-mips', asin: 'B0BYLQJXZ8', title: 'Sweet Protection Bushwhacker MIPS Helmet', price: '$280', confidence: 0.95 },
+            { helmetId: 'sweet-protection-falconer-aero-mips', asin: 'B0DD8QFP82', title: 'Sweet Protection Falconer Aero MIPS Helmet', price: '$320', confidence: 0.95 },
+            { helmetId: 'lazer-g1-mips', asin: 'B081NLW2LV', title: 'Lazer G1 MIPS Helmet', price: '$200', confidence: 0.95 },
+            { helmetId: 'met-downtown-mips', asin: 'B0993DYK6M', title: 'MET Downtown MIPS Helmet', price: '$150', confidence: 0.95 },
+            { helmetId: 'lazer-z1-kineticore', asin: 'B0CN3RP5H7', title: 'Lazer Z1 KinetiCore Helmet', price: '$180', confidence: 0.95 },
+            { helmetId: 'bluegrass-vanguard-core', asin: 'B0CZXZK6BC', title: 'Bluegrass Vanguard Core Helmet', price: '$220', confidence: 0.95 },
+            { helmetId: 'scott-centric-plus-mips', asin: 'B076MHBNZJ', title: 'Scott Centric Plus MIPS Helmet', price: '$180', confidence: 0.95 },
+            { helmetId: 'met-terrae', asin: 'B0F9YJ3LPD', title: 'MET Terrae Helmet', price: '$160', confidence: 0.95 },
+            { helmetId: 'lazer-sphere-mips', asin: 'B08WYG2HQC', title: 'Lazer Sphere MIPS Helmet', price: '$190', confidence: 0.95 },
+            { helmetId: 'poc-octal-x-spin', asin: 'B079YGSVHF', title: 'POC Octal X Spin Helmet', price: '$240', confidence: 0.95 },
+            { helmetId: 'troy-lee-designs-flowline', asin: 'B0CW25CVLG', title: 'Troy Lee Designs Flowline Helmet', price: '$200', confidence: 0.95 },
+            { helmetId: 'fox-racing-speedframe-pro-mips', asin: 'B084DLC58Z', title: 'Fox Racing Speedframe Pro MIPS Helmet', price: '$180', confidence: 0.95 },
+            { helmetId: 'abus-modrop-mips', asin: 'B0BF5P7BXY', title: 'ABUS MoDrop MIPS Helmet', price: '$120', confidence: 0.95 },
+            { helmetId: 'met-vinci-mips', asin: 'B0993F1LQ6', title: 'MET Vinci MIPS Helmet', price: '$140', confidence: 0.95 },
+            { helmetId: 'bell-z20-mips', asin: 'B07ZZLCBS5', title: 'Bell Z20 MIPS Helmet', price: '$160', confidence: 0.95 },
+            { helmetId: 'troy-lee-designs-a1-classic-mips', asin: 'B08N3PS4KP', title: 'Troy Lee Designs A1 Classic MIPS Helmet', price: '$190', confidence: 0.95 },
+            { helmetId: 'poc-tectal-race-spin', asin: 'B07WW8V5GZ', title: 'POC Tectal Race Spin Helmet', price: '$220', confidence: 0.95 },
+            { helmetId: 'lazer-z1-mips', asin: 'B018M9VN56', title: 'Lazer Z1 MIPS Helmet', price: '$170', confidence: 0.95 },
+            { helmetId: 'giro-manifest-spherical', asin: 'B09JC9SJZ3', title: 'Giro Manifest Spherical Helmet', price: '$200', confidence: 0.95 },
+            { helmetId: 'troy-lee-designs-flowline-se', asin: 'B0BRYTMPJ3', title: 'Troy Lee Designs Flowline SE Helmet', price: '$180', confidence: 0.95 },
+            { helmetId: 'abus-gamechanger-2-0-mips', asin: 'B0CTDGZLQF', title: 'ABUS Gamechanger 2.0 MIPS Helmet', price: '$160', confidence: 0.95 },
+            { helmetId: 'poc-cytal-carbon', asin: 'B0CBQ431NX', title: 'POC Cytal Carbon Helmet', price: '$260', confidence: 0.95 },
+            { helmetId: 'lazer-coyote-kineticore', asin: 'B0BSHGRJ5Z', title: 'Lazer Coyote KinetiCore Helmet', price: '$150', confidence: 0.95 },
+            { helmetId: 'met-rivale-mips', asin: 'B0993FDNBV', title: 'MET Rivale MIPS Helmet', price: '$130', confidence: 0.95 },
+            { helmetId: 'fizik-kudo', asin: 'B0F2R7GDR6', title: 'Fizik Kudo Helmet', price: '$180', confidence: 0.95 },
+            { helmetId: 'bell-stratus-mips', asin: 'B01LKXRELI', title: 'Bell Stratus MIPS Helmet', price: '$140', confidence: 0.95 },
+            { helmetId: 'thousand-chapter-mips', asin: 'B0B5YLFY1K', title: 'Thousand Chapter MIPS Helmet', price: '$150', confidence: 0.95 },
+            { helmetId: 'giro-synthe-mips', asin: 'B00XIQKEOA', title: 'Giro Synthe MIPS Helmet', price: '$190', confidence: 0.95 },
+            { helmetId: 'lazer-chiru-mips', asin: 'B08ZLV6VQD', title: 'Lazer Chiru MIPS Helmet', price: '$160', confidence: 0.95 },
+            { helmetId: 'bern-hudson', asin: 'B07ZGBD9L4', title: 'BERN Hudson Helmet', price: '$110', confidence: 0.95 },
+            { helmetId: 'lazer-lupo-kineticore', asin: 'B0CN3RD1PP', title: 'Lazer Lupo KinetiCore Helmet', price: '$140', confidence: 0.95 },
+            { helmetId: 'lazer-finch-kineticore', asin: 'B00GMMQBXU', title: 'Lazer Finch KinetiCore Helmet', price: '$100', confidence: 0.95 },
+            { helmetId: 'scott-stego-plus-mips', asin: 'B08PW6DKRP', title: 'Scott Stego Plus MIPS Helmet', price: '$170', confidence: 0.95 },
+            { helmetId: 'fox-racing-mainframe-mips', asin: 'B095XBZ9P7', title: 'Fox Racing Mainframe MIPS Helmet', price: '$200', confidence: 0.95 },
+            { helmetId: 'fox-racing-speedframe', asin: 'B084GDMK7W', title: 'Fox Racing Speedframe Helmet', price: '$160', confidence: 0.95 },
+            { helmetId: 'lazer-chase-kineticore', asin: 'B0CN3QZHZR', title: 'Lazer Chase KinetiCore Helmet', price: '$120', confidence: 0.95 },
+            { helmetId: 'nutcase-street-mips', asin: 'B08V2288M1', title: 'Nutcase Street MIPS Helmet', price: '$130', confidence: 0.95 },
+            { helmetId: 'scott-tago-plus-mips', asin: 'B0C15K8YYC', title: 'Scott Tago Plus MIPS Helmet', price: '$150', confidence: 0.95 },
+            { helmetId: 'lazer-strada-kineticore', asin: 'B09XSPCYST', title: 'Lazer Strada KinetiCore Helmet', price: '$160', confidence: 0.95 },
+            { helmetId: 'lazer-vento-kineticore', asin: 'B09XS43GX8', title: 'Lazer Vento KinetiCore Helmet', price: '$180', confidence: 0.95 },
+            { helmetId: 'giro-chronicle-mips', asin: 'B01LKXR3LY', title: 'Giro Chronicle MIPS Helmet', price: '$170', confidence: 0.95 }
+        ];
+
+        let importProgress = 0;
+        let importedASINs = [];
+
+        function updateProgress(current, total) {
+            importProgress = (current / total) * 100;
+            document.getElementById('progressFill').style.width = importProgress + '%';
+            document.getElementById('progressText').textContent = `Importing: ${current}/${total} ASINs (${Math.round(importProgress)}%)`;
+        }
+
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+            statusEl.style.display = 'block';
+
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 5000);
+        }
+
+        function addASINItem(asin, status, message) {
+            const grid = document.getElementById('asinGrid');
+            const item = document.createElement('div');
+            item.className = `asin-item ${status}`;
+            item.innerHTML = `
+                <strong>${asin.asin}</strong> - ${asin.title}<br>
+                <small>${message}</small>
+            `;
+            grid.appendChild(item);
+            grid.scrollTop = grid.scrollHeight;
+        }
+
+        async function importASIN(asin) {
+            try {
+                // Get existing database
+                const existing = JSON.parse(localStorage.getItem('helmet_asin_database') || '{}');
+
+                // Create ASIN candidate
+                const candidate = {
+                    asin: asin.asin,
+                    title: asin.title,
+                    price: asin.price,
+                    confidence: asin.confidence,
+                    url: `https://amazon.com/dp/${asin.asin}?tag=helmetscore-20`,
+                    imageUrl: '',
+                    source: 'batch_import',
+                    timestamp: Date.now(),
+                    verified: true,
+                    lastChecked: new Date().toISOString(),
+                    notes: 'Imported via batch import tool'
+                };
+
+                // Add to database
+                if (!existing[asin.helmetId]) {
+                    existing[asin.helmetId] = [];
+                }
+
+                // Check for duplicates
+                const duplicateIndex = existing[asin.helmetId].findIndex(item => item.asin === asin.asin);
+                let message;
+                if (duplicateIndex >= 0) {
+                    existing[asin.helmetId][duplicateIndex] = candidate;
+                    message = 'Updated existing ASIN';
+                } else {
+                    existing[asin.helmetId].push(candidate);
+                    message = 'Added new ASIN';
+                }
+
+                // Save to localStorage
+                localStorage.setItem('helmet_asin_database', JSON.stringify(existing));
+
+                addASINItem(asin, 'success', message);
+                return true;
+
+            } catch (error) {
+                addASINItem(asin, 'error', `Error: ${error.message}`);
+                return false;
+            }
+        }
+
+        async function importAllASINs() {
+            const importBtn = document.getElementById('importBtn');
+            importBtn.disabled = true;
+            importBtn.textContent = 'Importing...';
+
+            // Clear previous results
+            document.getElementById('asinGrid').innerHTML = '';
+
+            let successCount = 0;
+            const total = asinDatabase.length;
+
+            for (let i = 0; i < asinDatabase.length; i++) {
+                const asin = asinDatabase[i];
+                updateProgress(i + 1, total);
+
+                const success = await importASIN(asin);
+                if (success) successCount++;
+
+                // Small delay to show progress
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+
+            importBtn.disabled = false;
+            importBtn.textContent = '🚀 Import All 43 ASINs';
+
+            const message = `✅ Import completed! ${successCount}/${total} ASINs imported successfully.`;
+            showStatus(message, 'success');
+
+            document.getElementById('progressText').textContent = `Completed: ${successCount}/${total} ASINs imported`;
+        }
+
+        function showCurrentDatabase() {
+            const database = JSON.parse(localStorage.getItem('helmet_asin_database') || '{}');
+            const totalASINs = Object.values(database).reduce((sum, asins) => sum + asins.length, 0);
+
+            if (totalASINs === 0) {
+                showStatus('No ASINs in database yet.', 'error');
+                return;
+            }
+
+            const message = `📊 Current database contains ${totalASINs} ASINs across ${Object.keys(database).length} helmets.`;
+            showStatus(message, 'success');
+
+            console.log('Full ASIN Database:', database);
+        }
+
+        function clearDatabase() {
+            if (confirm('Are you sure you want to clear all ASINs? This cannot be undone.')) {
+                localStorage.removeItem('helmet_asin_database');
+                showStatus('🗑️ Database cleared successfully!', 'success');
+                document.getElementById('asinGrid').innerHTML = '';
+                document.getElementById('progressFill').style.width = '0%';
+                document.getElementById('progressText').textContent = 'Ready to import 43 ASINs';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', function() {
+            showCurrentDatabase();
+        });
+    </script>
+</body>
+</html>

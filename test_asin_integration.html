@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASIN Integration Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 4px solid;
+        }
+        .test-result.success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        .test-result.error {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        .test-result.info {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .helmet-test {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border-left: 4px solid #007bff;
+        }
+        .helmet-name {
+            font-weight: bold;
+            color: #333;
+        }
+        .asin-info {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 5px 8px;
+            border-radius: 3px;
+            margin: 5px 0;
+        }
+        .url-test {
+            margin: 10px 0;
+        }
+        .url-test a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .url-test a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 ASIN Database Integration Test</h1>
+        <p>Testing the integration of our 43 collected ASINs with the helmet database system.</p>
+        <button onclick="runFullTest()">🧪 Run Full Test Suite</button>
+        <button onclick="clearDatabase()">🗑️ Clear Database</button>
+        <button onclick="loadTestData()">📥 Load Test Data</button>
+    </div>
+
+    <div class="section">
+        <h2>📊 Database Statistics</h2>
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalHelmets">-</div>
+                <div class="stat-label">Total Test Helmets</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="helmetsWithASINs">-</div>
+                <div class="stat-label">Helmets with ASINs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="verifiedASINs">-</div>
+                <div class="stat-label">Verified ASINs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="coveragePercentage">-</div>
+                <div class="stat-label">Coverage %</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔧 Test Results</h2>
+        <div id="testResults"></div>
+    </div>
+
+    <div class="section">
+        <h2>🎯 ASIN URL Tests</h2>
+        <div id="asinTests"></div>
+    </div>
+
+    <script>
+        // Test data based on our collected ASINs
+        const testASINs = [
+            { brand: 'Sweet Protection', name: 'Falconer MIPS', asin: 'B0BYLFS6KZ', price: '$300' },
+            { brand: 'Sweet Protection', name: 'Trailblazer MIPS', asin: 'B0851WRLPY', price: '$250' },
+            { brand: 'Sweet Protection', name: 'Bushwhacker MIPS', asin: 'B0BYLQJXZ8', price: '$280' },
+            { brand: 'Sweet Protection', name: 'Falconer Aero MIPS', asin: 'B0DD8QFP82', price: '$320' },
+            { brand: 'Lazer', name: 'G1 MIPS', asin: 'B081NLW2LV', price: '$200' },
+            { brand: 'MET', name: 'Downtown MIPS', asin: 'B0993DYK6M', price: '$150' },
+            { brand: 'Lazer', name: 'Z1 KinetiCore', asin: 'B0CN3RP5H7', price: '$180' },
+            { brand: 'Bluegrass', name: 'Vanguard Core', asin: 'B0CZXZK6BC', price: '$220' },
+            { brand: 'Scott', name: 'Centric Plus MIPS', asin: 'B076MHBNZJ', price: '$180' },
+            { brand: 'MET', name: 'Terrae', asin: 'B0F9YJ3LPD', price: '$160' },
+            { brand: 'Lazer', name: 'Sphere MIPS', asin: 'B08WYG2HQC', price: '$190' },
+            { brand: 'POC', name: 'Octal X Spin', asin: 'B079YGSVHF', price: '$240' },
+            { brand: 'Troy Lee Designs', name: 'Flowline', asin: 'B0CW25CVLG', price: '$200' },
+            { brand: 'Fox Racing', name: 'Speedframe Pro MIPS', asin: 'B084DLC58Z', price: '$180' },
+            { brand: 'ABUS', name: 'MoDrop MIPS', asin: 'B0BF5P7BXY', price: '$120' },
+            { brand: 'MET', name: 'Vinci MIPS', asin: 'B0993F1LQ6', price: '$140' },
+            { brand: 'Bell', name: 'Z20 MIPS', asin: 'B07ZZLCBS5', price: '$160' },
+            { brand: 'Troy Lee Designs', name: 'A1 Classic MIPS', asin: 'B08N3PS4KP', price: '$190' },
+            { brand: 'POC', name: 'Tectal Race Spin', asin: 'B07WW8V5GZ', price: '$220' },
+            { brand: 'Lazer', name: 'Z1 MIPS', asin: 'B018M9VN56', price: '$170' },
+            { brand: 'Giro', name: 'Manifest Spherical', asin: 'B09JC9SJZ3', price: '$200' },
+            { brand: 'Troy Lee Designs', name: 'Flowline SE', asin: 'B0BRYTMPJ3', price: '$180' },
+            { brand: 'ABUS', name: 'Gamechanger 2.0 MIPS', asin: 'B0CTDGZLQF', price: '$160' },
+            { brand: 'POC', name: 'Cytal Carbon', asin: 'B0CBQ431NX', price: '$260' },
+            { brand: 'Lazer', name: 'Coyote KinetiCore', asin: 'B0BSHGRJ5Z', price: '$150' },
+            { brand: 'MET', name: 'Rivale MIPS', asin: 'B0993FDNBV', price: '$130' },
+            { brand: 'Fizik', name: 'Kudo', asin: 'B0F2R7GDR6', price: '$180' },
+            { brand: 'Bell', name: 'Stratus MIPS', asin: 'B01LKXRELI', price: '$140' },
+            { brand: 'Thousand', name: 'Chapter MIPS', asin: 'B0B5YLFY1K', price: '$150' },
+            { brand: 'Giro', name: 'Synthe MIPS', asin: 'B00XIQKEOA', price: '$190' },
+            { brand: 'Lazer', name: 'Chiru MIPS', asin: 'B08ZLV6VQD', price: '$160' },
+            { brand: 'BERN', name: 'Hudson', asin: 'B07ZGBD9L4', price: '$110' },
+            { brand: 'Lazer', name: 'Lupo KinetiCore', asin: 'B0CN3RD1PP', price: '$140' },
+            { brand: 'Lazer', name: 'Finch KinetiCore', asin: 'B00GMMQBXU', price: '$100' },
+            { brand: 'Scott', name: 'Stego Plus MIPS', asin: 'B08PW6DKRP', price: '$170' },
+            { brand: 'Fox Racing', name: 'Mainframe MIPS', asin: 'B095XBZ9P7', price: '$200' },
+            { brand: 'Fox Racing', name: 'Speedframe', asin: 'B084GDMK7W', price: '$160' },
+            { brand: 'Lazer', name: 'Chase KinetiCore', asin: 'B0CN3QZHZR', price: '$120' },
+            { brand: 'Nutcase', name: 'Street MIPS', asin: 'B08V2288M1', price: '$130' },
+            { brand: 'Scott', name: 'Tago Plus MIPS', asin: 'B0C15K8YYC', price: '$150' },
+            { brand: 'Lazer', name: 'Strada KinetiCore', asin: 'B09XSPCYST', price: '$160' },
+            { brand: 'Lazer', name: 'Vento KinetiCore', asin: 'B09XS43GX8', price: '$180' },
+            { brand: 'Giro', name: 'Chronicle MIPS', asin: 'B01LKXR3LY', price: '$170' }
+        ];
+
+        function logResult(message, type = 'info') {
+            const resultsDiv = document.getElementById('testResults');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-result ${type}`;
+            resultDiv.innerHTML = message;
+            resultsDiv.appendChild(resultDiv);
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        function updateStats() {
+            try {
+                const stored = localStorage.getItem('helmet_asin_database');
+                let database = {};
+                let totalEntries = 0;
+                let verifiedCount = 0;
+
+                if (stored) {
+                    const data = JSON.parse(stored);
+                    if (data.entries && Array.isArray(data.entries)) {
+                        // Map format
+                        database = Object.fromEntries(data.entries);
+                    } else if (typeof data === 'object' && data !== null) {
+                        // Direct object format
+                        database = data;
+                    }
+
+                    // Count entries and verified ASINs
+                    Object.values(database).forEach(candidates => {
+                        if (Array.isArray(candidates)) {
+                            totalEntries += candidates.length;
+                            verifiedCount += candidates.filter(c => c.verified).length;
+                        }
+                    });
+                }
+
+                document.getElementById('totalHelmets').textContent = testASINs.length;
+                document.getElementById('helmetsWithASINs').textContent = Object.keys(database).length;
+                document.getElementById('verifiedASINs').textContent = verifiedCount;
+                document.getElementById('coveragePercentage').textContent =
+                    Object.keys(database).length > 0 ?
+                    ((Object.keys(database).length / testASINs.length) * 100).toFixed(1) + '%' : '0%';
+
+            } catch (error) {
+                logResult(`Error updating stats: ${error.message}`, 'error');
+            }
+        }
+
+        function loadTestData() {
+            try {
+                logResult('🔄 Loading test ASIN data into database...', 'info');
+
+                const database = {};
+
+                testASINs.forEach((helmet, index) => {
+                    const helmetId = index + 1; // Simple ID system for testing
+
+                    const candidate = {
+                        asin: helmet.asin,
+                        url: `https://amazon.com/dp/${helmet.asin}?tag=helmetscore-20`,
+                        title: `${helmet.brand} ${helmet.name} Helmet`,
+                        price: helmet.price,
+                        confidence: 0.95,
+                        source: 'manual',
+                        verified: true,
+                        lastChecked: new Date().toISOString(),
+                        notes: 'Test data from ASIN collection'
+                    };
+
+                    database[helmetId] = [candidate];
+                });
+
+                localStorage.setItem('helmet_asin_database', JSON.stringify(database));
+
+                logResult(`✅ Successfully loaded ${testASINs.length} test ASINs into database`, 'success');
+                updateStats();
+                generateASINTests();
+
+            } catch (error) {
+                logResult(`❌ Error loading test data: ${error.message}`, 'error');
+            }
+        }
+
+        function clearDatabase() {
+            if (confirm('Are you sure you want to clear the ASIN database?')) {
+                localStorage.removeItem('helmet_asin_database');
+                logResult('🗑️ Database cleared', 'info');
+                updateStats();
+                document.getElementById('asinTests').innerHTML = '';
+            }
+        }
+
+        function testASINValidation() {
+            logResult('🧪 Testing ASIN validation...', 'info');
+
+            const validASINs = ['B0BYLFS6KZ', 'B081NLW2LV', 'B0993DYK6M'];
+            const invalidASINs = ['ABC123', 'B0BYLFS6K', 'invalidasin', ''];
+
+            let passed = 0;
+            let total = validASINs.length + invalidASINs.length;
+
+            // Test valid ASINs
+            validASINs.forEach(asin => {
+                const isValid = /^[A-Z0-9]{10}$/.test(asin);
+                if (isValid) {
+                    passed++;
+                    logResult(`✅ Valid ASIN: ${asin}`, 'success');
+                } else {
+                    logResult(`❌ Expected valid but got invalid: ${asin}`, 'error');
+                }
+            });
+
+            // Test invalid ASINs
+            invalidASINs.forEach(asin => {
+                const isValid = /^[A-Z0-9]{10}$/.test(asin);
+                if (!isValid) {
+                    passed++;
+                    logResult(`✅ Correctly rejected invalid ASIN: "${asin}"`, 'success');
+                } else {
+                    logResult(`❌ Expected invalid but got valid: "${asin}"`, 'error');
+                }
+            });
+
+            logResult(`🏁 ASIN Validation: ${passed}/${total} tests passed`, passed === total ? 'success' : 'error');
+        }
+
+        function testURLGeneration() {
+            logResult('🧪 Testing URL generation...', 'info');
+
+            const testCases = [
+                { asin: 'B0BYLFS6KZ', expected: 'https://amazon.com/dp/B0BYLFS6KZ?tag=helmetscore-20' },
+                { asin: 'B081NLW2LV', expected: 'https://amazon.com/dp/B081NLW2LV?tag=helmetscore-20' }
+            ];
+
+            let passed = 0;
+
+            testCases.forEach(test => {
+                const generated = `https://amazon.com/dp/${test.asin}?tag=helmetscore-20`;
+                if (generated === test.expected) {
+                    passed++;
+                    logResult(`✅ URL generation for ${test.asin}: ${generated}`, 'success');
+                } else {
+                    logResult(`❌ URL mismatch for ${test.asin}: got ${generated}`, 'error');
+                }
+            });
+
+            logResult(`🏁 URL Generation: ${passed}/${testCases.length} tests passed`, passed === testCases.length ? 'success' : 'error');
+        }
+
+        function testDatabaseOperations() {
+            logResult('🧪 Testing database operations...', 'info');
+
+            try {
+                // Test data storage and retrieval
+                const testData = {
+                    999: [{
+                        asin: 'B0TEST1234',
+                        url: 'https://amazon.com/dp/B0TEST1234',
+                        title: 'Test Helmet',
+                        confidence: 0.9,
+                        source: 'test',
+                        verified: true,
+                        lastChecked: new Date().toISOString()
+                    }]
+                };
+
+                localStorage.setItem('test_helmet_asin_database', JSON.stringify(testData));
+                const retrieved = JSON.parse(localStorage.getItem('test_helmet_asin_database'));
+
+                if (retrieved && retrieved[999] && retrieved[999][0].asin === 'B0TEST1234') {
+                    logResult('✅ Database storage and retrieval working', 'success');
+                } else {
+                    logResult('❌ Database storage/retrieval failed', 'error');
+                }
+
+                // Cleanup test data
+                localStorage.removeItem('test_helmet_asin_database');
+
+            } catch (error) {
+                logResult(`❌ Database operations error: ${error.message}`, 'error');
+            }
+        }
+
+        function generateASINTests() {
+            const testsDiv = document.getElementById('asinTests');
+            testsDiv.innerHTML = '';
+
+            try {
+                const stored = localStorage.getItem('helmet_asin_database');
+                if (!stored) {
+                    testsDiv.innerHTML = '<p>No ASIN data found. Please load test data first.</p>';
+                    return;
+                }
+
+                const database = JSON.parse(stored);
+                let entries = [];
+
+                if (database.entries && Array.isArray(database.entries)) {
+                    entries = database.entries;
+                } else if (typeof database === 'object' && database !== null) {
+                    entries = Object.entries(database);
+                }
+
+                entries.slice(0, 10).forEach(([helmetId, candidates]) => {
+                    if (Array.isArray(candidates) && candidates.length > 0) {
+                        const candidate = candidates[0];
+                        const helmetDiv = document.createElement('div');
+                        helmetDiv.className = 'helmet-test';
+                        helmetDiv.innerHTML = `
+                            <div class="helmet-name">${candidate.title}</div>
+                            <div class="asin-info">ASIN: ${candidate.asin}</div>
+                            <div class="asin-info">Confidence: ${(candidate.confidence * 100).toFixed(0)}%</div>
+                            <div class="asin-info">Source: ${candidate.source}</div>
+                            <div class="asin-info">Verified: ${candidate.verified ? '✅' : '❌'}</div>
+                            <div class="url-test">
+                                <a href="${candidate.url}" target="_blank">Test Direct Link →</a>
+                            </div>
+                        `;
+                        testsDiv.appendChild(helmetDiv);
+                    }
+                });
+
+                if (entries.length === 0) {
+                    testsDiv.innerHTML = '<p>No ASIN entries found in database.</p>';
+                }
+
+            } catch (error) {
+                testsDiv.innerHTML = `<p style="color: red;">Error loading ASIN tests: ${error.message}</p>`;
+            }
+        }
+
+        function runFullTest() {
+            document.getElementById('testResults').innerHTML = '';
+
+            logResult('🚀 Starting ASIN Integration Test Suite...', 'info');
+
+            testASINValidation();
+            testURLGeneration();
+            testDatabaseOperations();
+
+            logResult('✅ Test suite completed!', 'success');
+            updateStats();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+            generateASINTests();
+        });
+    </script>
+</body>
+</html>

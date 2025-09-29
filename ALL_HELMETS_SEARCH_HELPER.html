@@ -1,0 +1,2732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Helmets Amazon Search - HelmetScore</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+            line-height: 1.4;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .stats {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        .filters {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+        .filter-group input, .filter-group select {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 100%;
+            max-width: 300px;
+        }
+        .helmet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .helmet-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 16px;
+            background: #fafafa;
+            transition: all 0.2s;
+        }
+        .helmet-card:hover {
+            background: #f3f4f6;
+            border-color: #3b82f6;
+            transform: translateY(-1px);
+        }
+        .helmet-header {
+            margin-bottom: 12px;
+        }
+        .helmet-id {
+            font-size: 12px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        .helmet-brand {
+            font-weight: 700;
+            color: #1f2937;
+            font-size: 14px;
+        }
+        .helmet-name {
+            font-weight: 600;
+            color: #374151;
+            font-size: 13px;
+            margin-top: 2px;
+        }
+        .helmet-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 12px;
+        }
+        .category-badge {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .price-badge {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .rating-stars {
+            color: #fbbf24;
+        }
+        .search-button {
+            display: block;
+            width: 100%;
+            padding: 10px 12px;
+            background: #f97316;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        .search-button:hover {
+            background: #ea580c;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .filter-controls {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .instructions {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .instructions h3 {
+            color: #92400e;
+            margin-top: 0;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .bulk-actions {
+            background: #f0fdf4;
+            border: 1px solid #16a34a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .bulk-actions h3 {
+            color: #15803d;
+            margin-top: 0;
+        }
+        .bulk-btn {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .bulk-btn:hover {
+            background: #15803d;
+        }
+        .results-summary {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 Complete Helmet Amazon Search</h1>
+        <p>Search all 281 helmets to find Amazon listings and ASINs</p>
+    </div>
+
+    <div class="instructions">
+        <h3>📋 How to Use This Search Tool</h3>
+        <ol>
+            <li><strong>Browse all helmets:</strong> Every helmet in your database is listed below</li>
+            <li><strong>Click "Search on Amazon":</strong> Opens targeted search for that specific helmet</li>
+            <li><strong>Check for results:</strong> See if Amazon has any listings for that helmet</li>
+            <li><strong>Extract ASINs:</strong> Copy ASIN codes from any matches you find</li>
+            <li><strong>Use filters:</strong> Filter by brand, category, price, or rating to focus your search</li>
+            <li><strong>Track progress:</strong> Use bulk actions to systematically check popular brands</li>
+        </ol>
+    </div>
+
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-number" id="totalHelmets">281</div>
+            <div class="stat-label">Total Helmets</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" id="visibleHelmets">281</div>
+            <div class="stat-label">Visible Helmets</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" id="uniqueBrands">0</div>
+            <div class="stat-label">Unique Brands</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" id="avgPrice">$0</div>
+            <div class="stat-label">Average Price</div>
+        </div>
+    </div>
+
+    <div class="bulk-actions">
+        <h3>⚡ Bulk Brand Searches</h3>
+        <p>Open multiple searches at once for popular brands:</p>
+        <button class="bulk-btn" onclick="openBrandSearches('SPECIALIZED')">All Specialized (12 helmets)</button>
+        <button class="bulk-btn" onclick="openBrandSearches('GIRO')">All Giro (17 helmets)</button>
+        <button class="bulk-btn" onclick="openBrandSearches('FOX')">All Fox Racing (8 helmets)</button>
+        <button class="bulk-btn" onclick="openBrandSearches('POC')">All POC (9 helmets)</button>
+        <button class="bulk-btn" onclick="openBrandSearches('SWEET')">All Sweet Protection (5 helmets)</button>
+        <button class="bulk-btn" onclick="openBrandSearches('LAZER')">All Lazer (23 helmets)</button>
+        <button class="bulk-btn" onclick="openBrandSearches('BELL')">All Bell (13 helmets)</button>
+        <button class="bulk-btn" onclick="openBrandSearches('SCOTT')">All Scott (9 helmets)</button>
+    </div>
+
+    <div class="filters">
+        <div class="filter-controls">
+            <div class="filter-group">
+                <label for="searchFilter">Search by Name/Brand:</label>
+                <input type="text" id="searchFilter" placeholder="e.g., Giro, MIPS, Specialized">
+            </div>
+            <div class="filter-group">
+                <label for="brandFilter">Filter by Brand:</label>
+                <select id="brandFilter">
+                    <option value="">All Brands</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="categoryFilter">Filter by Category:</label>
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="All Mountain">All Mountain</option>
+                    <option value="Road">Road</option>
+                    <option value="Urban">Urban</option>
+                    <option value="Full-Face">Full-Face</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="priceFilter">Max Price:</label>
+                <select id="priceFilter">
+                    <option value="">Any Price</option>
+                    <option value="50">Under $50</option>
+                    <option value="100">Under $100</option>
+                    <option value="200">Under $200</option>
+                    <option value="300">Under $300</option>
+                    <option value="400">Under $400</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="ratingFilter">Min Star Rating:</label>
+                <select id="ratingFilter">
+                    <option value="">Any Rating</option>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4+ Stars</option>
+                    <option value="3">3+ Stars</option>
+                </select>
+            </div>
+        </div>
+        <button onclick="clearFilters()" style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Clear All Filters</button>
+    </div>
+
+    <div class="results-summary">
+        <span id="resultsText">Showing 281 helmets</span>
+        <span id="progressText">Ready to search</span>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="helmet-grid" id="helmetGrid">
+        <!-- Helmets will be populated by JavaScript -->
+    </div>
+
+    <script>
+        // Helmet data extracted from your database
+        const helmets = [
+  {
+    "id": 1,
+    "name": "DEFLECTR RLS",
+    "brand": "CANYON",
+    "category": "All Mountain",
+    "price": 160,
+    "rating": 5
+  },
+  {
+    "id": 2,
+    "name": "MIDEN RLS",
+    "brand": "HEXR",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 5
+  },
+  {
+    "id": 3,
+    "name": "CULARIS",
+    "brand": "POC",
+    "category": "All Mountain",
+    "price": 240,
+    "rating": 5
+  },
+  {
+    "id": 4,
+    "name": "RACING SPEEDFRAME RS",
+    "brand": "FOX",
+    "category": "All Mountain",
+    "price": 279,
+    "rating": 5
+  },
+  {
+    "id": 5,
+    "name": "CYTAL",
+    "brand": "POC",
+    "category": "All Mountain",
+    "price": 330,
+    "rating": 5
+  },
+  {
+    "id": 6,
+    "name": "RACING SPEEDFRAME PRO",
+    "brand": "FOX",
+    "category": "All Mountain",
+    "price": 199,
+    "rating": 5
+  },
+  {
+    "id": 7,
+    "name": "A20",
+    "brand": "P2R",
+    "category": "All Mountain",
+    "price": 55,
+    "rating": 5
+  },
+  {
+    "id": 8,
+    "name": "ARIES SPHERICAL",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 300,
+    "rating": 5
+  },
+  {
+    "id": 9,
+    "name": "JETRO",
+    "brand": "BLUEGRASS",
+    "category": "All Mountain",
+    "price": 270,
+    "rating": 5
+  },
+  {
+    "id": 10,
+    "name": "PROTECTION FALCONER 2VI MIPS",
+    "brand": "SWEET",
+    "category": "All Mountain",
+    "price": 250,
+    "rating": 5
+  },
+  {
+    "id": 11,
+    "name": "ALTERRA",
+    "brand": "D",
+    "category": "All Mountain",
+    "price": 395,
+    "rating": 5
+  },
+  {
+    "id": 12,
+    "name": "TACTIC 4",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 110,
+    "rating": 5
+  },
+  {
+    "id": 13,
+    "name": "PREVAIL 3",
+    "brand": "SPECIALIZED",
+    "category": "Road",
+    "price": 300,
+    "rating": 5
+  },
+  {
+    "id": 14,
+    "name": "PROTECTION TRAILBLAZER MIPS",
+    "brand": "SWEET",
+    "category": "All Mountain",
+    "price": 180,
+    "rating": 5
+  },
+  {
+    "id": 15,
+    "name": "MODE",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 120,
+    "rating": 5
+  },
+  {
+    "id": 16,
+    "name": "RACING DROPFRAME PRO",
+    "brand": "FOX",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 5
+  },
+  {
+    "id": 17,
+    "name": "1 AURA",
+    "brand": "UNIT",
+    "category": "All Mountain",
+    "price": 250,
+    "rating": 5
+  },
+  {
+    "id": 18,
+    "name": "GIANT",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 5
+  },
+  {
+    "id": 19,
+    "name": "RACING DROPFRAME PRO 2023",
+    "brand": "FOX",
+    "category": "All Mountain",
+    "price": 280,
+    "rating": 5
+  },
+  {
+    "id": 20,
+    "name": "PROTECTION BUSHWHACKER 2VI MIPS",
+    "brand": "SWEET",
+    "category": "All Mountain",
+    "price": 250,
+    "rating": 5
+  },
+  {
+    "id": 21,
+    "name": "PROTECTION FALCONER AERO 2VI MIPS",
+    "brand": "SWEET",
+    "category": "Road",
+    "price": 300,
+    "rating": 5
+  },
+  {
+    "id": 22,
+    "name": "REV COMP MIPS",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 65,
+    "rating": 5
+  },
+  {
+    "id": 23,
+    "name": "G1 MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 240,
+    "rating": 5
+  },
+  {
+    "id": 24,
+    "name": "RHOAN",
+    "brand": "KAV",
+    "category": "All Mountain",
+    "price": 300,
+    "rating": 5
+  },
+  {
+    "id": 25,
+    "name": "RALLY MIPS",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 5
+  },
+  {
+    "id": 26,
+    "name": "RACING CROSSFRAME PRO",
+    "brand": "FOX",
+    "category": "All Mountain",
+    "price": 220,
+    "rating": 5
+  },
+  {
+    "id": 27,
+    "name": "VELOCIS MIPS",
+    "brand": "TREK",
+    "category": "All Mountain",
+    "price": 300,
+    "rating": 5
+  },
+  {
+    "id": 28,
+    "name": "ALIGN II",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 50,
+    "rating": 5
+  },
+  {
+    "id": 29,
+    "name": "CHAMONIX 3",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 80,
+    "rating": 5
+  },
+  {
+    "id": 30,
+    "name": "HUMMVEE MIPS",
+    "brand": "ENDURA",
+    "category": "All Mountain",
+    "price": 90,
+    "rating": 5
+  },
+  {
+    "id": 31,
+    "name": "TONIC MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 80,
+    "rating": 5
+  },
+  {
+    "id": 32,
+    "name": "AMBUSH 2",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 180,
+    "rating": 5
+  },
+  {
+    "id": 33,
+    "name": "ROGUE CORE MIPS",
+    "brand": "BLUEGRASS",
+    "category": "All Mountain",
+    "price": 190,
+    "rating": 5
+  },
+  {
+    "id": 34,
+    "name": "LEE DESIGNS A2 MIPS DECOY",
+    "brand": "TROY",
+    "category": "All Mountain",
+    "price": 179,
+    "rating": 5
+  },
+  {
+    "id": 35,
+    "name": "CENTURY MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 180,
+    "rating": 5
+  },
+  {
+    "id": 36,
+    "name": "DOWNTOWN MIPS",
+    "brand": "MET",
+    "category": "All Mountain",
+    "price": 80,
+    "rating": 5
+  },
+  {
+    "id": 37,
+    "name": "MILES MIPS",
+    "brand": "MET",
+    "category": "All Mountain",
+    "price": 80,
+    "rating": 5
+  },
+  {
+    "id": 38,
+    "name": "ATB-2T",
+    "brand": "D",
+    "category": "All Mountain",
+    "price": 229,
+    "rating": 5
+  },
+  {
+    "id": 39,
+    "name": "Z1 KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 280,
+    "rating": 5
+  },
+  {
+    "id": 40,
+    "name": "ROOST",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 110,
+    "rating": 5
+  },
+  {
+    "id": 41,
+    "name": "ROOST",
+    "brand": "LIV",
+    "category": "All Mountain",
+    "price": 110,
+    "rating": 5
+  },
+  {
+    "id": 42,
+    "name": "VANGUARD CORE",
+    "brand": "BLUEGRASS",
+    "category": "All Mountain",
+    "price": 350,
+    "rating": 5
+  },
+  {
+    "id": 43,
+    "name": "CENTRIC PLUS MIPS",
+    "brand": "SCOTT",
+    "category": "Road",
+    "price": 200,
+    "rating": 5
+  },
+  {
+    "id": 44,
+    "name": "REV PRO MIPS",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 273,
+    "rating": 5
+  },
+  {
+    "id": 45,
+    "name": "REV PRO MIPS",
+    "brand": "LIV",
+    "category": "All Mountain",
+    "price": 273,
+    "rating": 5
+  },
+  {
+    "id": 46,
+    "name": "TERRAE",
+    "brand": "MET",
+    "category": "All Mountain",
+    "price": 160,
+    "rating": 5
+  },
+  {
+    "id": 47,
+    "name": "SPHERE MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 160,
+    "rating": 5
+  },
+  {
+    "id": 48,
+    "name": "REVO",
+    "brand": "MET",
+    "category": "All Mountain",
+    "price": 230,
+    "rating": 5
+  },
+  {
+    "id": 49,
+    "name": "CYCLONE MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 75,
+    "rating": 5
+  },
+  {
+    "id": 50,
+    "name": "TERRANOVA MIPS",
+    "brand": "MET",
+    "category": "All Mountain",
+    "price": 160,
+    "rating": 5
+  },
+  {
+    "id": 51,
+    "name": "OCTAL X SPIN",
+    "brand": "POC",
+    "category": "All Mountain",
+    "price": 250,
+    "rating": 5
+  },
+  {
+    "id": 52,
+    "name": "MOTRIP MIPS",
+    "brand": "ABUS",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 5
+  },
+  {
+    "id": 53,
+    "name": "QUANTUM WAVECEL",
+    "brand": "TREK",
+    "category": "All Mountain",
+    "price": 125,
+    "rating": 5
+  },
+  {
+    "id": 54,
+    "name": "MT500 MIPS",
+    "brand": "ENDURA",
+    "category": "All Mountain",
+    "price": 240,
+    "rating": 5
+  },
+  {
+    "id": 55,
+    "name": "ARX PLUS MIPS 2020",
+    "brand": "SCOTT",
+    "category": "Road",
+    "price": 100,
+    "rating": 5
+  },
+  {
+    "id": 56,
+    "name": "LEE DESIGNS FLOWLINE",
+    "brand": "TROY",
+    "category": "All Mountain",
+    "price": 110,
+    "rating": 5
+  },
+  {
+    "id": 57,
+    "name": "SPECTER WAVECEL",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 5
+  },
+  {
+    "id": 58,
+    "name": "HELIOS SPHERICAL",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 250,
+    "rating": 5
+  },
+  {
+    "id": 59,
+    "name": "RACING SPEEDFRAME PRO MIPS",
+    "brand": "FOX",
+    "category": "All Mountain",
+    "price": 160,
+    "rating": 5
+  },
+  {
+    "id": 60,
+    "name": "MODROP MIPS",
+    "brand": "ABUS",
+    "category": "All Mountain",
+    "price": 140,
+    "rating": 5
+  },
+  {
+    "id": 61,
+    "name": "VINCI MIPS",
+    "brand": "MET",
+    "category": "All Mountain",
+    "price": 130,
+    "rating": 5
+  },
+  {
+    "id": 62,
+    "name": "BALLISTA MIPS",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 5
+  },
+  {
+    "id": 63,
+    "name": "EVADE 3",
+    "brand": "SPECIALIZED",
+    "category": "Road",
+    "price": 300,
+    "rating": 5
+  },
+  {
+    "id": 64,
+    "name": "LOMA",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 120,
+    "rating": 5
+  },
+  {
+    "id": 65,
+    "name": "ANVERZ NTA MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 5
+  },
+  {
+    "id": 66,
+    "name": "LEE DESIGNS A3 MIPS",
+    "brand": "TROY",
+    "category": "All Mountain",
+    "price": 220,
+    "rating": 5
+  },
+  {
+    "id": 67,
+    "name": "MASTER GEM",
+    "brand": "OUTDOOR",
+    "category": "All Mountain",
+    "price": 52,
+    "rating": 5
+  },
+  {
+    "id": 68,
+    "name": "RAIL",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 190,
+    "rating": 5
+  },
+  {
+    "id": 69,
+    "name": "RAIL",
+    "brand": "LIV",
+    "category": "All Mountain",
+    "price": 190,
+    "rating": 5
+  },
+  {
+    "id": 70,
+    "name": "STARVOS WAVECEL ASIA FIT",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 5
+  },
+  {
+    "id": 71,
+    "name": "STARVOS WAVECEL ROUND FIT",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 5
+  },
+  {
+    "id": 72,
+    "name": "PEDELEC 2.0 MIPS",
+    "brand": "ABUS",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 5
+  },
+  {
+    "id": 73,
+    "name": "PROJECT REBEL",
+    "brand": "RUDY",
+    "category": "All Mountain",
+    "price": 350,
+    "rating": 5
+  },
+  {
+    "id": 74,
+    "name": "RAIL SX MIPS",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 190,
+    "rating": 5
+  },
+  {
+    "id": 75,
+    "name": "JACKAL MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 5
+  },
+  {
+    "id": 76,
+    "name": "ECLIPSE SPHERICAL",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 250,
+    "rating": 5
+  },
+  {
+    "id": 77,
+    "name": "STARVOS WAVECEL",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 5
+  },
+  {
+    "id": 78,
+    "name": "TYRANT SPHERICAL",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 170,
+    "rating": 5
+  },
+  {
+    "id": 79,
+    "name": "Z20 MIPS",
+    "brand": "BELL",
+    "category": "All Mountain",
+    "price": 230,
+    "rating": 5
+  },
+  {
+    "id": 80,
+    "name": "TRENTA MIPS",
+    "brand": "MET",
+    "category": "All Mountain",
+    "price": 300,
+    "rating": 5
+  },
+  {
+    "id": 81,
+    "name": "SHELTER",
+    "brand": "MET",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 5
+  },
+  {
+    "id": 82,
+    "name": "PROPERO 4",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 5
+  },
+  {
+    "id": 83,
+    "name": "PREVAIL 2 VENT MIPS",
+    "brand": "SPECIALIZED",
+    "category": "Road",
+    "price": 250,
+    "rating": 5
+  },
+  {
+    "id": 84,
+    "name": "RALLY WAVECEL",
+    "brand": "TREK",
+    "category": "All Mountain",
+    "price": 160,
+    "rating": 5
+  },
+  {
+    "id": 85,
+    "name": "BALLISTA MIPS",
+    "brand": "TREK",
+    "category": "All Mountain",
+    "price": 300,
+    "rating": 5
+  },
+  {
+    "id": 86,
+    "name": "BALLISTA MIPS ASIA FIT",
+    "brand": "TREK",
+    "category": "All Mountain",
+    "price": 300,
+    "rating": 5
+  },
+  {
+    "id": 87,
+    "name": "SOLSTICE MIPS",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 65,
+    "rating": 5
+  },
+  {
+    "id": 88,
+    "name": "MAJOR MIPS",
+    "brand": "BERN",
+    "category": "All Mountain",
+    "price": 130,
+    "rating": 5
+  },
+  {
+    "id": 89,
+    "name": "ARGO PLUS MIPS",
+    "brand": "SCOTT",
+    "category": "Road",
+    "price": 80,
+    "rating": 5
+  },
+  {
+    "id": 90,
+    "name": "CASCADE",
+    "brand": "KALI",
+    "category": "All Mountain",
+    "price": 260,
+    "rating": 5
+  },
+  {
+    "id": 91,
+    "name": "LEE DESIGNS A1 CLASSIC MIPS",
+    "brand": "TROY",
+    "category": "All Mountain",
+    "price": 139,
+    "rating": 5
+  },
+  {
+    "id": 92,
+    "name": "TECTAL RACE SPIN",
+    "brand": "POC",
+    "category": "All Mountain",
+    "price": 220,
+    "rating": 5
+  },
+  {
+    "id": 93,
+    "name": "CIRCUIT WAVECEL",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 5
+  },
+  {
+    "id": 94,
+    "name": "CAGE KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 300,
+    "rating": 5
+  },
+  {
+    "id": 95,
+    "name": "XXX WAVECEL",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 300,
+    "rating": 5
+  },
+  {
+    "id": 96,
+    "name": "SONUS",
+    "brand": "NEAL",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 5
+  },
+  {
+    "id": 97,
+    "name": "SEARCH",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 160,
+    "rating": 5
+  },
+  {
+    "id": 98,
+    "name": "REV COMP",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 5
+  },
+  {
+    "id": 99,
+    "name": "ELEMENTO",
+    "brand": "KASK",
+    "category": "All Mountain",
+    "price": 400,
+    "rating": 5
+  },
+  {
+    "id": 100,
+    "name": "FORMULA MIPS",
+    "brand": "BELL",
+    "category": "All Mountain",
+    "price": 95,
+    "rating": 5
+  },
+  {
+    "id": 101,
+    "name": "SOLSTICE MIPS ASIA FIT",
+    "brand": "TREK",
+    "category": "All Mountain",
+    "price": 70,
+    "rating": 5
+  },
+  {
+    "id": 102,
+    "name": "ROOST MIPS",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 5
+  },
+  {
+    "id": 103,
+    "name": "PROTECTION PROMUTER MIPS",
+    "brand": "SWEET",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 5
+  },
+  {
+    "id": 104,
+    "name": "HEAD TRAUMA PROTECTION SYSTEM",
+    "brand": "AIRNOGGIN",
+    "category": "All Mountain",
+    "price": 99,
+    "rating": 5
+  },
+  {
+    "id": 105,
+    "name": "SOLSTICE MIPS",
+    "brand": "TREK",
+    "category": "All Mountain",
+    "price": 70,
+    "rating": 5
+  },
+  {
+    "id": 106,
+    "name": "RALLY WAVECEL",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 5
+  },
+  {
+    "id": 107,
+    "name": "REALM MIPS",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 220,
+    "rating": 5
+  },
+  {
+    "id": 108,
+    "name": "CAMBER",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 80,
+    "rating": 5
+  },
+  {
+    "id": 109,
+    "name": "Z1 MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 255,
+    "rating": 5
+  },
+  {
+    "id": 110,
+    "name": "MACON 2.0 MIPS",
+    "brand": "BERN",
+    "category": "All Mountain",
+    "price": 89,
+    "rating": 5
+  },
+  {
+    "id": 111,
+    "name": "MANIFEST SPHERICAL",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 260,
+    "rating": 5
+  },
+  {
+    "id": 112,
+    "name": "ECHELON II MIPS",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 90,
+    "rating": 5
+  },
+  {
+    "id": 113,
+    "name": "VELOCIS MIPS",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 210,
+    "rating": 5
+  },
+  {
+    "id": 114,
+    "name": "PROJECT RACEMASTER MIPS",
+    "brand": "RUDY",
+    "category": "All Mountain",
+    "price": 350,
+    "rating": 5
+  },
+  {
+    "id": 115,
+    "name": "CRUIZER MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 125,
+    "rating": 5
+  },
+  {
+    "id": 116,
+    "name": "BLADE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 5
+  },
+  {
+    "id": 117,
+    "name": "GARNEAU RAID MIPS",
+    "brand": "LOUIS",
+    "category": "All Mountain",
+    "price": 120,
+    "rating": 5
+  },
+  {
+    "id": 118,
+    "name": "Z20 AERO MIPS",
+    "brand": "BELL",
+    "category": "Road",
+    "price": 250,
+    "rating": 5
+  },
+  {
+    "id": 119,
+    "name": "LEE DESIGNS FLOWLINE SE",
+    "brand": "TROY",
+    "category": "All Mountain",
+    "price": 160,
+    "rating": 5
+  },
+  {
+    "id": 120,
+    "name": "GAMECHANGER 2.0 MIPS",
+    "brand": "ABUS",
+    "category": "All Mountain",
+    "price": 330,
+    "rating": 5
+  },
+  {
+    "id": 121,
+    "name": "PATH MIPS",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 55,
+    "rating": 5
+  },
+  {
+    "id": 122,
+    "name": "RELAY MIPS",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 50,
+    "rating": 5
+  },
+  {
+    "id": 123,
+    "name": "PATH MIPS",
+    "brand": "LIV",
+    "category": "All Mountain",
+    "price": 55,
+    "rating": 5
+  },
+  {
+    "id": 124,
+    "name": "RELAY MIPS",
+    "brand": "LIV",
+    "category": "All Mountain",
+    "price": 50,
+    "rating": 5
+  },
+  {
+    "id": 125,
+    "name": "AETHER SPHERICAL",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 325,
+    "rating": 5
+  },
+  {
+    "id": 126,
+    "name": "UNION MIPS",
+    "brand": "BERN",
+    "category": "All Mountain",
+    "price": 110,
+    "rating": 5
+  },
+  {
+    "id": 127,
+    "name": "S-WORKS PREVAIL II MIPS",
+    "brand": "SPECIALIZED",
+    "category": "Road",
+    "price": 250,
+    "rating": 5
+  },
+  {
+    "id": 128,
+    "name": "CYTAL CARBON",
+    "brand": "POC",
+    "category": "All Mountain",
+    "price": 400,
+    "rating": 5
+  },
+  {
+    "id": 129,
+    "name": "COYOTE KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 5
+  },
+  {
+    "id": 130,
+    "name": "REV ELITE MIPS",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 180,
+    "rating": 5
+  },
+  {
+    "id": 131,
+    "name": "BLAZE WAVECEL",
+    "brand": "TREK",
+    "category": "All Mountain",
+    "price": 250,
+    "rating": 5
+  },
+  {
+    "id": 132,
+    "name": "RIVALE MIPS",
+    "brand": "MET",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 5
+  },
+  {
+    "id": 133,
+    "name": "KUDO AERO",
+    "brand": "FIZIK",
+    "category": "Road",
+    "price": 290,
+    "rating": 5
+  },
+  {
+    "id": 134,
+    "name": "CANNIBAL MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 80,
+    "rating": 5
+  },
+  {
+    "id": 135,
+    "name": "KUDO",
+    "brand": "FIZIK",
+    "category": "All Mountain",
+    "price": 290,
+    "rating": 5
+  },
+  {
+    "id": 136,
+    "name": "ELEGANT MIPS",
+    "brand": "PMT",
+    "category": "All Mountain",
+    "price": 103,
+    "rating": 5
+  },
+  {
+    "id": 137,
+    "name": "STRATUS MIPS",
+    "brand": "BELL",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 5
+  },
+  {
+    "id": 138,
+    "name": "CHAPTER MIPS",
+    "brand": "THOUSAND",
+    "category": "All Mountain",
+    "price": 135,
+    "rating": 5
+  },
+  {
+    "id": 139,
+    "name": "ROLLER MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 85,
+    "rating": 5
+  },
+  {
+    "id": 140,
+    "name": "SYNTHE MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 270,
+    "rating": 4
+  },
+  {
+    "id": 141,
+    "name": "CHIRU MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 55,
+    "rating": 4
+  },
+  {
+    "id": 142,
+    "name": "HUDSON",
+    "brand": "BERN",
+    "category": "All Mountain",
+    "price": 140,
+    "rating": 4
+  },
+  {
+    "id": 143,
+    "name": "TONE",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 80,
+    "rating": 4
+  },
+  {
+    "id": 144,
+    "name": "CHAMONIX MIPS",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 75,
+    "rating": 4
+  },
+  {
+    "id": 145,
+    "name": "HYBAN 2.0 MIPS",
+    "brand": "ABUS",
+    "category": "All Mountain",
+    "price": 110,
+    "rating": 4
+  },
+  {
+    "id": 146,
+    "name": "LUPO KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 69,
+    "rating": 4
+  },
+  {
+    "id": 147,
+    "name": "FINCH KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 69,
+    "rating": 4
+  },
+  {
+    "id": 148,
+    "name": "BLAZE WAVECEL",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 300,
+    "rating": 4
+  },
+  {
+    "id": 149,
+    "name": "SUPRA PLUS MIPS",
+    "brand": "SCOTT",
+    "category": "Road",
+    "price": 100,
+    "rating": 4
+  },
+  {
+    "id": 150,
+    "name": "STEGO PLUS MIPS",
+    "brand": "SCOTT",
+    "category": "Road",
+    "price": 190,
+    "rating": 4
+  },
+  {
+    "id": 151,
+    "name": "SYNTAX MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 4
+  },
+  {
+    "id": 152,
+    "name": "RACING MAINFRAME MIPS",
+    "brand": "FOX",
+    "category": "All Mountain",
+    "price": 90,
+    "rating": 4
+  },
+  {
+    "id": 153,
+    "name": "RACING SPEEDFRAME",
+    "brand": "FOX",
+    "category": "All Mountain",
+    "price": 109,
+    "rating": 4
+  },
+  {
+    "id": 154,
+    "name": "MT500 FULL-FACE MIPS",
+    "brand": "ENDURA",
+    "category": "Full-Face",
+    "price": 300,
+    "rating": 4
+  },
+  {
+    "id": 155,
+    "name": "NOVA",
+    "brand": "KAV",
+    "category": "All Mountain",
+    "price": 300,
+    "rating": 4
+  },
+  {
+    "id": 156,
+    "name": "URBANIZE NTA MIPS",
+    "brand": "LAZER",
+    "category": "Urban",
+    "price": 160,
+    "rating": 4
+  },
+  {
+    "id": 157,
+    "name": "CHASE KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 4
+  },
+  {
+    "id": 158,
+    "name": "STREET MIPS",
+    "brand": "NUTCASE",
+    "category": "All Mountain",
+    "price": 80,
+    "rating": 4
+  },
+  {
+    "id": 159,
+    "name": "TAGO PLUS MIPS",
+    "brand": "SCOTT",
+    "category": "Road",
+    "price": 160,
+    "rating": 4
+  },
+  {
+    "id": 160,
+    "name": "JACKAL KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 4
+  },
+  {
+    "id": 161,
+    "name": "STRADA KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 110,
+    "rating": 4
+  },
+  {
+    "id": 162,
+    "name": "CHARGE WAVECEL",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 4
+  },
+  {
+    "id": 163,
+    "name": "VENTO KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 280,
+    "rating": 4
+  },
+  {
+    "id": 164,
+    "name": "ELEGANT 3.0",
+    "brand": "PMT",
+    "category": "All Mountain",
+    "price": 105,
+    "rating": 4
+  },
+  {
+    "id": 165,
+    "name": "KASSIS",
+    "brand": "FIZIK",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 4
+  },
+  {
+    "id": 166,
+    "name": "CHRONICLE MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 4
+  },
+  {
+    "id": 167,
+    "name": "CLIFFHANGER MIPS",
+    "brand": "ABUS",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 4
+  },
+  {
+    "id": 168,
+    "name": "KORA 3.0",
+    "brand": "PMT",
+    "category": "All Mountain",
+    "price": 121,
+    "rating": 4
+  },
+  {
+    "id": 169,
+    "name": "IMPALA MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 140,
+    "rating": 4
+  },
+  {
+    "id": 170,
+    "name": "CADENCE PLUS",
+    "brand": "SCOTT",
+    "category": "Road",
+    "price": 230,
+    "rating": 4
+  },
+  {
+    "id": 171,
+    "name": "AMBUSH MIPS",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 4
+  },
+  {
+    "id": 172,
+    "name": "GIANT",
+    "brand": "GIANT",
+    "category": "All Mountain",
+    "price": 350,
+    "rating": 4
+  },
+  {
+    "id": 173,
+    "name": "TRENTA 3K CARBON MIPS",
+    "brand": "MET",
+    "category": "All Mountain",
+    "price": 380,
+    "rating": 4
+  },
+  {
+    "id": 174,
+    "name": "ROUTE MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 105,
+    "rating": 4
+  },
+  {
+    "id": 175,
+    "name": "COMPACT DLX MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 60,
+    "rating": 4
+  },
+  {
+    "id": 176,
+    "name": "CIRCUIT MIPS",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 90,
+    "rating": 4
+  },
+  {
+    "id": 177,
+    "name": "CADEN MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 95,
+    "rating": 4
+  },
+  {
+    "id": 178,
+    "name": "TONIC KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 70,
+    "rating": 4
+  },
+  {
+    "id": 179,
+    "name": "CERRO KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 4
+  },
+  {
+    "id": 180,
+    "name": "ARX PLUS MIPS 2014",
+    "brand": "SCOTT",
+    "category": "Road",
+    "price": 100,
+    "rating": 4
+  },
+  {
+    "id": 181,
+    "name": "QUANTUM MIPS",
+    "brand": "BONTRAGER",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 4
+  },
+  {
+    "id": 182,
+    "name": "S-WORKS EVADE II MIPS",
+    "brand": "SPECIALIZED",
+    "category": "Road",
+    "price": 275,
+    "rating": 4
+  },
+  {
+    "id": 183,
+    "name": "ANNEX MIPS",
+    "brand": "BELL",
+    "category": "All Mountain",
+    "price": 125,
+    "rating": 4
+  },
+  {
+    "id": 184,
+    "name": "TEMPO KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 40,
+    "rating": 4
+  },
+  {
+    "id": 185,
+    "name": "CODAX KINETICORE",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 45,
+    "rating": 4
+  },
+  {
+    "id": 186,
+    "name": "INTERCEPTOR 2.0",
+    "brand": "KALI",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 4
+  },
+  {
+    "id": 187,
+    "name": "TITLE",
+    "brand": "MONGOOSE",
+    "category": "All Mountain",
+    "price": 88,
+    "rating": 4
+  },
+  {
+    "id": 188,
+    "name": "CITYZEN KINETICORE",
+    "brand": "LAZER",
+    "category": "Urban",
+    "price": 65,
+    "rating": 4
+  },
+  {
+    "id": 189,
+    "name": "CAMELEON MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 90,
+    "rating": 4
+  },
+  {
+    "id": 190,
+    "name": "COYOTE MIPS",
+    "brand": "LAZER",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 4
+  },
+  {
+    "id": 191,
+    "name": "CENTRO MIPS",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 65,
+    "rating": 4
+  },
+  {
+    "id": 192,
+    "name": "S-WORKS PREVAIL II",
+    "brand": "SPECIALIZED",
+    "category": "Road",
+    "price": 225,
+    "rating": 4
+  },
+  {
+    "id": 193,
+    "name": "RETRO LIFER E-HELMET",
+    "brand": "S1",
+    "category": "All Mountain",
+    "price": 120,
+    "rating": 4
+  },
+  {
+    "id": 194,
+    "name": "OVERTAKE",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 163,
+    "rating": 4
+  },
+  {
+    "id": 195,
+    "name": "UNITED PODIUM",
+    "brand": "DEMON",
+    "category": "All Mountain",
+    "price": 70,
+    "rating": 4
+  },
+  {
+    "id": 196,
+    "name": "VIVO PLUS MIPS",
+    "brand": "SCOTT",
+    "category": "Road",
+    "price": 130,
+    "rating": 4
+  },
+  {
+    "id": 197,
+    "name": "WHISPER",
+    "brand": "CATLIKE",
+    "category": "All Mountain",
+    "price": 130,
+    "rating": 4
+  },
+  {
+    "id": 198,
+    "name": "SIGNAL MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 85,
+    "rating": 4
+  },
+  {
+    "id": 199,
+    "name": "SAVANT",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 4
+  },
+  {
+    "id": 200,
+    "name": "UNITED FR LINK",
+    "brand": "DEMON",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 4
+  },
+  {
+    "id": 201,
+    "name": "MACON 2.0 DVRT",
+    "brand": "BERN",
+    "category": "All Mountain",
+    "price": 79,
+    "rating": 4
+  },
+  {
+    "id": 202,
+    "name": "SIXER MIPS",
+    "brand": "BELL",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 4
+  },
+  {
+    "id": 203,
+    "name": "RYKER AM MIPS",
+    "brand": "CANNONDALE",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 4
+  },
+  {
+    "id": 204,
+    "name": "DRAFT MIPS",
+    "brand": "BELL",
+    "category": "All Mountain",
+    "price": 60,
+    "rating": 4
+  },
+  {
+    "id": 205,
+    "name": "AMBUSH",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 180,
+    "rating": 4
+  },
+  {
+    "id": 206,
+    "name": "POWERDOME MIPS",
+    "brand": "ABUS",
+    "category": "All Mountain",
+    "price": 170,
+    "rating": 4
+  },
+  {
+    "id": 207,
+    "name": "SERVO",
+    "brand": "BELL",
+    "category": "All Mountain",
+    "price": 80,
+    "rating": 4
+  },
+  {
+    "id": 208,
+    "name": "MOTRIP",
+    "brand": "ABUS",
+    "category": "All Mountain",
+    "price": 75,
+    "rating": 3
+  },
+  {
+    "id": 209,
+    "name": "OCTAL",
+    "brand": "POC",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 3
+  },
+  {
+    "id": 210,
+    "name": "TT-29",
+    "brand": "BIKEROO",
+    "category": "Road",
+    "price": 25,
+    "rating": 3
+  },
+  {
+    "id": 211,
+    "name": "KORA",
+    "brand": "PMT",
+    "category": "All Mountain",
+    "price": 120,
+    "rating": 3
+  },
+  {
+    "id": 212,
+    "name": "PRO 24",
+    "brand": "ZEFAL",
+    "category": "All Mountain",
+    "price": 30,
+    "rating": 3
+  },
+  {
+    "id": 213,
+    "name": "OMNE AIR SPIN",
+    "brand": "POC",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 3
+  },
+  {
+    "id": 214,
+    "name": "TECTAL",
+    "brand": "POC",
+    "category": "All Mountain",
+    "price": 190,
+    "rating": 3
+  },
+  {
+    "id": 215,
+    "name": "FORAY MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 85,
+    "rating": 3
+  },
+  {
+    "id": 216,
+    "name": "MT7 MIPS",
+    "brand": "ENDURA",
+    "category": "All Mountain",
+    "price": 190,
+    "rating": 3
+  },
+  {
+    "id": 217,
+    "name": "RANGER MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 3
+  },
+  {
+    "id": 218,
+    "name": "O'NEAL SIERRA R",
+    "brand": "O'NEAL",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 3
+  },
+  {
+    "id": 219,
+    "name": "ISANO",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 50,
+    "rating": 3
+  },
+  {
+    "id": 220,
+    "name": "RIDGE MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 3
+  },
+  {
+    "id": 221,
+    "name": "MONTARE MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 3
+  },
+  {
+    "id": 222,
+    "name": "AERO MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 300,
+    "rating": 3
+  },
+  {
+    "id": 223,
+    "name": "ARBOR MIPS",
+    "brand": "SCOTT",
+    "category": "Road",
+    "price": 130,
+    "rating": 3
+  },
+  {
+    "id": 224,
+    "name": "BLADE+",
+    "brand": "KASK",
+    "category": "All Mountain",
+    "price": 170,
+    "rating": 3
+  },
+  {
+    "id": 225,
+    "name": "REGISTER MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 70,
+    "rating": 3
+  },
+  {
+    "id": 226,
+    "name": "AXION SPIN",
+    "brand": "POC",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 3
+  },
+  {
+    "id": 227,
+    "name": "FOREFRONT 2 MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 260,
+    "rating": 3
+  },
+  {
+    "id": 228,
+    "name": "OMNE AIR MIPS",
+    "brand": "POC",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 3
+  },
+  {
+    "id": 229,
+    "name": "ENGAGE MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 140,
+    "rating": 3
+  },
+  {
+    "id": 230,
+    "name": "AETHER MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 270,
+    "rating": 3
+  },
+  {
+    "id": 231,
+    "name": "ROVER MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 95,
+    "rating": 3
+  },
+  {
+    "id": 232,
+    "name": "MT5 MIPS",
+    "brand": "ENDURA",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 3
+  },
+  {
+    "id": 233,
+    "name": "TRACE MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 120,
+    "rating": 3
+  },
+  {
+    "id": 234,
+    "name": "OPENFACE DOWNHILL",
+    "brand": "DEMON",
+    "category": "All Mountain",
+    "price": 90,
+    "rating": 3
+  },
+  {
+    "id": 235,
+    "name": "FIXTURE MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 75,
+    "rating": 3
+  },
+  {
+    "id": 236,
+    "name": "RADIX MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 150,
+    "rating": 3
+  },
+  {
+    "id": 237,
+    "name": "FATHOM",
+    "brand": "KASK",
+    "category": "All Mountain",
+    "price": 250,
+    "rating": 3
+  },
+  {
+    "id": 238,
+    "name": "VASONA MIPS",
+    "brand": "SPECIALIZED",
+    "category": "All Mountain",
+    "price": 85,
+    "rating": 3
+  },
+  {
+    "id": 239,
+    "name": "HELMET MIPS",
+    "brand": "SCOTT",
+    "category": "Road",
+    "price": 70,
+    "rating": 3
+  },
+  {
+    "id": 240,
+    "name": "NEXUS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 130,
+    "rating": 3
+  },
+  {
+    "id": 241,
+    "name": "HIXON MIPS",
+    "brand": "SCOTT",
+    "category": "Road",
+    "price": 90,
+    "rating": 3
+  },
+  {
+    "id": 242,
+    "name": "CONTRA MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 190,
+    "rating": 3
+  },
+  {
+    "id": 243,
+    "name": "PROTONE",
+    "brand": "KASK",
+    "category": "All Mountain",
+    "price": 220,
+    "rating": 3
+  },
+  {
+    "id": 244,
+    "name": "FACTOR",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 70,
+    "rating": 3
+  },
+  {
+    "id": 245,
+    "name": "CARTWHEEL MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 80,
+    "rating": 3
+  },
+  {
+    "id": 246,
+    "name": "RADIX",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 120,
+    "rating": 3
+  },
+  {
+    "id": 247,
+    "name": "FIXTURE",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 55,
+    "rating": 3
+  },
+  {
+    "id": 248,
+    "name": "CORMICK MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 90,
+    "rating": 3
+  },
+  {
+    "id": 249,
+    "name": "COMPOUND MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 120,
+    "rating": 3
+  },
+  {
+    "id": 250,
+    "name": "OPENFACE",
+    "brand": "DEMON",
+    "category": "All Mountain",
+    "price": 80,
+    "rating": 3
+  },
+  {
+    "id": 251,
+    "name": "MATRIX MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 170,
+    "rating": 3
+  },
+  {
+    "id": 252,
+    "name": "SESSION MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 3
+  },
+  {
+    "id": 253,
+    "name": "TREMOR",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 45,
+    "rating": 3
+  },
+  {
+    "id": 254,
+    "name": "MAINFRAME MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 110,
+    "rating": 3
+  },
+  {
+    "id": 255,
+    "name": "SCAMP MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 55,
+    "rating": 3
+  },
+  {
+    "id": 256,
+    "name": "QUARTER FS MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 90,
+    "rating": 3
+  },
+  {
+    "id": 257,
+    "name": "MOJITO 3",
+    "brand": "KASK",
+    "category": "All Mountain",
+    "price": 160,
+    "rating": 3
+  },
+  {
+    "id": 258,
+    "name": "LIVESTRONG E-500",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 140,
+    "rating": 3
+  },
+  {
+    "id": 259,
+    "name": "VENT",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 60,
+    "rating": 3
+  },
+  {
+    "id": 260,
+    "name": "DISCIPLE MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 200,
+    "rating": 3
+  },
+  {
+    "id": 261,
+    "name": "VIRTUE MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 90,
+    "rating": 3
+  },
+  {
+    "id": 262,
+    "name": "VERCE MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 3
+  },
+  {
+    "id": 263,
+    "name": "NINE MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 250,
+    "rating": 3
+  },
+  {
+    "id": 264,
+    "name": "QUARTER MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 70,
+    "rating": 3
+  },
+  {
+    "id": 265,
+    "name": "TRANSFER",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 50,
+    "rating": 3
+  },
+  {
+    "id": 266,
+    "name": "CODE MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 180,
+    "rating": 3
+  },
+  {
+    "id": 267,
+    "name": "TRACE",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 85,
+    "rating": 3
+  },
+  {
+    "id": 268,
+    "name": "ASPECT MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 160,
+    "rating": 3
+  },
+  {
+    "id": 269,
+    "name": "HOLT",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 40,
+    "rating": 3
+  },
+  {
+    "id": 270,
+    "name": "EXPRESS MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 55,
+    "rating": 3
+  },
+  {
+    "id": 271,
+    "name": "CONVOY MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 110,
+    "rating": 3
+  },
+  {
+    "id": 272,
+    "name": "EMERGE MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 65,
+    "rating": 3
+  },
+  {
+    "id": 273,
+    "name": "SWITCHBLADE MIPS",
+    "brand": "GIRO",
+    "category": "All Mountain",
+    "price": 300,
+    "rating": 3
+  },
+  {
+    "id": 274,
+    "name": "NETWORK MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 90,
+    "rating": 3
+  },
+  {
+    "id": 275,
+    "name": "WILDER JR MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 60,
+    "rating": 3
+  },
+  {
+    "id": 276,
+    "name": "LEVEL MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 80,
+    "rating": 3
+  },
+  {
+    "id": 277,
+    "name": "PORTAL MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 130,
+    "rating": 3
+  },
+  {
+    "id": 278,
+    "name": "IGNITE MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 100,
+    "rating": 3
+  },
+  {
+    "id": 279,
+    "name": "ALLURE MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 130,
+    "rating": 3
+  },
+  {
+    "id": 280,
+    "name": "PERSIST MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 90,
+    "rating": 3
+  },
+  {
+    "id": 281,
+    "name": "PROSPECT MIPS",
+    "brand": "SMITH",
+    "category": "All Mountain",
+    "price": 70,
+    "rating": 3
+  }
+];
+
+        let filteredHelmets = [...helmets];
+        let clickedLinks = new Set();
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            populateBrandFilter();
+            updateStats();
+            renderHelmets();
+            setupEventListeners();
+        });
+
+        function populateBrandFilter() {
+            const brands = [...new Set(helmets.map(h => h.brand))].sort();
+            const brandFilter = document.getElementById('brandFilter');
+
+            brands.forEach(brand => {
+                const option = document.createElement('option');
+                option.value = brand;
+                option.textContent = brand;
+                brandFilter.appendChild(option);
+            });
+
+            document.getElementById('uniqueBrands').textContent = brands.length;
+        }
+
+        function updateStats() {
+            const visible = filteredHelmets.length;
+            const avgPrice = visible > 0 ? Math.round(filteredHelmets.reduce((sum, h) => sum + h.price, 0) / visible) : 0;
+
+            document.getElementById('visibleHelmets').textContent = visible;
+            document.getElementById('avgPrice').textContent = `$${avgPrice}`;
+            document.getElementById('resultsText').textContent = `Showing ${visible} helmets`;
+
+            // Update progress
+            const clickedCount = clickedLinks.size;
+            const progressPercent = visible > 0 ? (clickedCount / visible) * 100 : 0;
+            document.getElementById('progressFill').style.width = `${progressPercent}%`;
+            document.getElementById('progressText').textContent = `${clickedCount}/${visible} searched (${Math.round(progressPercent)}%)`;
+        }
+
+        function renderHelmets() {
+            const grid = document.getElementById('helmetGrid');
+
+            if (filteredHelmets.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #6b7280;">No helmets match your filters.</div>';
+                return;
+            }
+
+            grid.innerHTML = filteredHelmets.map(helmet => `
+                <div class="helmet-card ${clickedLinks.has(helmet.id) ? 'searched' : ''}" data-helmet-id="${helmet.id}">
+                    <div class="helmet-header">
+                        <div class="helmet-id">ID: ${helmet.id}</div>
+                        <div class="helmet-brand">${helmet.brand}</div>
+                        <div class="helmet-name">${helmet.name}</div>
+                    </div>
+                    <div class="helmet-meta">
+                        <span class="category-badge">${helmet.category}</span>
+                        <span class="price-badge">$${helmet.price}</span>
+                        <span class="rating-stars">${'★'.repeat(helmet.rating)}${'☆'.repeat(5-helmet.rating)}</span>
+                    </div>
+                    <a href="${generateSearchURL(helmet)}"
+                       target="_blank"
+                       class="search-button"
+                       onclick="markAsSearched(${helmet.id})"
+                       rel="noopener noreferrer">
+                        🔍 Search on Amazon
+                    </a>
+                </div>
+            `).join('');
+
+            updateStats();
+        }
+
+        function generateSearchURL(helmet) {
+            const query = encodeURIComponent(`${helmet.brand} ${helmet.name} helmet`);
+            return `https://www.amazon.com/s?k=${query}&ref=nb_sb_noss`;
+        }
+
+        function markAsSearched(helmetId) {
+            clickedLinks.add(helmetId);
+            document.querySelector(`[data-helmet-id="${helmetId}"]`).style.background = '#f0fdf4';
+            document.querySelector(`[data-helmet-id="${helmetId}"]`).style.borderColor = '#16a34a';
+            updateStats();
+        }
+
+        function setupEventListeners() {
+            // Search filter
+            document.getElementById('searchFilter').addEventListener('input', applyFilters);
+            document.getElementById('brandFilter').addEventListener('change', applyFilters);
+            document.getElementById('categoryFilter').addEventListener('change', applyFilters);
+            document.getElementById('priceFilter').addEventListener('change', applyFilters);
+            document.getElementById('ratingFilter').addEventListener('change', applyFilters);
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchFilter').value.toLowerCase();
+            const brandFilter = document.getElementById('brandFilter').value;
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const priceFilter = parseInt(document.getElementById('priceFilter').value) || Infinity;
+            const ratingFilter = parseInt(document.getElementById('ratingFilter').value) || 0;
+
+            filteredHelmets = helmets.filter(helmet => {
+                const matchesSearch = !searchTerm ||
+                    helmet.name.toLowerCase().includes(searchTerm) ||
+                    helmet.brand.toLowerCase().includes(searchTerm);
+
+                const matchesBrand = !brandFilter || helmet.brand === brandFilter;
+                const matchesCategory = !categoryFilter || helmet.category === categoryFilter;
+                const matchesPrice = helmet.price <= priceFilter;
+                const matchesRating = helmet.rating >= ratingFilter;
+
+                return matchesSearch && matchesBrand && matchesCategory && matchesPrice && matchesRating;
+            });
+
+            renderHelmets();
+        }
+
+        function clearFilters() {
+            document.getElementById('searchFilter').value = '';
+            document.getElementById('brandFilter').value = '';
+            document.getElementById('categoryFilter').value = '';
+            document.getElementById('priceFilter').value = '';
+            document.getElementById('ratingFilter').value = '';
+            applyFilters();
+        }
+
+        function openBrandSearches(brand) {
+            const brandHelmets = helmets.filter(h => h.brand === brand);
+
+            if (brandHelmets.length > 10) {
+                if (!confirm(`This will open ${brandHelmets.length} new tabs. Continue?`)) {
+                    return;
+                }
+            }
+
+            brandHelmets.forEach((helmet, index) => {
+                setTimeout(() => {
+                    window.open(generateSearchURL(helmet), '_blank');
+                    markAsSearched(helmet.id);
+                }, index * 100); // Stagger the opening
+            });
+        }
+
+        // Global function for onclick
+        window.markAsSearched = markAsSearched;
+        window.openBrandSearches = openBrandSearches;
+        window.clearFilters = clearFilters;
+    </script>
+</body>
+</html>

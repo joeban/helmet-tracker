@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual ASIN Search Helper - HelmetScore</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8fafc;
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .search-link {
+            display: block;
+            padding: 12px 16px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #334155;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        .search-link:hover {
+            background: #e2e8f0;
+            border-color: #3b82f6;
+            transform: translateY(-1px);
+        }
+        .brand-section {
+            margin-bottom: 25px;
+        }
+        .brand-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .quick-tools {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .quick-tools h3 {
+            color: #92400e;
+            margin-top: 0;
+        }
+        .instructions {
+            background: #dbeafe;
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .instructions h3 {
+            color: #1e40af;
+            margin-top: 0;
+        }
+        .category-badge {
+            display: inline-block;
+            background: #6366f1;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .price-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .copy-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+        .copy-btn:hover {
+            background: #2563eb;
+        }
+        .workflow {
+            background: #f0fdf4;
+            border: 1px solid #16a34a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .workflow h3 {
+            color: #15803d;
+            margin-top: 0;
+        }
+        .workflow ol {
+            color: #166534;
+        }
+        .asin-extractor {
+            background: #fdf4ff;
+            border: 1px solid #a855f7;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .asin-extractor h3 {
+            color: #7c2d12;
+            margin-top: 0;
+        }
+        .compact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+        .compact-link {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 Manual ASIN Search Helper</h1>
+        <p>Streamlined tools for finding Amazon ASINs for HelmetScore helmets</p>
+    </div>
+
+    <div class="instructions">
+        <h3>📋 How to Use This Helper</h3>
+        <ol>
+            <li><strong>Click any search link</strong> to open Amazon with pre-filled search terms</li>
+            <li><strong>Look for exact helmet matches</strong> by brand and model name</li>
+            <li><strong>Extract the ASIN</strong> from the URL (10-character code like B08XYZ1234)</li>
+            <li><strong>Copy the ASIN</strong> and add it to your helmet data</li>
+            <li><strong>Verify the price and details</strong> match your helmet database</li>
+        </ol>
+    </div>
+
+    <div class="workflow">
+        <h3>⚡ Efficient Search Workflow</h3>
+        <ol>
+            <li><strong>Start with brand-specific searches</strong> below for broad discovery</li>
+            <li><strong>Use exact helmet searches</strong> for precise model matching</li>
+            <li><strong>Check multiple search variations</strong> if first attempt fails</li>
+            <li><strong>Use ASIN verification tools</strong> to confirm product details</li>
+            <li><strong>Document successful search patterns</strong> for future reference</li>
+        </ol>
+    </div>
+
+    <div class="asin-extractor">
+        <h3>🔗 ASIN Extraction Tips</h3>
+        <p><strong>ASIN Location in URLs:</strong></p>
+        <ul>
+            <li><code>amazon.com/dp/<strong>B08XYZ1234</strong>/</code> - Direct product page</li>
+            <li><code>amazon.com/.../<strong>B08XYZ1234</strong>/ref=...</code> - Search result page</li>
+            <li><code>amazon.com/gp/product/<strong>B08XYZ1234</strong></code> - Alternative format</li>
+        </ul>
+        <p><strong>Quick Copy:</strong> Right-click on ASIN in browser address bar → Copy</p>
+    </div>
+
+    <div class="quick-tools">
+        <h3>🚀 Quick Search Tools</h3>
+        <div class="search-grid">
+            <a href="https://www.amazon.com/s?k=bicycle+helmet+MIPS&ref=nb_sb_noss" class="search-link" target="_blank">
+                🛡️ All MIPS Helmets
+            </a>
+            <a href="https://www.amazon.com/s?k=bike+helmet+virginia+tech&ref=nb_sb_noss" class="search-link" target="_blank">
+                ⭐ Virginia Tech Tested
+            </a>
+            <a href="https://www.amazon.com/s?k=cycling+helmet+road&ref=nb_sb_noss" class="search-link" target="_blank">
+                🚴 Road Helmets
+            </a>
+            <a href="https://www.amazon.com/s?k=mountain+bike+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                🏔️ Mountain Bike Helmets
+            </a>
+            <a href="https://www.amazon.com/s?k=urban+commuter+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                🏙️ Urban/Commuter Helmets
+            </a>
+            <a href="https://www.amazon.com/s?k=full+face+bike+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                🎯 Full Face Helmets
+            </a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🏷️ Brand-Specific Searches</h2>
+
+        <div class="brand-section">
+            <div class="brand-title">SPECIALIZED</div>
+            <div class="search-grid">
+                <a href="https://www.amazon.com/s?k=Specialized+Prevail+3+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    Specialized Prevail 3 <span class="price-badge">~$300</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=Specialized+Tactic+4+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    Specialized Tactic 4 <span class="category-badge">MTB</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=Specialized+Mode+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    Specialized Mode <span class="category-badge">Road</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=Specialized+bicycle+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    All Specialized Helmets
+                </a>
+            </div>
+        </div>
+
+        <div class="brand-section">
+            <div class="brand-title">GIRO</div>
+            <div class="search-grid">
+                <a href="https://www.amazon.com/s?k=Giro+Aries+Spherical+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    Giro Aries Spherical <span class="price-badge">~$250</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=Giro+Syntax+MIPS+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    Giro Syntax MIPS <span class="category-badge">Road</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=Giro+Chronicle+MIPS+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    Giro Chronicle MIPS <span class="category-badge">MTB</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=Giro+bicycle+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    All Giro Helmets
+                </a>
+            </div>
+        </div>
+
+        <div class="brand-section">
+            <div class="brand-title">POC</div>
+            <div class="search-grid">
+                <a href="https://www.amazon.com/s?k=POC+Cularis+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    POC Cularis <span class="price-badge">~$240</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=POC+Cytal+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    POC Cytal <span class="category-badge">All Mountain</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=POC+Ventral+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    POC Ventral <span class="category-badge">Road</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=POC+bicycle+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    All POC Helmets
+                </a>
+            </div>
+        </div>
+
+        <div class="brand-section">
+            <div class="brand-title">FOX RACING</div>
+            <div class="search-grid">
+                <a href="https://www.amazon.com/s?k=Fox+Racing+Speedframe+RS+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    Fox Speedframe RS <span class="category-badge">MTB</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=Fox+Racing+Speedframe+Pro+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    Fox Speedframe Pro <span class="category-badge">MTB</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=Fox+Racing+Dropframe+Pro+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    Fox Dropframe Pro <span class="category-badge">Full Face</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=Fox+Racing+bicycle+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    All Fox Racing Helmets
+                </a>
+            </div>
+        </div>
+
+        <div class="brand-section">
+            <div class="brand-title">SWEET PROTECTION</div>
+            <div class="search-grid">
+                <a href="https://www.amazon.com/s?k=Sweet+Protection+Falconer+2VI+MIPS+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    Sweet Falconer 2VI MIPS <span class="category-badge">MTB</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=Sweet+Protection+Trailblazer+MIPS+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    Sweet Trailblazer MIPS <span class="category-badge">MTB</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=Sweet+Protection+Bushwhacker+2VI+MIPS+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    Sweet Bushwhacker 2VI MIPS <span class="category-badge">MTB</span>
+                </a>
+                <a href="https://www.amazon.com/s?k=Sweet+Protection+bicycle+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                    All Sweet Protection Helmets
+                </a>
+            </div>
+        </div>
+
+        <div class="brand-section">
+            <div class="brand-title">OTHER BRANDS</div>
+            <div class="compact-grid">
+                <a href="https://www.amazon.com/s?k=Canyon+Deflectr+RLS+helmet&ref=nb_sb_noss" class="search-link compact-link" target="_blank">
+                    Canyon Deflectr RLS
+                </a>
+                <a href="https://www.amazon.com/s?k=Hexr+Miden+RLS+helmet&ref=nb_sb_noss" class="search-link compact-link" target="_blank">
+                    Hexr Miden RLS
+                </a>
+                <a href="https://www.amazon.com/s?k=P2R+A20+helmet&ref=nb_sb_noss" class="search-link compact-link" target="_blank">
+                    P2R A20
+                </a>
+                <a href="https://www.amazon.com/s?k=Bluegrass+Jetro+helmet&ref=nb_sb_noss" class="search-link compact-link" target="_blank">
+                    Bluegrass Jetro
+                </a>
+                <a href="https://www.amazon.com/s?k=Unit+1+Aura+helmet&ref=nb_sb_noss" class="search-link compact-link" target="_blank">
+                    Unit 1 Aura
+                </a>
+                <a href="https://www.amazon.com/s?k=Giant+bicycle+helmet&ref=nb_sb_noss" class="search-link compact-link" target="_blank">
+                    Giant Helmets
+                </a>
+                <a href="https://www.amazon.com/s?k=Bell+bicycle+helmet&ref=nb_sb_noss" class="search-link compact-link" target="_blank">
+                    Bell Helmets
+                </a>
+                <a href="https://www.amazon.com/s?k=Smith+bicycle+helmet&ref=nb_sb_noss" class="search-link compact-link" target="_blank">
+                    Smith Helmets
+                </a>
+                <a href="https://www.amazon.com/s?k=Kask+bicycle+helmet&ref=nb_sb_noss" class="search-link compact-link" target="_blank">
+                    Kask Helmets
+                </a>
+                <a href="https://www.amazon.com/s?k=Lazer+bicycle+helmet&ref=nb_sb_noss" class="search-link compact-link" target="_blank">
+                    Lazer Helmets
+                </a>
+                <a href="https://www.amazon.com/s?k=Oakley+bicycle+helmet&ref=nb_sb_noss" class="search-link compact-link" target="_blank">
+                    Oakley Helmets
+                </a>
+                <a href="https://www.amazon.com/s?k=Troy+Lee+Designs+helmet&ref=nb_sb_noss" class="search-link compact-link" target="_blank">
+                    Troy Lee Designs
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🔧 Advanced Search Techniques</h2>
+
+        <div class="search-grid">
+            <a href="https://www.amazon.com/s?k=%22MIPS%22+bicycle+helmet&ref=nb_sb_noss" class="search-link" target="_blank">
+                🔍 Exact "MIPS" Search
+            </a>
+            <a href="https://www.amazon.com/s?k=bicycle+helmet+-kids+-child&ref=nb_sb_noss" class="search-link" target="_blank">
+                🚫 Exclude Kids Helmets
+            </a>
+            <a href="https://www.amazon.com/s?k=bike+helmet+%22Virginia+Tech%22&ref=nb_sb_noss" class="search-link" target="_blank">
+                📊 "Virginia Tech" Tested
+            </a>
+            <a href="https://www.amazon.com/s?k=cycling+helmet+%22spherical%22&ref=nb_sb_noss" class="search-link" target="_blank">
+                🔮 Spherical Technology
+            </a>
+            <a href="https://www.amazon.com/s?k=bike+helmet+%22WaveCel%22&ref=nb_sb_noss" class="search-link" target="_blank">
+                🌊 WaveCel Technology
+            </a>
+            <a href="https://www.amazon.com/s?k=helmet+%22STAR+rating%22&ref=nb_sb_noss" class="search-link" target="_blank">
+                ⭐ STAR Rating Mentions
+            </a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>📊 ASIN Verification Tools</h2>
+        <div class="search-grid">
+            <a href="https://www.amazon.com/dp/ASIN_HERE" class="search-link" target="_blank">
+                🔗 Direct ASIN Lookup (Replace ASIN_HERE)
+            </a>
+            <a href="https://keepa.com" class="search-link" target="_blank">
+                📈 Keepa Price History
+            </a>
+            <a href="https://camelcamelcamel.com" class="search-link" target="_blank">
+                🐫 CamelCamelCamel Tracker
+            </a>
+            <a href="https://www.amazon.com/gp/product/ASIN_HERE" class="search-link" target="_blank">
+                📋 Alternative ASIN Format
+            </a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>💡 Pro Tips for Efficient ASIN Discovery</h2>
+        <ul>
+            <li><strong>Use multiple search variations:</strong> "Brand Model helmet", "Brand Model bike", "Brand Model cycling"</li>
+            <li><strong>Check for model year variations:</strong> Some helmets have 2023, 2024 versions</li>
+            <li><strong>Look for MIPS vs non-MIPS versions:</strong> Often separate ASINs</li>
+            <li><strong>Check different colors/sizes:</strong> Sometimes different ASINs per variant</li>
+            <li><strong>Use Amazon's "Customers who viewed this item also viewed"</strong> for related models</li>
+            <li><strong>Search seller pages:</strong> Official brand stores often have complete catalogs</li>
+            <li><strong>Check Amazon's sports categories:</strong> Cycling > Helmets for browsing</li>
+            <li><strong>Use Google with site search:</strong> "Brand Model site:amazon.com"</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>📝 ASIN Recording Template</h2>
+        <div style="background: #f1f5f9; padding: 15px; border-radius: 6px; font-family: monospace; font-size: 14px;">
+Helmet: [Brand] [Model]<br>
+ASIN: [B0XXXXXXXXX]<br>
+URL: https://amazon.com/dp/[ASIN]<br>
+Price: $[XXX.XX]<br>
+Match Confidence: [High/Medium/Low]<br>
+Notes: [Color, size, year, etc.]<br>
+---
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f8fafc; border-radius: 8px;">
+        <p><strong>🎯 Happy ASIN Hunting!</strong></p>
+        <p>Bookmark this page for quick access to streamlined helmet searches.</p>
+        <p><em>Generated for HelmetScore manual ASIN discovery workflow</em></p>
+    </div>
+
+    <script>
+        // Add copy functionality for ASINs
+        function copyASIN(asin) {
+            navigator.clipboard.writeText(asin).then(() => {
+                alert('ASIN copied: ' + asin);
+            });
+        }
+
+        // Add click tracking for analytics
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('search-link')) {
+                console.log('Search link clicked:', e.target.href);
+                // You could send this to your analytics if needed
+            }
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + K to focus search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                window.open('https://www.amazon.com/s?k=bicycle+helmet', '_blank');
+            }
+        });
+    </script>
+</body>
+</html>
