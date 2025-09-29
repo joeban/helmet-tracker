@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getProductByASIN, searchProducts } from '@/utils/amazonProductAPI';
 
 // Cache for API responses (in-memory for now, could use Redis in production)
-const cache = new Map<string, { data: any; timestamp: number }>();
+const cache = new Map<string, { data: unknown; timestamp: number }>();
 const CACHE_DURATION = 60 * 60 * 1000; // 1 hour
 
 export async function GET(request: NextRequest) {

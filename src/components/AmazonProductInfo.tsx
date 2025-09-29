@@ -26,7 +26,7 @@ export default function AmazonProductInfo({
   const { product, loading, error } = useAmazonProduct({
     asin: storedInfo?.asin,
     brand: !storedInfo?.asin ? helmet.brand : undefined,
-    model: !storedInfo?.asin ? helmet.model : undefined,
+    model: !storedInfo?.asin ? helmet.name : undefined,
     enabled: true
   });
 
