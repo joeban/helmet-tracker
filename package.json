@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "fetch-asins": "node scripts/fetch-amazon-asins.js",
@@ -14,7 +14,9 @@
     "pa-api:test": "node scripts/test-single-helmet.js",
     "pa-api:discover": "npm run discover-asins",
     "pa-api:enrich": "npm run enrich-data",
-    "pa-api:full": "npm run discover-asins && npm run enrich-data"
+    "pa-api:full": "npm run discover-asins && npm run enrich-data",
+    "pa-api:monitor": "node scripts/monitor-api-limits.js",
+    "pa-api:slow-test": "node scripts/pa-api-slow-test.js"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
