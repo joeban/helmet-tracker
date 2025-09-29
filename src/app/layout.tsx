@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import AnalyticsDashboard from '@/components/AnalyticsDashboard';
 import PopularSearchDashboard from '@/components/PopularSearchDashboard';
 import ABTestDashboard, { ABTestConfigPanel } from '@/components/ABTestDashboard';
+import ASINManagementDashboard from '@/components/ASINManagementDashboard';
 import PriceAlertsButton from '@/components/PriceAlertsButton';
 import ComparisonWidget from '@/components/ComparisonWidget';
 import "./globals.css";
@@ -277,6 +278,7 @@ export default function RootLayout({
         <PopularSearchDashboard />
         <ABTestDashboard />
         <ABTestConfigPanel />
+        <ASINManagementDashboard />
         <PriceAlertsButton />
         <ComparisonWidget />
         <Analytics />

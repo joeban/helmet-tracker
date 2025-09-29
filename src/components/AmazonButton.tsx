@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { getButtonConfig, trackButtonImpression, trackButtonClick } from '@/utils/abTesting';
 import { trackAdvancedAffiliateClick } from '@/utils/analytics';
+import { getBestAmazonURL, getHelmetASIN } from '@/utils/amazonASINDiscovery';
 import type { ABTestVariant } from '@/utils/abTesting';
 import type { Helmet } from '@/types/helmet';
 
@@ -42,16 +43,17 @@ export default function AmazonButton({
       trackButtonClick(testId);
     }
 
+    // Get the best available Amazon URL (ASIN if available, search otherwise)
+    const amazonUrl = getBestAmazonURL(helmet);
+    const hasDirectASIN = getHelmetASIN(helmet) !== null;
+
     // Track advanced affiliate click for analytics
     trackAdvancedAffiliateClick({
       ...helmet,
       id: helmet.id.toString()
-    }, 'amazon', 'direct');
+    }, 'amazon', hasDirectASIN ? 'direct' : 'search');
 
-    // Open Amazon with affiliate link
-    const amazonUrl = helmet.amazon_url ||
-      `https://amazon.com/s?k=${encodeURIComponent(`${helmet.brand} ${helmet.name} helmet`)}&tag=${process.env.NEXT_PUBLIC_AMAZON_AFFILIATE_TAG || 'helmetscore-20'}`;
-
+    // Open Amazon with the best available link
     window.open(amazonUrl, '_blank');
   };
 
@@ -213,13 +215,16 @@ export function AmazonSearchButton({
       trackButtonClick(testId);
     }
 
+    // Get the best available Amazon URL (ASIN if available, search otherwise)
+    const amazonUrl = getBestAmazonURL(helmet);
+    const hasDirectASIN = getHelmetASIN(helmet) !== null;
+
     trackAdvancedAffiliateClick({
       ...helmet,
       id: helmet.id.toString()
-    }, 'amazon', 'search');
+    }, 'amazon', hasDirectASIN ? 'direct' : 'search');
 
-    const searchUrl = `https://amazon.com/s?k=${encodeURIComponent(`${helmet.brand} ${helmet.name} helmet`)}&tag=${process.env.NEXT_PUBLIC_AMAZON_AFFILIATE_TAG || 'helmetscore-20'}`;
-    window.open(searchUrl, '_blank');
+    window.open(amazonUrl, '_blank');
   };
 
   const config = buttonConfig || {
@@ -268,15 +273,17 @@ export function AmazonLink({
     // Track click for A/B testing
     trackButtonClick(testId);
 
+    // Get the best available Amazon URL (ASIN if available, search otherwise)
+    const hasDirectASIN = getHelmetASIN(helmet) !== null;
+
     // Track analytics
     trackAdvancedAffiliateClick({
       ...helmet,
       id: helmet.id.toString()
-    }, 'amazon', 'direct');
+    }, 'amazon', hasDirectASIN ? 'direct' : 'search');
   };
 
-  const amazonUrl = helmet.amazon_url ||
-    `https://amazon.com/s?k=${encodeURIComponent(`${helmet.brand} ${helmet.name} helmet`)}&tag=${process.env.NEXT_PUBLIC_AMAZON_AFFILIATE_TAG || 'helmetscore-20'}`;
+  const amazonUrl = getBestAmazonURL(helmet);
 
   return (
     <a
