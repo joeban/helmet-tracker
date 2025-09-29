@@ -181,9 +181,9 @@ export default function Home() {
               <span className="text-sm font-medium">281+ Helmets Tested by Virginia Tech</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               Find the Safest Bike Helmet
-              <span className="block text-3xl sm:text-4xl lg:text-5xl text-blue-400 mt-2">Based on Scientific Testing</span>
+              <span className="block text-2xl sm:text-3xl lg:text-4xl text-blue-400 mt-3 font-normal">Based on Scientific Testing</span>
             </h1>
 
             <p className="text-lg lg:text-xl text-white/90 mb-8 max-w-3xl mx-auto">
@@ -192,16 +192,21 @@ export default function Home() {
             </p>
 
             {/* Search Bar */}
-            <div className="max-w-2xl mx-auto mb-8">
-              <div className="relative">
+            <div className="max-w-2xl mx-auto mb-10">
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-5">
+                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
                 <input
                   type="text"
                   placeholder="Search by brand, model, or category..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-6 py-4 pr-12 text-lg rounded-xl text-gray-900 placeholder-gray-500 bg-white shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400/50"
+                  className="w-full pl-14 pr-6 py-4 text-lg rounded-2xl text-gray-900 placeholder-gray-400 bg-white shadow-2xl focus:outline-none focus:ring-4 focus:ring-white/50 transition-all group-hover:shadow-3xl"
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter' && searchTerm) {
+                    if (e.key === 'Enter') {
                       const resultsSection = document.querySelector('main');
                       if (resultsSection) {
                         resultsSection.scrollIntoView({ behavior: 'smooth' });
@@ -209,42 +214,37 @@ export default function Home() {
                     }
                   }}
                 />
-                <button
-                  onClick={() => {
-                    if (searchTerm) {
-                      const resultsSection = document.querySelector('main');
-                      if (resultsSection) {
-                        resultsSection.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }
-                  }}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                >
-                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </button>
+                {searchTerm && (
+                  <button
+                    onClick={() => setSearchTerm('')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+                  >
+                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                )}
               </div>
             </div>
 
             {/* Quick Stats */}
-            <div className="grid grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto">
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                <div className="text-3xl font-bold text-white">281+</div>
-                <div className="text-sm text-white/80">Helmets Tested</div>
+            <div className="grid grid-cols-3 gap-6 mb-10 max-w-3xl mx-auto">
+              <div className="bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-md rounded-xl p-5 border-2 border-white/30 shadow-xl hover:scale-105 transition-transform">
+                <div className="text-4xl font-bold text-white mb-1">281+</div>
+                <div className="text-sm text-white/90 font-medium">Helmets Tested</div>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                <div className="text-3xl font-bold text-green-400">124</div>
-                <div className="text-sm text-white/80">5-Star Rated</div>
+              <div className="bg-gradient-to-br from-green-500/20 to-green-600/10 backdrop-blur-md rounded-xl p-5 border-2 border-green-400/30 shadow-xl hover:scale-105 transition-transform">
+                <div className="text-4xl font-bold text-green-400 mb-1">124</div>
+                <div className="text-sm text-white/90 font-medium">5-Star Rated</div>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-                <div className="text-3xl font-bold text-blue-400">$45+</div>
-                <div className="text-sm text-white/80">Starting Price</div>
+              <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/10 backdrop-blur-md rounded-xl p-5 border-2 border-blue-400/30 shadow-xl hover:scale-105 transition-transform">
+                <div className="text-4xl font-bold text-blue-400 mb-1">$45+</div>
+                <div className="text-sm text-white/90 font-medium">Starting Price</div>
               </div>
             </div>
 
             {/* Primary CTAs */}
-            <div className="flex flex-col sm:flex-row justify-center gap-3 lg:gap-4 mb-6">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
               <button
                 onClick={() => {
                   setSortBy('rating');
@@ -253,13 +253,13 @@ export default function Home() {
                     resultsSection.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className="bg-white text-slate-900 px-6 lg:px-8 py-3 lg:py-4 rounded-xl hover:bg-gray-100 transition-all duration-200 font-semibold text-base lg:text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5"
+                className="bg-white text-slate-900 px-8 py-4 rounded-2xl hover:bg-gray-50 transition-all duration-200 font-bold text-lg shadow-2xl hover:shadow-3xl transform hover:-translate-y-1"
               >
                 Browse All Helmets
               </button>
               <a
                 href="/compare"
-                className="bg-blue-500/20 backdrop-blur-sm text-white border border-white/30 px-6 lg:px-8 py-3 lg:py-4 rounded-xl hover:bg-blue-500/30 transition-all duration-200 font-semibold text-base lg:text-lg"
+                className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-md text-white border-2 border-white/40 px-8 py-4 rounded-2xl hover:from-blue-600/30 hover:to-purple-600/30 transition-all duration-200 font-bold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
               >
                 Compare Helmets
               </a>

@@ -28,21 +28,21 @@ function QuickPickCard({ helmet, rank, category }: QuickPickCardProps) {
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-3 hover:shadow-md transition-all duration-200 group">
-      <div className="flex items-start gap-3">
+    <div className="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-lg transition-all duration-200 group">
+      <div className="flex items-start gap-4">
         {/* Rank Badge */}
-        <div className={`${getBadgeColor()} text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-sm`}>
+        <div className={`${getBadgeColor()} text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-base flex-shrink-0 shadow-md`}>
           {rank}
         </div>
 
         {/* Content */}
         <div className="flex-1 min-w-0">
           {/* Title and Rating */}
-          <div className="mb-1.5">
-            <h4 className="font-semibold text-gray-800 text-sm group-hover:text-blue-600 transition-colors">
+          <div className="mb-2">
+            <h4 className="font-semibold text-gray-800 text-base group-hover:text-blue-600 transition-colors">
               {helmet.brand} {helmet.name}
             </h4>
-            <div className="flex items-center gap-1.5 mt-0.5">
+            <div className="flex items-center gap-1.5 mt-1">
               <span className="text-yellow-500 text-sm">
                 {'★'.repeat(helmet.star_rating)}{'☆'.repeat(5 - helmet.star_rating)}
               </span>
@@ -51,14 +51,14 @@ function QuickPickCard({ helmet, rank, category }: QuickPickCardProps) {
           </div>
 
           {/* Safety Score and Price */}
-          <div className="grid grid-cols-2 gap-1.5 mb-2">
-            <div className="bg-green-50 px-1.5 py-0.5 rounded">
+          <div className="grid grid-cols-2 gap-2 mb-3">
+            <div className="bg-green-50 px-2 py-1.5 rounded-lg border border-green-100">
               <div className="text-xs text-gray-600">Safety</div>
-              <div className="font-bold text-green-700 text-sm">{helmet.safety_score}</div>
+              <div className="font-bold text-green-700">{helmet.safety_score}</div>
             </div>
-            <div className="bg-blue-50 px-1.5 py-0.5 rounded">
+            <div className="bg-blue-50 px-2 py-1.5 rounded-lg border border-blue-100">
               <div className="text-xs text-gray-600">Price</div>
-              <div className="font-bold text-blue-700 text-sm">${helmet.min_price}</div>
+              <div className="font-bold text-blue-700">${helmet.min_price}</div>
             </div>
           </div>
 
@@ -132,8 +132,8 @@ export default function QuickPicks() {
       {/* Two Main Quick Pick Sections - No header needed */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top Safety Picks */}
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-5 lg:p-6 shadow-sm">
-          <div className="mb-4">
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 lg:p-8 shadow-md hover:shadow-lg transition-shadow">
+          <div className="mb-6">
             <h3 className="text-xl font-bold text-gray-800 mb-2">Top Safety Picks</h3>
             <p className="text-sm text-gray-600">
               The absolute safest helmets. All 5-star rated with lowest injury risk.
@@ -148,7 +148,7 @@ export default function QuickPicks() {
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             {topSafetyPicks.slice(0, getDisplayCount('safety')).map((helmet, index) => (
               <QuickPickCard
                 key={helmet.id}
@@ -174,8 +174,8 @@ export default function QuickPicks() {
         </div>
 
         {/* Best Value Under $150 */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 lg:p-6 shadow-sm">
-          <div className="mb-4">
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 lg:p-8 shadow-md hover:shadow-lg transition-shadow">
+          <div className="mb-6">
             <h3 className="text-xl font-bold text-gray-800 mb-2">Best Value Under $150</h3>
             <p className="text-sm text-gray-600">
               Maximum safety on a budget. 4+ star helmets under $150.
@@ -190,7 +190,7 @@ export default function QuickPicks() {
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             {bestValuePicks.slice(0, getDisplayCount('value')).map((helmet, index) => (
               <QuickPickCard
                 key={helmet.id}
