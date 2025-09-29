@@ -229,7 +229,7 @@ export default function PriceAlertsDashboard({
         ].map(tab => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as 'alerts' | 'deals' | 'tracking' | 'export')}
+            onClick={() => setActiveTab(tab.id as 'alerts' | 'watchlist' | 'deals' | 'create')}
             className={`px-6 py-3 text-sm font-medium border-b-2 ${
               activeTab === tab.id
                 ? 'border-blue-500 text-blue-600'

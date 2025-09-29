@@ -86,20 +86,23 @@ export class ScraperIntegration {
           confidence: result.confidence / 100, // Convert percentage to decimal
           url: result.productUrls[index] || `https://amazon.com/dp/${asin}`,
           imageUrl: result.imageUrls[index] || '',
-          source: 'scraper' as const,
-          timestamp: result.scrapedAt.getTime()
+          source: 'automated' as const,
+          timestamp: result.scrapedAt.getTime(),
+          verified: false,
+          lastChecked: new Date().toISOString()
         };
 
         // Add the ASIN candidate
-        const success = this.asinManager.addASINCandidate(result.helmet.id, candidate);
-
-        if (success) {
+        try {
+          this.asinManager.addASINCandidate(result.helmet.id, candidate);
           stats.newASINsAdded++;
 
           // Auto-verify high confidence ASINs
           if (autoVerifyHighConfidence && result.confidence >= highConfidenceThreshold) {
             this.asinManager.verifyASIN(result.helmet.id, asin, true);
           }
+        } catch (error) {
+          console.warn(`Failed to add ASIN candidate ${asin} for helmet ${result.helmet.id}:`, error);
         }
       });
     });
@@ -202,7 +205,7 @@ export class ScraperIntegration {
         return sum + (Array.isArray(asins) ? asins.filter((asin) => asin && asin.verified).length : 0);
       }, 0),
       scraperGenerated: Object.values(parsed).reduce((sum: number, asins) => {
-        return sum + (Array.isArray(asins) ? asins.filter((asin) => asin && asin.source === 'scraper').length : 0);
+        return sum + (Array.isArray(asins) ? asins.filter((asin) => asin && asin.source === 'automated').length : 0);
       }, 0)
     };
 
@@ -229,7 +232,7 @@ export class ScraperIntegration {
 
         asins.forEach(asin => {
           if (asin.verified) verifiedASINs++;
-          if (asin.source === 'scraper') scraperASINs++;
+          if (asin.source === 'automated') scraperASINs++;
           if (asin.confidence && asin.confidence > 0.8) highConfidenceASINs++;
         });
       }

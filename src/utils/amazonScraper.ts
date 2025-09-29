@@ -1,4 +1,4 @@
-import { chromium, Browser, Page } from 'playwright';
+import { chromium, Browser, Page, BrowserContext } from 'playwright';
 import { Helmet } from '@/types/helmet';
 
 export interface ScrapedASINResult {
@@ -208,15 +208,18 @@ export class AmazonASINScraper {
     };
 
     let page: Page | null = null;
+    let context: BrowserContext | null = null;
 
     try {
       if (!this.browser) throw new Error('Browser not initialized');
 
-      page = await this.browser.newPage();
+      // Create context with user agent
+      context = await this.browser.newContext({
+        userAgent: this.config.userAgent!,
+        viewport: this.config.viewport!
+      });
 
-      // Set user agent and viewport
-      await page.setUserAgent(this.config.userAgent!);
-      await page.setViewportSize(this.config.viewport!);
+      page = await context.newPage();
 
       // Set extra headers to look more human
       await page.setExtraHTTPHeaders({
@@ -277,6 +280,9 @@ export class AmazonASINScraper {
     } finally {
       if (page) {
         await page.close();
+      }
+      if (context) {
+        await context.close();
       }
     }
 
