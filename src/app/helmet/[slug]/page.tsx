@@ -17,7 +17,7 @@ import { AddToComparisonButton } from '@/components/ComparisonWidget';
 import AmazonButton from '@/components/AmazonButton';
 
 interface HelmetPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 // Generate static params for all helmets
@@ -30,7 +30,8 @@ export async function generateStaticParams() {
 
 // Generate metadata for each helmet page
 export async function generateMetadata({ params }: HelmetPageProps): Promise<Metadata> {
-  const helmet = findHelmetBySlug(HELMETS, params.slug);
+  const { slug } = await params;
+  const helmet = findHelmetBySlug(HELMETS, slug);
 
   if (!helmet) {
     return {
@@ -128,8 +129,9 @@ function getSimilarHelmets(currentHelmet: Helmet): Helmet[] {
     .slice(0, 4);
 }
 
-export default function HelmetPage({ params }: HelmetPageProps) {
-  const helmet = findHelmetBySlug(HELMETS, params.slug);
+export default async function HelmetPage({ params }: HelmetPageProps) {
+  const { slug } = await params;
+  const helmet = findHelmetBySlug(HELMETS, slug);
 
   if (!helmet) {
     notFound();
