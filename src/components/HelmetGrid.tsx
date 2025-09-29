@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { Helmet } from '@/types/helmet';
 import HelmetImage from '@/components/HelmetImage';
-import AmazonProductInfo from '@/components/AmazonProductInfo';
+import StaticAmazonInfo from '@/components/StaticAmazonInfo';
 import { getHelmetAmazonInfo } from '@/utils/amazonImages';
 import { trackHelmetView, trackHelmetClick } from '@/utils/analytics';
 
@@ -99,14 +99,14 @@ export default function HelmetGrid({ helmets, showFilters = false }: HelmetGridP
             className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-200 group"
             onMouseEnter={() => handleHelmetView(helmet)}
           >
-            {/* Amazon Product Image and Info */}
-            <div className="relative">
-              <AmazonProductInfo
-                helmet={helmet}
-                showImage={true}
-                showPrice={false}
-                showAvailability={false}
-                className=""
+            {/* Helmet Image */}
+            <div className="h-48 bg-gray-50 flex items-center justify-center overflow-hidden">
+              <HelmetImage
+                brand={helmet.brand}
+                name={helmet.name}
+                category={helmet.category}
+                imageUrl={helmet.image_url}
+                amazonUrl={helmet.amazon_url}
               />
             </div>
 
@@ -166,16 +166,24 @@ export default function HelmetGrid({ helmets, showFilters = false }: HelmetGridP
                 <div className="text-xs text-gray-600 mt-1.5 font-medium">Lower score = better protection</div>
               </div>
 
-              {/* Amazon Pricing and Availability */}
-              <AmazonProductInfo
-                helmet={helmet}
-                showImage={false}
-                showPrice={true}
-                showAvailability={true}
-                className="bg-gradient-to-br from-gray-50 to-gray-100 p-3 lg:p-4 rounded-lg border border-gray-200"
-              />
+              {/* Pricing */}
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-3 lg:p-4 rounded-lg border border-gray-200">
+                <div className="text-lg lg:text-xl font-bold text-green-600 mb-1.5">
+                  {helmet.min_price === helmet.max_price
+                    ? `$${helmet.min_price.toFixed(2)}`
+                    : `$${helmet.min_price.toFixed(2)} - $${helmet.max_price.toFixed(2)}`
+                  }
+                </div>
+                <div className="text-xs lg:text-sm text-gray-600 mb-1">
+                  VT Test Price: ${helmet.vt_test_price.toFixed(2)}
+                </div>
+              </div>
 
-              {/* Amazon button is now included in AmazonProductInfo component */}
+              {/* Amazon Links - Static, no API calls */}
+              <StaticAmazonInfo
+                helmet={helmet}
+                className="mt-4"
+              />
             </div>
           </div>
         ))}

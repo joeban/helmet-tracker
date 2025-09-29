@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "fetch-asins": "node scripts/fetch-amazon-asins.js",
+    "update-amazon": "node scripts/update-amazon-data.js"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",

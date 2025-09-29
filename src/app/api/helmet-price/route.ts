@@ -6,6 +6,15 @@ const cache = new Map<string, { data: unknown; timestamp: number }>();
 const CACHE_DURATION = 60 * 60 * 1000; // 1 hour
 
 export async function GET(request: NextRequest) {
+  // API DISABLED to prevent rate limiting on public site
+  // Use npm run update-amazon locally to update product data
+  return NextResponse.json({
+    success: false,
+    error: 'API temporarily disabled. Product data is served from cache.',
+    message: 'Run npm run update-amazon locally to refresh product data'
+  }, { status: 503 });
+
+  /* Original implementation preserved for reference
   const searchParams = request.nextUrl.searchParams;
   const asin = searchParams.get('asin');
   const search = searchParams.get('search');
@@ -85,4 +94,5 @@ export async function GET(request: NextRequest) {
       error: 'Failed to fetch product data'
     }, { status: 500 });
   }
+  */
 }
