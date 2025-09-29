@@ -11,6 +11,7 @@
     "update-amazon": "node scripts/update-amazon-data.js",
     "discover-asins": "node scripts/discover-asins.js",
     "enrich-data": "node scripts/enrich-helmet-data.js",
+    "pa-api:test": "node scripts/test-single-helmet.js",
     "pa-api:discover": "npm run discover-asins",
     "pa-api:enrich": "npm run enrich-data",
     "pa-api:full": "npm run discover-asins && npm run enrich-data"

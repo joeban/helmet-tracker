@@ -18,7 +18,7 @@ const helmetsData = require('../src/data/helmets.ts');
 const PROGRESS_FILE = path.join(__dirname, '../data/asin-discovery-progress.json');
 const ASIN_MAP_FILE = path.join(__dirname, '../data/helmet-asin-map.json');
 const DELAY_BETWEEN_SEARCHES = 2000; // 2 seconds
-const MAX_SEARCHES_PER_SESSION = 30; // Conservative limit
+const MAX_SEARCHES_PER_SESSION = 1; // Test with just 1 helmet for now
 
 // Load or initialize progress
 async function loadProgress() {
